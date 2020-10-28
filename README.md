@@ -311,16 +311,7 @@ particular DenseNet, ResNet, and SqueezeNet as used in
 run SqueezeNet inference for ImageNet as follows:
 
 ```
-git clone https://github.com/mkskeller/EzPC
-cd EzPC/Athos/Networks/SqueezeNetImgNet
-axel -a -n 5 -c --output ./PreTrainedModel https://github.com/avoroshilov/tf-squeezenet/raw/master/sqz_full.mat
-pip3 install scipy==1.1.0
-python3 squeezenet_main.py --in ./SampleImages/n02109961_36.JPEG --saveTFMetadata True
-python3 squeezenet_main.py --in ./SampleImages/n02109961_36.JPEG --scalingFac 12 --saveImgAndWtData True
-cd ../../../..
-Scripts/fixed-rep-to-float.py EzPC/Athos/Networks/SqueezeNetImgNet/SqNetImgNet_img_input.inp
-./compile.py -R 64 tf EzPC/Athos/Networks/SqueezeNetImgNet/graphDef.bin 1 trunc_pr split
-Scripts/ring.sh tf-EzPC_Athos_Networks_SqueezeNetImgNet_graphDef.bin-1-trunc_pr-split
+./tf-inference.sh
 ```
 
 This requires TensorFlow and the axel command-line utility to be
@@ -724,7 +715,7 @@ After compiling the mpc file:
 You can benchmark the ORAM implementation as follows:
 
 1) Edit `Program/Source/gc_oram.mpc` to change size and to choose
-Circuit ORAM or linear scan without ORAM. 
+Circuit ORAM or linear scan without ORAM.
 2) Run `./compile.py -D gc_oram`. The `-D` argument instructs the
 compiler to remove dead code. This is useful for more complex programs
 such as this one.
