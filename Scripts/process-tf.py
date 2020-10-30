@@ -3,7 +3,7 @@
 import sys
 from functools import reduce
 import operator
-import math
+import math  
 
 filename = sys.argv[1]
 

@@ -34,8 +34,6 @@ import numpy
 import tensorflow as tf
 from tensorflow.tools.graph_transforms import TransformGraph
 
-# sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'TFCompiler'))
-
 def dumpImageDataInt(imgData, filename, scalingFac, writeMode):
   print("Dumping image data...")
   with open(filename, writeMode) as ff:
@@ -334,10 +332,6 @@ def main():
 
         SCALING_FAC = 12
         save_graph_metadata(output_tensor, sess, feed_dict)
-        # sqz_class = final_class.eval(feed_dict)[0][0][0]
-        # print(sqz_class)
-        # # Outputting result MIGHT NEED THIS CODE
-        # print("\nclass: [%d] '%s'" % (sqz_class, classes[sqz_class]))
         dumpImgAndWeightsData(sess, imageData, all_weights, 'SqNetImgNet_img_input.inp', SCALING_FAC, alreadyEvaluated=True)
 
 if __name__ == '__main__':
