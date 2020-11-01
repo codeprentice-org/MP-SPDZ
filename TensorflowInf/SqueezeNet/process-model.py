@@ -124,7 +124,7 @@ def get_dtype_tf():
 
 all_weights = []
 
-def load_net(data_path):
+def load_net(data_path, parser):
     if not os.path.isfile(data_path):
         parser.error("Network %s does not exist. (Did you forget to download it?)" % data_path)
 
@@ -300,7 +300,7 @@ def main():
         classes = classes_file.read().splitlines()
 
     # Loading network
-    data, sqz_mean = load_net('./PreTrainedModel/sqz_full.mat')
+    data, sqz_mean = load_net('./PreTrainedModel', parser)
 
     config = tf.ConfigProto(log_device_placement = False)
     config.gpu_options.allow_growth = True

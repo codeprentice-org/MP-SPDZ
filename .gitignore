@@ -115,3 +115,7 @@ Thumbs.db
 
 # Sphinx build
 _build/
+
+# Virtual env for testing #
+###########################
+venv
