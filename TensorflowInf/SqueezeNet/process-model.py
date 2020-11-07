@@ -30,14 +30,12 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 from argparse import ArgumentParser
-import numpy
-import tensorflow as tf
 from tensorflow.tools.graph_transforms import TransformGraph
 
 def dumpImageDataInt(imgData, filename, scalingFac, writeMode):
   print("Dumping image data...")
   with open(filename, writeMode) as ff:
-    for xx in numpy.nditer(imgData, order='C'):
+    for xx in np.nditer(imgData, order='C'):
       ff.write(str(int(xx * (1<<scalingFac))) + ' ')
     ff.write('\n\n')
 
@@ -47,7 +45,7 @@ def dumpTrainedWeightsInt(sess, evalTensors, filename, scalingFac, writeMode, al
   else: finalParameters = map(lambda x : sess.run(x), evalTensors)
   with open(filename, writeMode) as ff:
     for ii, curParameterVal in enumerate(finalParameters):
-      for xx in numpy.nditer(curParameterVal, order='C'):
+      for xx in np.nditer(curParameterVal, order='C'):
         ff.write(str(int(xx * (1<<scalingFac))) + ' ')
       ff.write('\n\n')
 
