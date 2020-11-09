@@ -1,10 +1,10 @@
 ## Package Overview
 mp-tensorflow is a package for secure tensorflow inference that utilizes the MP-SPDZ framework. 
-For all supported models, computation are preformed in five parts:
-0. Pretrained model is downloaded
-1. Resource/Dependency collection 
-2. Data processing
-3. MP-SPDZ compilation
+For all supported models, computation are preformed in four parts:
+1. Pretrained model is downloaded
+2. Resource/Dependency collection 
+3. Data processing
+4. MP-SPDZ compilation
 
 ### Resource/Dependency Collection 
 Add support for:
