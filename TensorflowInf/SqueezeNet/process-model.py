@@ -123,6 +123,7 @@ def get_dtype_tf():
 all_weights = []
 
 def load_net(data_path):
+    print(data_path)
     if not os.path.isfile(data_path):
         parser.error("Network %s does not exist. (Did you forget to download it?)" % data_path)
 
