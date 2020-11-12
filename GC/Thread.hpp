@@ -54,7 +54,13 @@ void Thread<T>::run()
         P = new CryptoPlayer(N, thread_num << 16);
     else
         P = new PlainPlayer(N, thread_num << 16);
-    processor.open_input_file(N.my_num(), thread_num);
+    processor.open_input_file(N.my_num(), thread_num,
+            master.opts.cmd_private_input_file);
+    processor.out.activate(N.my_num() == 0 or master.opts.interactive);
+    processor.setup_redirection(P->my_num(), thread_num, master.opts);
+    if (processor.stdout_redirect_file.is_open())
+		processor.out.redirect_to_file(processor.stdout_redirect_file);
+
     done.push(0);
     pre_run();
 
@@ -91,15 +97,17 @@ void Thread<T>::finish()
 }
 
 template<class T>
-int Thread<T>::n_interactive_inputs_from_me(InputArgList& args)
+size_t GC::Thread<T>::data_sent()
 {
-    return args.n_interactive_inputs_from_me(P->my_num());
+	assert(P);
+	return P->comm_stats.total_data();
 }
 
 } /* namespace GC */
 
 
-inline int InputArgList::n_interactive_inputs_from_me(int my_num)
+template<class T>
+inline int InputArgListBase<T>::n_interactive_inputs_from_me(int my_num)
 {
     int res = 0;
     if (ArithmeticProcessor().use_stdin())

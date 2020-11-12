@@ -62,13 +62,14 @@ public:
 	static int t() { return 0; }
 
 	static char type_char() { return 'R'; }
+	static string type_short() { return "R"; }
 	static string type_string() { return "Z2^" + to_string(int(N_BITS)); }
 
 	static DataFieldType field_type() { return DATA_INT; }
 
-	static const bool invertible = false;
+	static const false_type invertible;
 
-	template <int L, int M>
+	template <int L, int M, bool LAZY = false>
 	static Z2<K> Mul(const Z2<L>& x, const Z2<M>& y);
 
 	static void reqbl(int n);
@@ -117,7 +118,7 @@ public:
 	Z2<K> operator-(const Z2<K>& other) const;
 
 	template <int L>
-	Z2<K+L> operator*(const Z2<L>& other) const;
+	Z2<(K > L) ? K : L> operator*(const Z2<L>& other) const;
 
 	Z2<K> operator*(bool other) const { return other ? *this : Z2<K>(); }
 	Z2<K> operator*(int other) const { return *this * Z2<K>(other); }
@@ -151,6 +152,9 @@ public:
 
 	void add(octetStream& os) { add(os.consume(size())); }
 
+	Z2 lazy_add(const Z2& x) const;
+	Z2 lazy_mul(const Z2& x) const;
+
 	Z2& invert();
 	void invert(const Z2& a) { *this = a; invert(); }
 
@@ -171,6 +175,7 @@ public:
 	void XOR(const Z2& a, const Z2& b);
 
 	void randomize(PRNG& G, int n = -1);
+	void randomize_part(PRNG& G, int n);
 	void almost_randomize(PRNG& G) { randomize(G); }
 
 	void force_to_bit() { throw runtime_error("impossible"); }
@@ -279,9 +284,16 @@ public:
 template<int K>
 inline Z2<K> Z2<K>::operator+(const Z2<K>& other) const
 {
+	auto res = lazy_add(other);
+	res.normalize();
+	return res;
+}
+
+template<int K>
+Z2<K> Z2<K>::lazy_add(const Z2<K>& other) const
+{
     Z2<K> res;
     mpn_add_fixed_n<N_WORDS>(res.a, a, other.a);
-    res.a[N_WORDS - 1] &= UPPER_MASK;
     return res;
 }
 
@@ -331,20 +343,27 @@ Z2<K>& Z2<K>::operator>>=(int other)
 }
 
 template <int K>
-template <int L, int M>
+template <int L, int M, bool LAZY>
 inline Z2<K> Z2<K>::Mul(const Z2<L>& x, const Z2<M>& y)
 {
 	Z2<K> res;
 	mpn_mul_fixed_<N_WORDS, Z2<L>::N_WORDS, Z2<M>::N_WORDS>(res.a, x.a, y.a);
-	res.a[N_WORDS - 1] &= UPPER_MASK;
+	if (not LAZY)
+		res.normalize();
 	return res;
 }
 
 template <int K>
 template <int L>
-inline Z2<K+L> Z2<K>::operator*(const Z2<L>& other) const
+inline Z2<(K > L) ? K : L> Z2<K>::operator*(const Z2<L>& other) const
 {
-	return Z2<K+L>::Mul(*this, other);
+	return Z2<(K > L) ? K : L>::Mul(*this, other);
+}
+
+template <int K>
+inline Z2<K> Z2<K>::lazy_mul(const Z2<K>& other) const
+{
+	return Z2<K>::Mul<K, K, true>(*this, other);
 }
 
 template <int K>
@@ -385,6 +404,14 @@ void Z2<K>::randomize(PRNG& G, int n)
 	(void) n;
 	G.get_octets<N_BYTES>((octet*)a);
 	normalize();
+}
+
+template<int K>
+void Z2<K>::randomize_part(PRNG& G, int n)
+{
+	*this = {};
+	G.get_octets((octet*)a, DIV_CEIL(n, 8));
+	a[DIV_CEIL(n, 64) - 1] &= uint64_t(-1LL) >> (N_LIMB_BITS - 1 - (n - 1) % N_LIMB_BITS);
 }
 
 template<int K>

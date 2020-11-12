@@ -12,6 +12,7 @@
 #include "ShareInterface.h"
 
 template<class T> class ReplicatedPrep;
+template<class T> class ReplicatedRingPrep;
 
 namespace GC
 {
@@ -27,6 +28,7 @@ public:
     typedef T mac_key_type;
     typedef void sacri_type;
     typedef GC::NoShare mac_type;
+    typedef GC::NoShare mac_share_type;
 
     typedef Shamir<ShamirShare> Protocol;
     typedef ShamirMC<ShamirShare> MAC_Check;
@@ -34,6 +36,7 @@ public:
     typedef ShamirInput<ShamirShare> Input;
     typedef ::PrivateOutput<ShamirShare> PrivateOutput;
     typedef ReplicatedPrep<ShamirShare> LivePrep;
+    typedef ReplicatedRingPrep<ShamirShare> TriplePrep;
     typedef ShamirShare Honest;
 
     typedef GC::CcdSecret<gf2n_short> bit_type;

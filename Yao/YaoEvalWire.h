@@ -14,16 +14,19 @@
 #include "YaoWire.h"
 
 class YaoEvaluator;
+class YaoEvalInput;
+class ProcessorBase;
 
 class YaoEvalWire : public YaoWire
 {
 public:
 	typedef YaoEvaluator Party;
+	typedef YaoEvalInput Input;
+	typedef GC::Processor<GC::Secret<YaoEvalWire>> Processor;
 
 	static string name() { return "YaoEvalWire"; }
 
-	typedef ostream& out_type;
-	static ostream& out;
+	typedef SwitchableOutput out_type;
 
 	static YaoEvalWire new_reg() { return {}; }
 
@@ -51,6 +54,8 @@ public:
 
 	static void inputb(GC::Processor<GC::Secret<YaoEvalWire>>& processor,
 			const vector<int>& args);
+	static void inputbvec(Processor& processor, ProcessorBase& input_processor,
+			const vector<int>& args);
 
 	static void convcbit(Integer& dest, const GC::Clear& source,
 			GC::Processor<GC::Secret<YaoEvalWire>>&);
@@ -72,6 +77,11 @@ public:
 	void public_input(bool value);
 	void op(const YaoEvalWire& left, const YaoEvalWire& right, Function func);
 	bool get_output();
+
+	template<class T>
+	void my_input(T&, bool value, int n_bits);
+	template<class T>
+	void finalize_input(T& inputter, int from, int n_bits);
 };
 
 #endif /* YAO_YAOEVALWIRE_H_ */

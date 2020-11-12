@@ -2,8 +2,10 @@
 #define _SHA1
 
 #include <sodium.h>
+#include <vector>
+using namespace std;
 
-class octetStream;
+#include "octetStream.h"
 
 class Hash
 {
@@ -25,9 +27,27 @@ public:
 		size += len;
 	}
 	void update(const octetStream& os);
+	template<class T>
+	void update(const T& x)
+	{
+	    update(x.get_ptr(), x.size());
+	}
+	template<class T>
+	void update(const vector<T>& v)
+	{
+	    octetStream tmp(v.size() * sizeof(T));
+	    for (auto& x : v)
+	        x.pack(tmp);
+	    update(tmp);
+	}
+
 	void final(unsigned char hashout[hash_length])
 	{
-		crypto_generichash_final(state, hashout, crypto_generichash_BYTES);
+		final(hashout, hash_length);
+	}
+	void final(unsigned char* hashout, size_t length)
+	{
+		crypto_generichash_final(state, hashout, length);
 	}
 	void final(octetStream& os);
 	octetStream final();

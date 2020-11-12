@@ -14,9 +14,10 @@
 template<class T> class ReplicatedPrep2k;
 
 template<int K>
-class Rep3Share2 : public Rep3Share<SignedZ2<K>>
+class Rep3Share2 : public Rep3Share<Z2<K>>
 {
-    typedef SignedZ2<K> T;
+    typedef Z2<K> T;
+    typedef Rep3Share2 This;
 
 public:
     typedef Replicated<Rep3Share2> Protocol;
@@ -26,6 +27,7 @@ public:
     typedef ::PrivateOutput<Rep3Share2> PrivateOutput;
     typedef ReplicatedPrep2k<Rep3Share2> LivePrep;
     typedef Rep3Share2 Honest;
+    typedef SignedZ2<K> clear;
 
     typedef GC::SemiHonestRepSecret bit_type;
 
@@ -116,6 +118,17 @@ public:
             default:
                 throw runtime_error("number of split summands not implemented");
             }
+        }
+    }
+
+    template<class T>
+    static void shrsi(SubProcessor<T>& proc, const Instruction& inst)
+    {
+        for (int i = 0; i < inst.get_size(); i++)
+        {
+            auto& dest = proc.get_S_ref(inst.get_r(0) + i);
+            auto& source = proc.get_S_ref(inst.get_r(1) + i);
+            dest = source >> inst.get_n();
         }
     }
 };

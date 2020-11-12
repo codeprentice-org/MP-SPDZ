@@ -189,8 +189,10 @@ class BitVector
     void set(const FixedVec<T, L>& a);
     bool get_bit(int i) const
       {
+#ifdef CHECK_SIZE
         if (i >= (int)nbits)
           throw out_of_range("BitVector access: " + to_string(i) + "/" + to_string(nbits));
+#endif
         return (bytes[i/8] >> (i % 8)) & 1;
       }
     void set_bit(int i,unsigned int a)
@@ -303,11 +305,18 @@ void inline BitVector::set(const T& a)
 template<class T>
 inline void BitVector::randomize_blocks(PRNG& G)
 {
-    T tmp;
-    for (size_t i = 0; i < (nbytes / T::size()); i++)
+    if (T::size_in_bits() == 1)
     {
-        tmp.randomize(G);
-        memcpy(bytes + i * T::size(), tmp.get_ptr(), T::size());
+        G.get_octets(bytes, nbytes);
+    }
+    else
+    {
+        T tmp;
+        for (size_t i = 0; i < (nbytes / T::size()); i++)
+        {
+            tmp.randomize(G);
+            memcpy(bytes + i * T::size(), tmp.get_ptr(), T::size());
+        }
     }
 }
 

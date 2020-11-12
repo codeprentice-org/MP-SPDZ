@@ -10,6 +10,9 @@
 #include "Math/Setup.hpp"
 
 template<int X, int L>
+const true_type gfp_<X, L>::invertible;
+
+template<int X, int L>
 inline void gfp_<X, L>::read_or_generate_setup(string dir,
         const OnlineOptions& opts)
 {
@@ -193,7 +196,8 @@ void gfp_<X, L>::reqbl(int n)
 {
   if ((int)n > 0 && pr() < bigint(1) << (n-1))
     {
-      cout << "Tape requires prime of bit length " << n << endl;
+      cerr << "Tape requires prime of bit length " << n << endl;
+      cerr << "Run with '-lgp " << n << "'" << endl;
       throw invalid_params();
     }
   else if ((int)n < 0)

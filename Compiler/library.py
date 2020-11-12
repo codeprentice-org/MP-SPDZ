@@ -6,6 +6,7 @@ in particularly providing flow control and output.
 from Compiler.types import cint,sint,cfix,sfix,sfloat,MPCThread,Array,MemValue,cgf2n,sgf2n,_number,_mem,_register,regint,Matrix,_types, cfloat, _single, localint, personal, copy_doc
 from Compiler.instructions import *
 from Compiler.util import tuplify,untuplify,is_zero
+from Compiler.allocator import RegintOptimizer
 from Compiler import instructions,instructions_base,comparison,program,util
 import inspect,math
 import random
@@ -54,6 +55,9 @@ def set_instruction_type(function):
     return instruction_typed_function
 
 
+def _expand_to_print(val):
+    return ('[' + ', '.join('%s' for i in range(len(val))) + ']',) + tuple(val)
+
 def print_str(s, *args):
     """ Print a string, with optional args for adding
     variables/registers with ``%s``. """
@@ -90,7 +94,7 @@ def print_str(s, *args):
             elif isinstance(val, cfloat):
                 val.print_float_plain()
             elif isinstance(val, (list, tuple, Array)):
-                print_str('[' + ', '.join('%s' for i in range(len(val))) + ']', *val)
+                print_str(*_expand_to_print(val))
             else:
                 try:
                     val.output()
@@ -127,6 +131,10 @@ def print_ln_if(cond, ss, *args):
 
         print_ln_if(get_player_id() == 0, 'Player 0 here')
     """
+    print_str_if(cond, ss + '\n', *args)
+
+def print_str_if(cond, ss, *args):
+    """ Print string conditionally. See :py:func:`print_ln_if` for details. """
     if util.is_constant(cond):
         if cond:
             print_ln(ss, *args)
@@ -138,9 +146,14 @@ def print_ln_if(cond, ss, *args):
         cond = cint.conv(cond)
         for i, s in enumerate(subs):
             if i != 0:
-                args[i - 1].output_if(cond)
-            if i == len(args):
-                s += '\n'
+                val = args[i - 1]
+                try:
+                    val.output_if(cond)
+                except:
+                    if isinstance(val, (list, tuple, Array)):
+                        print_str_if(cond, *_expand_to_print(val))
+                    else:
+                        print_str_if(cond, str(val))
             s += '\0' * ((-len(s)) % 4)
             while s:
                 cond.print_if(s[:4])
@@ -148,7 +161,8 @@ def print_ln_if(cond, ss, *args):
 
 def print_ln_to(player, ss, *args):
     """ Print line at :py:obj:`player` only. Note that printing is
-    disabled by default except at player 0.
+    disabled by default except at player 0. Activate interactive mode
+    with `-I` to enable it for all players.
 
     :param player: int
     :param ss: Python string
@@ -162,7 +176,15 @@ def print_ln_to(player, ss, *args):
     new_args = []
     for arg in args:
         if isinstance(arg, personal):
-            assert arg.player == player
+            if util.is_constant(arg.player) ^ util.is_constant(player):
+                match = False
+            else:
+                if util.is_constant(player):
+                    match = arg.player == player
+                else:
+                    match = id(arg.player) == id(player)
+            if not match:
+                raise CompilerError('player mismatch in personal printing')
             new_args.append(arg._v)
         else:
             new_args.append(arg)
@@ -794,8 +816,8 @@ def range_loop(loop_body, start, stop=None, step=None):
     if step is None:
         step = 1
     def loop_fn(i):
-        loop_body(i)
-        return i + step
+        res = loop_body(i)
+        return util.if_else(res == 0, stop, i + step)
     if isinstance(step, int):
         if step > 0:
             condition = lambda x: x < stop
@@ -820,7 +842,9 @@ def for_range(start, stop=None, step=None):
     in Python :py:func:`range`, but they can by any public
     integer. Information has to be passed out via container types such
     as :py:class:`Compiler.types.Array` or declaring registers as
-    :py:obj:`global`.
+    :py:obj:`global`. Note that changing Python data structures such
+    as lists within the loop is not possible, but the compiler cannot
+    warn about this.
 
     :param start/stop/step: regint/cint/int
 
@@ -884,8 +908,7 @@ def map_reduce_single(n_parallel, n_loops, initializer=lambda *x: [],
                       reducer=lambda *x: [], mem_state=None, budget=None):
     budget = budget or get_program().budget
     if not (isinstance(n_parallel, int) or n_parallel is None):
-        raise CompilerException('Number of parallel executions' \
-                                    'must be constant')
+        raise CompilerError('Number of parallel executions must be constant')
     n_parallel = 1 if is_zero(n_parallel) else n_parallel
     if mem_state is None:
         # default to list of MemValues to allow varying types
@@ -968,6 +991,7 @@ def map_reduce_single(n_parallel, n_loops, initializer=lambda *x: [],
                 del blocks[-n_to_merge + 1:]
                 del get_tape().req_node.children[-1]
                 merged.children = []
+                RegintOptimizer().run(merged.instructions)
                 get_tape().active_basicblock = merged
             else:
                 req_node = get_tape().req_node.children[-1].nodes[0]
@@ -1037,7 +1061,7 @@ def for_range_opt_multithread(n_threads, n_loops):
     """
     return for_range_multithread(n_threads, None, n_loops)
 
-def multithread(n_threads, n_items):
+def multithread(n_threads, n_items, max_size=None):
     """
     Distribute the computation of :py:obj:`n_items` to
     :py:obj:`n_threads` threads, but leave the in-thread repetition up
@@ -1055,8 +1079,19 @@ def multithread(n_threads, n_items):
         def f(base, size):
             ...
     """
-    return map_reduce(n_threads, None, n_items, initializer=lambda: [],
-                      reducer=None, looping=False)
+    if max_size is None:
+        return map_reduce(n_threads, None, n_items, initializer=lambda: [],
+                          reducer=None, looping=False)
+    else:
+        def wrapper(function):
+            @multithread(n_threads, n_items)
+            def new_function(base, size):
+                for i in range(0, size, max_size):
+                    part_base = base + i
+                    part_size = min(max_size, size - i)
+                    function(part_base, part_size)
+                    break_point()
+        return wrapper
 
 def map_reduce(n_threads, n_parallel, n_loops, initializer, reducer, \
                    thread_mem_req={}, looping=True):
@@ -1117,7 +1152,7 @@ def map_reduce(n_threads, n_parallel, n_loops, initializer, reducer, \
                 else:
                     return loop_body(base + i)
         prog = get_program()
-        threads = []
+        thread_args = []
         if not util.is_zero(thread_rounds):
             tape = prog.new_tape(f, (0,), 'multithread')
             for i in range(n_threads - remainder):
@@ -1125,7 +1160,7 @@ def map_reduce(n_threads, n_parallel, n_loops, initializer, reducer, \
                 args[remainder + i][0] = i * thread_rounds
                 if len(mem_state):
                     args[remainder + i][1] = mem_state.address
-                threads.append(prog.run_tape(tape, remainder + i))
+                thread_args.append((tape, remainder + i))
         if remainder:
             tape1 = prog.new_tape(f, (1,), 'multithread1')
             for i in range(remainder):
@@ -1133,7 +1168,8 @@ def map_reduce(n_threads, n_parallel, n_loops, initializer, reducer, \
                 args[i][0] = (n_threads - remainder + i) * thread_rounds + i
                 if len(mem_state):
                     args[i][1] = mem_state.address
-                threads.append(prog.run_tape(tape1, i))
+                thread_args.append((tape1, i))
+        threads = prog.run_tapes(thread_args)
         for thread in threads:
             prog.join_tape(thread)
         if state:
@@ -1542,8 +1578,8 @@ def cint_cint_division(a, b, k, f):
     theta = int(ceil(log(k/3.5) / log(2)))
     two = cint(2) * two_power(f)
 
-    sign_b = cint(1) - 2 * cint(b < 0)
-    sign_a = cint(1) - 2 * cint(a < 0)
+    sign_b = cint(1) - 2 * cint(b.less_than(0, k))
+    sign_a = cint(1) - 2 * cint(a.less_than(0, k))
     absolute_b = b * sign_b
     absolute_a = a * sign_a
     w0 = approximate_reciprocal(absolute_b, k, f, theta)
@@ -1611,9 +1647,12 @@ def FPDiv(a, b, k, f, kappa, simplex_flag=False, nearest=False):
     f = max((k - nearest) // 2 + 1, f)
     assert 2 * f > k - nearest
     theta = int(ceil(log(k/3.5) / log(2)))
+
+    base.set_global_vector_size(b.size)
     alpha = b.get_type(2 * k).two_power(2*f)
     w = AppRcr(b, k, f, kappa, simplex_flag, nearest).extend(2 * k)
     x = alpha - b.extend(2 * k) * w
+    base.reset_global_vector_size()
 
     y = a.extend(2 *k) * w
     y = y.round(2*k, f, kappa, nearest, signed=True)
@@ -1625,6 +1664,7 @@ def FPDiv(a, b, k, f, kappa, simplex_flag=False, nearest=False):
         y = y.round(2*k, 2*f, kappa, nearest, signed=True)
         x = x.round(2*k, 2*f, kappa, nearest, signed=True)
 
+    x = x.extend(2 * k)
     y = y.extend(2 * k) * (alpha + x).extend(2 * k)
     y = y.round(k + 3 * f - res_f, 3 * f - res_f, kappa, nearest, signed=True)
     return y
@@ -1659,7 +1699,7 @@ def Norm(b, k, f, kappa, simplex_flag=False):
 
     #next 2 lines actually compute the SufOR for little indian encoding
     bits = absolute_val.bit_decompose(k, kappa)[::-1]
-    suffixes = PreOR(bits)[::-1]
+    suffixes = PreOR(bits, kappa)[::-1]
 
     z = [0] * k
     for i in range(k - 1):

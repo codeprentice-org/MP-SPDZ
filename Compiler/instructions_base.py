@@ -106,10 +106,12 @@ opcodes = dict(
     GBITTRIPLE = 0x154,
     GBITGF2NTRIPLE = 0x155,
     INPUTMASK = 0x56,
+    INPUTMASKREG = 0x5C,
     PREP = 0x57,
     DABIT = 0x58,
     EDABIT = 0x59,
     SEDABIT = 0x5A,
+    RANDOMS = 0x5B,
     # Input
     INPUT = 0x60,
     INPUTFIX = 0xF0,
@@ -143,6 +145,7 @@ opcodes = dict(
     SHRC = 0x81,
     SHLCI = 0x82,
     SHRCI = 0x83,
+    SHRSI = 0x84,
     # Branching and comparison
     JMP = 0x90,
     JMPNZ = 0x91,
@@ -288,6 +291,10 @@ def vectorize(instruction, global_dict=None):
     Vectorized_Instruction.__name__ = vectorized_name
     global_dict[vectorized_name] = Vectorized_Instruction
     global_dict[instruction.__name__ + '_class'] = instruction
+    instruction.__doc__ = ''
+    # exclude GF(2^n) instructions from documentation
+    if instruction.code and instruction.code >> 8 == 1:
+        maybe_vectorized_instruction.__doc__ = ''
     return maybe_vectorized_instruction
 
 
@@ -374,6 +381,7 @@ def gf2n(instruction):
         global_dict[GF2N_Instruction.__name__] = GF2N_Instruction
 
     global_dict[instruction.__name__ + '_class'] = instruction_cls
+    instruction_cls.__doc__ = ''
     return maybe_gf2n_instruction
     #return instruction
 
@@ -438,6 +446,8 @@ def cisc(function):
                 program.options.cisc = True
                 reset_global_vector_size()
                 program.curr_tape = old_tape
+                for x, bl in tape.req_bit_length.items():
+                    old_tape.require_bit_length(bl, x)
                 from Compiler.allocator import Merger
                 merger = Merger(block, program.options,
                                 tuple(program.to_merge))
@@ -446,10 +456,11 @@ def cisc(function):
                 assert int(program.options.max_parallel_open) == 0, \
                     'merging restriction not compatible with ' \
                     'mergeable CISC instructions'
-                merger.longest_paths_merge()
+                n_rounds = merger.longest_paths_merge()
                 filtered = filter(lambda x: x is not None, block.instructions)
-                self.instructions[self.merge_id()] = list(filtered), args
-            template, args = self.instructions[self.merge_id()]
+                self.instructions[self.merge_id()] = list(filtered), args, \
+                                                     n_rounds
+            template, args, self.n_rounds = self.instructions[self.merge_id()]
             subs = util.dict_by_id()
             for arg, reg in zip(args, regs):
                 subs[arg] = reg
@@ -486,6 +497,9 @@ def cisc(function):
                 base += reg.size
             return block.instructions
 
+        def expanded_rounds(self):
+            return self.n_rounds - 1
+
     MergeCISC.__name__ = function.__name__
 
     def wrapper(*args, **kwargs):
@@ -516,25 +530,26 @@ def ret_cisc(function):
 
 def sfix_cisc(function):
     from Compiler.types import sfix, sint, cfix, copy_doc
-    def instruction(res, arg, k, f):
+    def instruction(res, arg, k, f, *args):
         assert k is not None
         assert f is not None
         old = sfix.k, sfix.f, cfix.k, cfix.f
         sfix.k, sfix.f, cfix.k, cfix.f = [None] * 4
-        res.mov(res, function(sfix._new(arg, k=k, f=f)).v)
+        res.mov(res, function(sfix._new(arg, k=k, f=f), *args).v)
         sfix.k, sfix.f, cfix.k, cfix.f = old
     instruction.__name__ = function.__name__
     instruction = cisc(instruction)
 
     def wrapper(*args, **kwargs):
         if isinstance(args[0], sfix):
-            assert len(args) == 1
+            for arg in args[1:]:
+                assert util.is_constant(arg)
             assert not kwargs
             assert args[0].size == args[0].v.size
             k = args[0].k
             f = args[0].f
             res = sfix._new(sint(size=args[0].size), k=k, f=f)
-            instruction(res.v, args[0].v, k, f)
+            instruction(res.v, args[0].v, k, f, *args[1:])
             return res
         else:
             return function(*args, **kwargs)
@@ -649,7 +664,7 @@ class String(ArgFormat):
 
     @classmethod
     def encode(cls, arg):
-        return arg + '\0' * (cls.length - len(arg))
+        return bytearray(arg, 'ascii') + b'\0' * (cls.length - len(arg))
 
 ArgFormats = {
     'c': ClearModpAF,
@@ -683,6 +698,7 @@ class Instruction(object):
     """
     __slots__ = ['args', 'arg_format', 'code', 'caller']
     count = 0
+    code_length = 10
 
     def __init__(self, *args, **kwargs):
         """ Create an instruction and append it to the program list. """
@@ -701,7 +717,7 @@ class Instruction(object):
             print("Compiled %d lines at" % self.__class__.count, time.asctime())
 
     def get_code(self, prefix=0):
-        return (prefix << 10) + self.code
+        return (prefix << self.code_length) + self.code
 
     def get_encoding(self):
         enc = int_to_bytes(self.get_code())
@@ -713,7 +729,10 @@ class Instruction(object):
         return enc
     
     def get_bytes(self):
-        return bytearray(self.get_encoding())
+        try:
+            return bytearray(self.get_encoding())
+        except TypeError:
+            raise CompilerError('cannot encode %s/%s' % (self, self.get_encoding()))
     
     def check_args(self):
         """ Check the args match up with that specified in arg_format """
@@ -786,6 +805,9 @@ class Instruction(object):
 
     def expand_merged(self):
         return [self]
+
+    def expanded_rounds(self):
+        return 0
 
     def get_new_args(self, size, subs):
         new_args = []
@@ -864,6 +886,12 @@ class DirectMemoryInstruction(Instruction):
     def __init__(self, *args, **kwargs):
         super(DirectMemoryInstruction, self).__init__(*args, **kwargs)
 
+class IndirectMemoryInstruction(Instruction):
+    __slots__ = []
+
+    def get_direct(self, address):
+        return self.direct(self.args[0], address, add_to_prog=False)
+
 class ReadMemoryInstruction(Instruction):
     __slots__ = []
 
@@ -875,7 +903,7 @@ class DirectMemoryWriteInstruction(DirectMemoryInstruction, \
     __slots__ = []
     def __init__(self, *args, **kwargs):
         if program.curr_tape.prevent_direct_memory_write:
-            raise CompilerError('Direct memory writing prevented')
+            raise CompilerError('Direct memory writing prevented in threads')
         super(DirectMemoryWriteInstruction, self).__init__(*args, **kwargs)
 
 ###
@@ -986,7 +1014,7 @@ class JumpInstruction(Instruction):
 
     def set_relative_jump(self, value):
         if value == -1:
-            raise CompilerException('Jump by -1 would cause infinite loop')
+            raise CompilerError('Jump by -1 would cause infinite loop')
         self.args[self.jump_arg] = value
 
     def get_relative_jump(self):

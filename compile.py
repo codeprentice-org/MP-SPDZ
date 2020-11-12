@@ -2,15 +2,16 @@
 
 
 #     ===== Compiler usage instructions =====
-# 
+#
 # ./compile.py input_file
-# 
-# will compile Programs/Source/input_file.asm onto
-# Programs/Bytecode/input_file.bc
-# 
+#
+# will compile Programs/Source/input_file.mpc onto
+# Programs/Bytecode/input_file.bc and Programs/Schedules/input_file.sch
+#
 # (run with --help for more options)
-# 
-# See Compiler/README for details on the Compiler package
+#
+# See the compiler documentation at https://mp-spdz.readthedocs.io
+# for details on the Compiler package
 
 
 from optparse import OptionParser
@@ -26,8 +27,6 @@ def main():
                       help="specify output file")
     parser.add_option("-a", "--asm-output", dest="asmoutfile",
                       help="asm output file for debugging")
-    parser.add_option("-p", "--primesize", dest="param", default=-1,
-                      help="bit length of modulus")
     parser.add_option("-g", "--galoissize", dest="galois", default=40,
                       help="bit length of Galois field")
     parser.add_option("-d", "--debug", action="store_true", dest="debug",
@@ -68,6 +67,10 @@ def main():
                       help="mixing arithmetic and binary computation")
     parser.add_option("-Y", "--edabit", action="store_true", dest="edabit",
                       help="mixing arithmetic and binary computation using edaBits")
+    parser.add_option("-Z", "--split", default=None, dest="split",
+                      help="mixing arithmetic and binary computation "
+                      "using direct conversion if supported "
+                      "(number of parties as argument)")
     parser.add_option("-C", "--CISC", action="store_true", dest="cisc",
                       help="faster CISC compilation mode")
     parser.add_option("-v", "--verbose", action="store_true", dest="verbose",
@@ -81,9 +84,7 @@ def main():
         print('Note that -O/--optimize-hard currently has no effect')
 
     def compilation():
-        prog = Compiler.run(args, options, param=int(options.param),
-                            merge_opens=options.merge_opens,
-                            debug=options.debug)
+        prog = Compiler.run(args, options, debug=options.debug)
         prog.write_bytes(options.outfile)
 
         if options.asmoutfile:

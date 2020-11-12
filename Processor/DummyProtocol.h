@@ -11,6 +11,9 @@ using namespace std;
 
 #include "Math/BitVec.h"
 #include "Data_Files.h"
+#include "Protocols/Replicated.h"
+#include "Protocols/MAC_Check_Base.h"
+#include "Processor/Input.h"
 
 class Player;
 class DataPositions;
@@ -26,17 +29,24 @@ template<class T> class ShareThread;
 }
 
 template<class T>
-class DummyMC
+class DummyMC : public MAC_Check_Base<T>
 {
 public:
-    void POpen(vector<typename T::open_type>&, vector<T>&, Player&)
+    DummyMC()
+    {
+    }
+
+    template<class U>
+    DummyMC(U, int = 0, int = 0)
+    {
+    }
+
+    void exchange(const Player&)
     {
         throw not_implemented();
     }
-
-    void Check(Player& P)
+    void CheckFor(const typename T::open_type&, const vector<T>&, const Player&)
     {
-        (void) P;
     }
 
     DummyMC<typename T::part_type>& get_part_MC()
@@ -49,16 +59,27 @@ public:
         throw not_implemented();
         return {};
     }
+
+    int number()
+    {
+        return 0;
+    }
 };
 
-class DummyProtocol
+template<class T>
+class DummyProtocol : public ProtocolBase<T>
 {
 public:
     Player& P;
+    int counter;
 
     static int get_n_relevant_players()
     {
         throw not_implemented();
+    }
+
+    static void multiply(vector<T>, vector<pair<T, T>>, int, int, SubProcessor<T>)
+    {
     }
 
     DummyProtocol(Player& P) :
@@ -66,13 +87,11 @@ public:
     {
     }
 
-    template<class T>
     void init_mul(SubProcessor<T>* = 0)
     {
         throw not_implemented();
     }
-    template<class T>
-    void prepare_mul(const T&, const T&, int = 0)
+    typename T::clear prepare_mul(const T&, const T&, int = 0)
     {
         throw not_implemented();
     }
@@ -80,10 +99,13 @@ public:
     {
         throw not_implemented();
     }
-    int finalize_mul(int = 0)
+    T finalize_mul(int = 0)
     {
         throw not_implemented();
-        return 0;
+        return {};
+    }
+    void check()
+    {
     }
 };
 
@@ -91,6 +113,13 @@ template<class T>
 class DummyLivePrep : public Preprocessing<T>
 {
 public:
+    static void basic_setup(Player&)
+    {
+    }
+    static void teardown()
+    {
+    }
+
     static void fail()
     {
         throw runtime_error(
@@ -102,6 +131,11 @@ public:
     {
     }
     DummyLivePrep(DataPositions& usage, bool = true) :
+            Preprocessing<T>(usage)
+    {
+    }
+
+    DummyLivePrep(SubProcessor<T>*, DataPositions& usage) :
             Preprocessing<T>(usage)
     {
     }
@@ -152,6 +186,10 @@ public:
     {
         (void) proc, (void) MC;
     }
+    template<class T, class U, class W>
+    NotImplementedInput(const T&, const U&, const W&)
+    {
+    }
     NotImplementedInput(Player& P)
     {
         (void) P;
@@ -177,10 +215,16 @@ public:
         throw not_implemented();
     }
     template<class T>
-    static void input(SubProcessor<T>& proc, vector<int> regs)
+    static void input(SubProcessor<V>& proc, vector<int> regs, int)
     {
         (void) proc, (void) regs;
         throw not_implemented();
+    }
+    static void input_mixed(SubProcessor<V>, vector<int>, int, int)
+    {
+    }
+    static void raw_input(SubProcessor<V>, vector<int>, int)
+    {
     }
     void reset_all(Player& P)
     {
@@ -206,6 +250,14 @@ public:
         (void) a, (void) b;
         throw not_implemented();
     }
+    static void raw_input(SubProcessor<V>&, vector<int>, int)
+    {
+        throw not_implemented();
+    }
+    static void input_mixed(SubProcessor<V>&, vector<int>, int, bool)
+    {
+        throw not_implemented();
+    }
 };
 
 class NotImplementedOutput
@@ -222,7 +274,7 @@ public:
         (void) player, (void) target, (void) source;
         throw not_implemented();
     }
-    void stop(int player, int source)
+    void stop(int player, int source, int)
     {
         (void) player, (void) source;
     }

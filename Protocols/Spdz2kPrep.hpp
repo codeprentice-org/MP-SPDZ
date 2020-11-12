@@ -7,6 +7,7 @@
 #define PROTOCOLS_SPDZ2KPREP_HPP_
 
 #include "Spdz2kPrep.h"
+#include "GC/BitAdder.h"
 
 #include "DabitSacrifice.hpp"
 #include "RingOnlyPrep.hpp"
@@ -16,7 +17,8 @@ Spdz2kPrep<T>::Spdz2kPrep(SubProcessor<T>* proc, DataPositions& usage) :
         BufferPrep<T>(usage),
         BitPrep<T>(proc, usage), RingPrep<T>(proc, usage),
         MaliciousRingPrep<T>(proc, usage),
-        OTPrep<T>(proc, usage), MascotPrep<T>(proc, usage),
+        MascotTriplePrep<T>(proc, usage),
+        MascotPrep<T>(proc, usage),
         RingOnlyPrep<T>(proc, usage)
 {
     this->params.amplify = false;
@@ -51,7 +53,7 @@ void Spdz2kPrep<T>::set_protocol(typename T::Protocol& protocol)
     bit_pos = DataPositions(proc->P.num_players());
     bit_DataF = new Sub_Data_Files<BitShare>(0, 0, "", bit_pos, 0);
     bit_proc = new SubProcessor<BitShare>(*bit_MC, *bit_DataF, proc->P);
-    bit_prep = new MascotPrep<BitShare>(bit_proc, bit_pos);
+    bit_prep = new MascotTriplePrep<BitShare>(bit_proc, bit_pos);
     bit_prep->params.amplify = false;
     bit_protocol = new typename BitShare::Protocol(proc->P);
     bit_prep->set_protocol(*bit_protocol);
@@ -66,16 +68,16 @@ void MaliciousRingPrep<T>::buffer_bits()
     RingPrep<T>::buffer_bits_without_check();
     assert(this->protocol != 0);
     auto& protocol = *this->protocol;
-    protocol.init_mul(this->proc);
+    protocol.init_dotprod(this->proc);
     auto one = T::constant(1, protocol.P.my_num(), this->proc->MC.get_alphai());
+    GlobalPRNG G(protocol.P);
     for (auto& bit : this->bits)
         // one of the two is not a zero divisor, so if the product is zero, one of them is too
-        protocol.prepare_mul(one - bit, bit);
+        protocol.prepare_dotprod(one - bit, bit * G.get<typename T::open_type>());
+    protocol.next_dotprod();
     protocol.exchange();
-    vector<T> checks(this->bits.size());
-    for (size_t i = 0; i < this->bits.size(); i++)
-        checks.push_back(protocol.finalize_mul());
-    this->proc->MC.CheckFor(0, checks, protocol.P);
+    this->proc->MC.CheckFor(0, {protocol.finalize_dotprod(this->bits.size())},
+            protocol.P);
 }
 
 template<class T>
@@ -99,6 +101,7 @@ void bits_from_square_in_ring(vector<T>& bits, int buffer_size, U* bit_prep)
     auto bit_MC = &bit_proc->MC;
     vector<BitShare> squares, random_shares;
     auto one = BitShare::constant(1, bit_proc->P.my_num(), bit_MC->get_alphai());
+    bit_prep->buffer_size = buffer_size;
     for (int i = 0; i < buffer_size; i++)
     {
         BitShare a, a2;

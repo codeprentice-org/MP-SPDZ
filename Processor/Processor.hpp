@@ -52,6 +52,11 @@ SubProcessor<T>::~SubProcessor()
   if (bit_prep.data_sent())
     cerr << "Sent for global bit preprocessing threads: " <<
         bit_prep.data_sent() * 1e-6 << " MB" << endl;
+  if (not bit_usage.empty())
+    {
+      cerr << "Mixed-circuit preprocessing cost:" << endl;
+      bit_usage.print_cost();
+    }
 #endif
 }
 
@@ -77,12 +82,23 @@ Processor<sint, sgf2n>::Processor(int thread_num,Player& P,
   public_output.open(get_filename(PREP_DIR "Public-Output-",true).c_str(), ios_base::out);
   private_output.open(get_filename(PREP_DIR "Private-Output-",true).c_str(), ios_base::out);
 
-  open_input_file(P.my_num(), thread_num);
+  open_input_file(P.my_num(), thread_num, machine.opts.cmd_private_input_file);
 
   secure_prng.ReSeed();
   shared_prng.SeedGlobally(P);
 
-  out.activate(P.my_num() == 0 or machine.opts.interactive);
+  // only output on party 0 if not interactive
+  bool output = P.my_num() == 0 or machine.opts.interactive;
+  out.activate(output);
+  Procb.out.activate(output);
+  setup_redirection(P.my_num(), thread_num, opts);
+
+  if (stdout_redirect_file.is_open())
+  {
+    out.redirect_to_file(stdout_redirect_file);
+    Procb.out.redirect_to_file(stdout_redirect_file);
+  }
+
 }
 
 
@@ -117,11 +133,11 @@ string Processor<sint, sgf2n>::get_filename(const char* prefix, bool use_number)
 template<class sint, class sgf2n>
 void Processor<sint, sgf2n>::reset(const Program& program,int arg)
 {
-  reg_max2 = program.num_reg(GF2N);
-  reg_maxp = program.num_reg(MODP);
   reg_maxi = program.num_reg(INT);
-  Proc2.resize(reg_max2);
-  Procp.resize(reg_maxp);
+  Proc2.get_S().resize(program.num_reg(SGF2N));
+  Proc2.get_C().resize(program.num_reg(CGF2N));
+  Procp.get_S().resize(program.num_reg(SINT));
+  Procp.get_C().resize(program.num_reg(CINT));
   Ci.resize(reg_maxi);
   this->arg = arg;
   Procb.reset(program);
@@ -292,7 +308,7 @@ void Processor<sint, sgf2n>::read_socket_vector(int client_id, const vector<int>
   socket_stream.Receive(external_clients.get_socket(client_id));
   for (int i = 0; i < m; i++)
   {
-    get_Cp_ref(registers[i]).unpack(socket_stream);
+    get_Cp_ref(registers[i]) = socket_stream.get<typename sint::open_type>();
   }
 }
 

@@ -60,16 +60,20 @@ public:
 
     typedef NoShare bit_type;
 
+    typedef typename T::Input Input;
+
+    typedef typename T::out_type out_type;
+
     static string type_string() { return "evaluation secret"; }
     static string phase_name() { return T::name(); }
 
     static int default_length;
 
-    static typename T::out_type out;
-
     static const bool needs_ot = false;
 
     static const bool is_real = true;
+
+    static const bool actual_inputs = T::actual_inputs;
 
     static Secret<T> input(party_id_t from, const int128& input, int n_bits = -1);
     static Secret<T> input(Processor<Secret<T>>& processor, const InputArgs& args);
@@ -101,6 +105,10 @@ public:
     static void inputb(Processor<U>& processor, ProcessorBase& input_proc,
             const vector<int>& args)
     { T::inputb(processor, input_proc, args); }
+    template<class U>
+    static void inputbvec(Processor<U>& processor, ProcessorBase& input_proc,
+            const vector<int>& args)
+    { T::inputbvec(processor, input_proc, args); }
     template<class U>
     static void reveal_inst(Processor<U>& processor, const vector<int>& args)
     { processor.reveal(args); }
@@ -143,6 +151,13 @@ public:
     template <class U>
     void reveal(size_t n_bits, U& x);
 
+    template <class U>
+    void my_input(U& inputter, BitVec value, int n_bits);
+    template <class U>
+    void other_input(U& inputter, int from, int n_bits);
+    template <class U>
+    void finalize_input(U& inputter, int from, int n_bits);
+
     int size() const { return registers.size(); }
     RegVector& get_regs() { return registers; }
     const RegVector& get_regs() const { return registers; }
@@ -154,9 +169,6 @@ public:
 
 template <class T>
 int Secret<T>::default_length = 64;
-
-template <class T>
-typename T::out_type Secret<T>::out = T::out;
 
 template <class T>
 inline ostream& operator<<(ostream& o, Secret<T>& secret)

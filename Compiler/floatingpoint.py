@@ -53,6 +53,12 @@ def maskField(a, k, kappa):
 
 @instructions_base.ret_cisc
 def EQZ(a, k, kappa):
+    prog = program.Program.prog
+    if prog.use_split():
+        from GC.types import sbitvec
+        v = sbitvec(a, k).v
+        bit = util.tree_reduce(operator.and_, (~b for b in v))
+        return types.sint.conv(bit)
     if program.Program.prog.options.ring:
         c, r = maskRing(a, k)
     else:
@@ -104,11 +110,15 @@ def PreORC(a, kappa=None, m=None, raw=False):
     k = len(a)
     if k == 1:
         return [a[0]]
+    prog = program.Program.prog
+    kappa = kappa or prog.security
     m = m or k
     if isinstance(a[0], types.sgf2n):
         max_k = program.Program.prog.galois_length - 1
     else:
-        max_k = int(log(program.Program.prog.P) / log(2)) - kappa
+        # assume prime length is power of two
+        prime_length = 2 ** int(ceil(log(prog.bit_length + kappa, 2)))
+        max_k = prime_length - kappa - 2
     assert(max_k > 0)
     if k <= max_k:
         p = [None] * m
@@ -132,7 +142,8 @@ def PreORC(a, kappa=None, m=None, raw=False):
         # not constant-round anymore
         s = [PreORC(a[i:i+max_k], kappa, raw=raw) for i in range(0,k,max_k)]
         t = PreORC([si[-1] for si in s[:-1]], kappa, raw=raw)
-        return sum(([or_op(x, y) for x in si] for si,y in zip(s[1:],t)), s[0])
+        return sum(([or_op(x, y) for x in si]
+                    for si,y in zip(s[1:],t)), s[0])[-m:]
 
 def PreOpL(op, items):
     """
@@ -302,16 +313,22 @@ def BitDec(a, k, m, kappa, bits_to_compute=None):
 def BitDecRing(a, k, m):
     n_shift = int(program.Program.prog.options.ring) - m
     assert(n_shift >= 0)
-    if program.Program.prog.use_dabit:
-        r, r_bits = zip(*(types.sint.get_dabit() for i in range(m)))
-        r = types.sint.bit_compose(r)
+    if program.Program.prog.use_split():
+        x = a.split_to_two_summands(m)
+        bits = types._bitint.carry_lookahead_adder(x[0], x[1], fewer_inv=False)
+        # reversing to reduce number of rounds
+        return [types.sint.conv(bit) for bit in reversed(bits)][::-1]
     else:
-        r_bits = [types.sint.get_random_bit() for i in range(m)]
-        r = types.sint.bit_compose(r_bits)
-    shifted = ((a - r) << n_shift).reveal()
-    masked = shifted >> n_shift
-    bits = r_bits[0].bit_adder(r_bits, masked.bit_decompose(m))
-    return [types.sint.conv(bit) for bit in bits]
+        if program.Program.prog.use_dabit:
+            r, r_bits = zip(*(types.sint.get_dabit() for i in range(m)))
+            r = types.sint.bit_compose(r)
+        else:
+            r_bits = [types.sint.get_random_bit() for i in range(m)]
+            r = types.sint.bit_compose(r_bits)
+        shifted = ((a - r) << n_shift).reveal()
+        masked = shifted >> n_shift
+        bits = r_bits[0].bit_adder(r_bits, masked.bit_decompose(m))
+        return [types.sint.conv(bit) for bit in bits]
 
 def BitDecField(a, k, m, kappa, bits_to_compute=None):
     r_dprime = types.sint()
@@ -471,22 +488,20 @@ def TruncRoundNearestAdjustOverflow(a, length, target_length, kappa):
 
 def Int2FL(a, gamma, l, kappa):
     lam = gamma - 1
-    s = types.sint()
-    comparison.LTZ(s, a, gamma, kappa)
-    z = EQZ(a, gamma, kappa)
-    a = (1 - 2 * s) * a
-    a_bits = BitDec(a, lam, lam, kappa)
+    s = a.less_than(0, gamma, security=kappa)
+    z = a.equal(0, gamma, security=kappa)
+    a = s.if_else(-a, a)
+    a_bits = a.bit_decompose(lam, security=kappa)
     a_bits.reverse()
     b = PreOR(a_bits, kappa)
-    t = a * (1 + sum(2**i * (1 - b_i) for i,b_i in enumerate(b)))
-    p = - (lam - sum(b))
+    t = a * (1 + a.bit_compose(1 - b_i for b_i in b))
+    p = a.popcnt_bits(b) - lam
     if gamma - 1 > l:
         if types.sfloat.round_nearest:
             v, overflow = TruncRoundNearestAdjustOverflow(t, gamma - 1, l, kappa)
             p = p + overflow
         else:
-            v = types.sint()
-            comparison.Trunc(v, t, gamma - 1, gamma - l - 1, kappa, False)
+            v = t.right_shift(gamma - l - 1, gamma - 1, kappa, signed=False)
     else:
         v = 2**(l-gamma+1) * t
     p = (p + gamma - 1 - l) * (1 -z)
@@ -534,6 +549,7 @@ def TruncPrRing(a, k, m, signed=True):
     n_ring = int(program.Program.prog.options.ring)
     assert n_ring >= k, '%d too large' % k
     if k == n_ring:
+        program.Program.prog.curr_tape.require_bit_length(1)
         if program.Program.prog.use_edabit():
             a += types.sint.get_edabit(m, True)[0]
         else:
@@ -549,9 +565,11 @@ def TruncPrRing(a, k, m, signed=True):
             trunc_pr(res, a, k, m)
         else:
             # extra bit to mask overflow
-            if program.Program.prog.use_edabit():
-                lower = sint.get_edabit(m, True)[0]
-                upper = sint.get_edabit(k - m, True)[0]
+            prog = program.Program.prog
+            prog.curr_tape.require_bit_length(1)
+            if prog.use_edabit() or prog.use_split() > 2:
+                lower = sint.get_random_int(m)
+                upper = sint.get_random_int(k - m)
                 msb = sint.get_random_bit()
                 r = (msb << k) + (upper << m) + lower
             else:

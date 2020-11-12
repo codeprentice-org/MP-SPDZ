@@ -38,6 +38,7 @@ public:
 
     typedef typename part_type::sacri_type sacri_type;
     typedef typename part_type::mac_type mac_type;
+    typedef typename part_type::mac_share_type mac_share_type;
     typedef BitDiagonal Rectangle;
 
     typedef typename T::super check_type;
@@ -150,6 +151,23 @@ public:
         assert(this->get_regs().size() == default_length);
         for (auto& reg : this->get_regs())
             reg.output(s, human);
+    }
+
+    void input(istream&, bool)
+    {
+        throw not_implemented();
+    }
+
+    template <class U>
+    void my_input(U& inputter, BitVec value, int n_bits)
+    {
+        inputter.add_mine(value, n_bits);
+    }
+
+    template <class U>
+    void finalize_input(U& inputter, int from, int n_bits)
+    {
+        *this = inputter.finalize(from, n_bits).mask(n_bits);
     }
 };
 

@@ -46,8 +46,10 @@ def right_shift(a, b, bits):
     else:
         return a.right_shift(b, bits)
 
-def bit_decompose(a, bits):
+def bit_decompose(a, bits=None):
     if isinstance(a, int):
+        if bits is None:
+            bits = int_len(a)
         return [int((a >> i) & 1) for i in range(bits)]
     else:
         return a.bit_decompose(bits)
@@ -122,6 +124,15 @@ def or_op(a, b):
 
 OR = or_op
 
+def bit_xor(a, b):
+    if is_constant(a):
+        if is_constant(b):
+            return a ^ b
+        else:
+            return b.bit_xor(a)
+    else:
+        return a.bit_xor(b)
+
 def pow2(bits):
     powers = [b.if_else(2**2**i, 1) for i,b in enumerate(bits)]
     return tree_reduce(operator.mul, powers)
@@ -163,8 +174,17 @@ def is_all_ones(x, n):
     else:
         return False
 
-def max(x, y):
-    return if_else(x > y, x, y)
+def max(x, y=None):
+    if y is None:
+        return tree_reduce(max, x)
+    else:
+        return if_else(x > y, x, y)
+
+def min(x, y=None):
+    if y is None:
+        return tree_reduce(min, x)
+    else:
+        return if_else(x < y, x, y)
 
 def long_one(x):
     try:

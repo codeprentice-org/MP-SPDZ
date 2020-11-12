@@ -20,17 +20,6 @@ using namespace std;
 namespace GC
 {
 
-class ExecutionStats : public map<int, size_t>
-{
-public:
-    ExecutionStats& operator+=(const ExecutionStats& other)
-    {
-        for (auto it : other)
-            (*this)[it.first] += it.second;
-        return *this;
-    }
-};
-
 template <class T>
 class Processor : public ::ProcessorBase, public GC::RuntimeBranching
 {
@@ -53,9 +42,9 @@ public:
     Memory<Clear> C;
     Memory<Integer> I;
 
-    ExecutionStats stats;
-
     Timer xor_timer;
+
+    typename T::out_type out;
 
     Processor(Machine<T>& machine);
     Processor(Memories<T>& memories, Machine<T>* machine = 0);
@@ -102,9 +91,12 @@ public:
     void ands(const vector<int>& args) { and_(args, false); }
 
     void input(const vector<int>& args);
-    void reveal(const vector<int>& args);
+    void inputb(typename T::Input& input, ProcessorBase& input_processor,
+            const vector<int>& args, int my_num);
+    void inputbvec(typename T::Input& input, ProcessorBase& input_processor,
+            const vector<int>& args, int my_num);
 
-    void reveal(const ::BaseInstruction& instruction);
+    void reveal(const vector<int>& args);
 
     void print_reg(int reg, int n, int size);
     void print_reg_plain(Clear& value);
