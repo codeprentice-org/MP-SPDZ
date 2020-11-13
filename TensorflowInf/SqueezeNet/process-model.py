@@ -284,8 +284,6 @@ def build_parser():
     return ps
 
 def main():
-    import time
-
     parser = build_parser()
     options = parser.parse_args()
 
@@ -311,7 +309,6 @@ def main():
     with g.as_default(), tf.Session(config=config) as sess:
         # Building network
         image = tf.placeholder(dtype=get_dtype_tf(), shape=img_content_shape, name="image_placeholder")
-        # keep_prob = tf.placeholder(get_dtype_tf())
         keep_prob = 0.0
         saveTFMetadata = True
         sqznet = net_preloaded(data, image, 'max', True, keep_prob, runPrediction=not(saveTFMetadata))

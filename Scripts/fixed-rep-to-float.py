@@ -2,17 +2,20 @@
 import sys
 import os
 
-def rep_to_float(inputfile, k, outputfile):
-    with open(outputfile, 'w') as out:
-        for line in open(inputfile):
+def rep_to_float(input_file, k, output_file):
+    ifile = open(input_file, 'r')
+    with open(output_file, 'w') as out:
+        for line in ifile:
             stripped_line = line.strip()
-            if len(stripped_line) != 0:
+            if len(stripped_line):
                 split_data = stripped_line.split(' ')
                 out.write(' '.join(str(int(val) / 2**k) for val in split_data))
             out.write('\n')
-if __name__ == "__main__":
+    ifile.close()
+
+def main():
     try:
-        inputfile = str(sys.argv[1])
+        input_file = str(sys.argv[1])
     except:
         print('Usage: python3 {} [INPUT FILE NAME] [K EXPONENT] [OUTPUT FILE NAME]'.format(sys.argv[0]))
         sys.exit(1)
@@ -23,9 +26,13 @@ if __name__ == "__main__":
         k = 12
 
     try:
-        outputfile = str(sys.argv[3])
+        output_file = str(sys.argv[3])
     except:
-        outputfile = 'Player-Data/Input-P0-0'
-        os.makedirs(os.path.dirname(outputfile), exist_ok = True)
+        output_file = 'Player-Data/Input-P0-0'
+        os.makedirs(os.path.dirname(output_file), exist_ok = True)
 
-    rep_to_float(inputfile, k, outputfile)
+    rep_to_float(input_file, k, output_file)
+
+
+if __name__ == "__main__":
+    main()
