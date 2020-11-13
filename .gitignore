@@ -113,5 +113,10 @@ ehthumbs.db
 Thumbs.db
 **/*.x.dSYM/**
 
-# Sphinx build
+# Sphinx build #
+################
 _build/
+
+# Virtual python environment #
+##############################
+venv
