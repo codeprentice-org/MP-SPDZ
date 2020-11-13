@@ -324,7 +324,7 @@ particular DenseNet, ResNet, and SqueezeNet as used in
 run SqueezeNet inference for ImageNet as follows:
 
 ```
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install -r TensorflowInf/requirements.txt
 ./new-tf-inference.sh
