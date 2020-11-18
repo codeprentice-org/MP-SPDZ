@@ -1,4 +1,5 @@
 cd TensorflowInf/SqueezeNet
+rm -f PreTrainedModel
 axel -a -n 5 -c --output ./PreTrainedModel https://github.com/avoroshilov/tf-squeezenet/raw/master/sqz_full.mat
 pip3 install scipy==1.1.0
 python3 process-model.py --in ./SampleImages/n02109961_36.JPEG
