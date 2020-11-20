@@ -1,7 +1,8 @@
 When running (new-)tf-inferenc.sh make sure that your have run:
 - Scripts/setup-ssl.sh
+- make -j 8 tldr
 - make replicated-ring-party.x
-- make -j 8 tldr (not sure if this is necessary)
+
 
 Also:
 - Make sure that your have created the directory TensorflowInf/SqueezeNet/PreTrainedModel (github likes to delete it because it is empty)
