@@ -34,3 +34,4 @@ opt.forward(1, keep_intermediate=False)
 stop_timer(1)
 if isinstance(layers[-1].Y, Array):
     print_ln('guess %s', layers[-1].Y[0].reveal())
+
