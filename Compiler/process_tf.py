@@ -14,9 +14,8 @@ paddings = {}
 
 def output(layers, named, op, layer, prev_input=True):
     global first
-    # is it just me or do the next 2 lines seem funky
     named[op.name] = layer
-    layers.append(named[op.name]) # layer.append(layer)
+    layers.append(named[op.name])
     if prev_input and not first:
         named[op.name].inputs = [named[op.inputs[0].name[:-2]]]
     first = False
