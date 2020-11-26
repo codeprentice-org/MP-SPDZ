@@ -284,7 +284,7 @@ def build_parser():
     return ps
 
 def main():
-    parser = build_parser()
+    # parser = build_parser()
     options = parser.parse_args()
 
     # Loading image
@@ -297,7 +297,8 @@ def main():
         classes = classes_file.read().splitlines()
 
     # Loading network
-    data, sqz_mean = load_net('./PreTrainedModel/sqz_full.mat')
+    # data, sqz_mean = load_net('./PreTrainedModel/sqz_full.mat')
+    data, sqz_mean = load_net("./PreTrainedModel")
 
     config = tf.ConfigProto(log_device_placement = False)
     config.gpu_options.allow_growth = True
@@ -331,4 +332,5 @@ def main():
         dumpImgAndWeightsData(sess, imageData, all_weights, 'SqNetImgNet_img_input.inp', SCALING_FAC, alreadyEvaluated=True)
 
 if __name__ == '__main__':
+    parser = build_parser()
     main()
