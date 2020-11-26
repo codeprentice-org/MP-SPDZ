@@ -2,7 +2,7 @@ set -e
 cd TensorflowInf/SqueezeNet
 if ! [[ -f "PreTrainedModel/sqz_full.mat" ]]; then
     mkdir -p PreTrainedModel
-    axel -a -n 5 --output ./PreTrainedModel https://github.com/avoroshilov/tf-squeezenet/raw/master/sqz_full.mat
+    ./download-pretrained-model.sh
 fi
 python3 process-model.py --in ./SampleImages/n02109961_36.JPEG
 cd ../..
