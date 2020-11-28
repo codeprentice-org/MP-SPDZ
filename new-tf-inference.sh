@@ -1,5 +1,7 @@
 set -e
 
+PARENT_DIR=`dirname ${BASH_SOURCE[0]}`
+
 echo Checking for Python3...
 PYTHON_CMD=${PYTHON_CMD:-`which python3`}
 if [ -z "$PYTHON_CMD" ]; then
@@ -21,7 +23,7 @@ else
     exit 2
 fi
 
-cd TensorflowInf/SqueezeNet
+cd "${PARENT_DIR}/TensorflowInf/SqueezeNet/"
 if ! [[ -f "PreTrainedModel/sqz_full.mat" ]]; then
     mkdir -p PreTrainedModel
     ./download-pretrained-model.sh
