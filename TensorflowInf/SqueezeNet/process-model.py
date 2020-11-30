@@ -284,7 +284,6 @@ def build_parser():
     return ps
 
 def main():
-    # parser = build_parser()
     options = parser.parse_args()
 
     # Loading image
