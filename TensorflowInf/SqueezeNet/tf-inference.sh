@@ -4,7 +4,7 @@ NUM_THREADS=1
 PARENT_DIR=`dirname ${BASH_SOURCE[0]}`
 
 print_usage() {
-    echo "Usage: ./tf-inference.sh [options]"
+    echo "Usage: ./tf-inference.sh <Image File> [options]"
     echo " -n	    Number of threads to use. Value defaults to 1"
 }
 
@@ -16,6 +16,11 @@ while getopts 'n:' flag; do
     esac
 done
 
+if [ -z "$1" ]; then
+    IMG_FILE="SampleImages/n02109961_36.JPEG"
+else
+    IMG_FILE=$1
+fi
 
 echo Checking for Python3...
 PYTHON_CMD=${PYTHON_CMD:-`which python3`}
@@ -38,16 +43,16 @@ else
     exit 2
 fi
 
-cd "${PARENT_DIR}/TensorflowInf/SqueezeNet/"
+cd "${PARENT_DIR}/"
 if [[ ! -f "PreTrainedModel/sqz_full.mat" ]]; then
     echo "Downloading pretrained SqueezeNet model from https://github.com/avoroshilov/tf-squeezenet"
     mkdir -p PreTrainedModel
     axel -a -n 5 -c --output ./PreTrainedModel https://github.com/avoroshilov/tf-squeezenet/raw/master/sqz_full.mat
 fi
 
-python3 process-model.py --in ./SampleImages/n02109961_36.JPEG
+python3 process-model.py --in $IMG_FILE
 
-cd ../..
+cd ../../
 Scripts/fixed-rep-to-float.py TensorflowInf/SqueezeNet/SqNetImgNet_img_input.inp
 
 # TODO: abstract script so that the protocol being used can be changed at runtime
