@@ -43,7 +43,7 @@ else
     exit 2
 fi
 
-cd "${PARENT_DIR}/"
+cd ${PARENT_DIR}
 if [[ ! -f "PreTrainedModel/sqz_full.mat" ]]; then
     echo "Downloading pretrained SqueezeNet model from https://github.com/avoroshilov/tf-squeezenet"
     mkdir -p PreTrainedModel
