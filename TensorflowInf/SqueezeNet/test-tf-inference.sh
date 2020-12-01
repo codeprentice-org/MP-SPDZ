@@ -1,12 +1,17 @@
+# Test pass count
 PASSES=0
+# Test failure count
 FAILURES=0
+# Test count
 TESTS=0
 
+# Run Tensorflow inference on image and compare output
 function test_tf_inference_file() {
     TESTS=$((TESTS+1))
     filename=$1
     echo Testing MP-SPDZ Tensorflow Inference on $filename...
-    
+
+    # Get image reference code from filename
     if [[ "$filename" =~ ^.*\/(n[[:digit:]]+)_[[:digit:]]+\..*$ ]]; then
         imgCodeExpected=${BASH_REMATCH[1]}
     else
@@ -16,8 +21,10 @@ function test_tf_inference_file() {
         return
     fi
 
-    ./tf-inference.sh $filename &> test.log
+    # Run Tensorflow inference and log output
+    ./tf-inference.sh -n 1 -F $filename &> test.log
 
+    # Get line number of image from log
     grep_output=`grep guess test.log`
     if [[ "$grep_output" =~ ^guess[[:space:]]+([[:digit:]]+)$ ]]; then
         line_number=$(( ${BASH_REMATCH[1]} + 1 ))
@@ -28,6 +35,7 @@ function test_tf_inference_file() {
         return
     fi
 
+    # Read and parse text at line number
     lineEntry=`sed "${line_number}q;d" ../synset_words.txt`
     if [[ "$lineEntry" =~ ^[[:space:]]*(n[[:digit:]]+)[[:space:]]+.*$ ]]; then
         imgCodeFound=${BASH_REMATCH[1]}
@@ -38,6 +46,7 @@ function test_tf_inference_file() {
         return
     fi
 
+    # Compare found and expected image reference codes
     if [[ $imgCodeFound == $imgCodeExpected ]]; then
         echo Test PASSED for $filename
         PASSES=$((PASSES+1))
@@ -50,9 +59,12 @@ function test_tf_inference_file() {
     fi
 }
 
-PARENT_DIR=`dirname ${BASH_SOURCE[0]}`
-cd $PARENT_DIR
+# Navigate to script directory
+SCRIPT_DIR=`dirname ${BASH_SOURCE[0]}`
+cd $SCRIPT_DIR
+# Run test on every image in SampleImages
 for FILE in SampleImages/*; do test_tf_inference_file $FILE; echo ''; done
+# Print test results
 echo $TESTS tests executed
 echo $PASSES tests PASSED
 echo $FAILURES tests FAILED

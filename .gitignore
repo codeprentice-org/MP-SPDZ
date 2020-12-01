@@ -120,3 +120,7 @@ _build/
 # Virtual python environment #
 ##############################
 venv
+
+# Tensorflow Inference #
+########################
+TensorflowInf/SqueezeNet/ImageNetDownloads
