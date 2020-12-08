@@ -123,4 +123,4 @@ venv
 
 # Tensorflow Inference #
 ########################
-TensorflowInf/SqueezeNet/ImageNetDownloads
+TensorflowInf/ImageNetDownloads

@@ -57,7 +57,7 @@ if [[ ! -f "PreTrainedModel/sqz_full.mat" ]]; then
 fi
 
 # Run SqueezeNet script
-python3 process-model.py --in $IMG_FILE
+python3 squeezenet_main.py --in $IMG_FILE
 
 # Run MP-SPDZ compilation
 cd ../../
