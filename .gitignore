@@ -115,3 +115,10 @@ Thumbs.db
 
 # Sphinx build
 _build/
+
+# TF Inference 
+TensorflowInf/SqueezeNet/PreTrainedModel/sqz_full.mat
+TensorflowInf/SqueezeNet/SqNetImgNet_img_input.inp
+TensorflowInf/SqueezeNet/graphDef.bin
+TensorflowInf/SqueezeNet/graphDef.mtdata
+TensorflowInf/SqueezeNet/sizeInfo.mtdata
