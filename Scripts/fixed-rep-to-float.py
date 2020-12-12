@@ -1,22 +1,38 @@
 #!/usr/bin/env python3
+import sys
+import os
 
-import sys, operator
+def rep_to_float(input_file, k, output_file):
+    ifile = open(input_file, 'r')
+    with open(output_file, 'w') as out:
+        for line in ifile:
+            stripped_line = line.strip()
+            if len(stripped_line):
+                split_data = stripped_line.split(' ')
+                out.write(' '.join(str(int(val) / 2**k) for val in split_data))
+            out.write('\n')
+    ifile.close()
 
-try:
-    f = int(sys.argv[2])
-except:
-    f = 12
+def main():
+    try:
+        input_file = str(sys.argv[1])
+    except:
+        print('Usage: python3 {} [INPUT FILE NAME] [K EXPONENT] [OUTPUT FILE NAME]'.format(sys.argv[0]))
+        sys.exit(1)
 
-try:
-    filename = sys.argv[3]
-except:
-    filename = 'Player-Data/Input-P0-0'
+    try:
+        k = int(sys.argv[2])
+    except:
+        k = 12
 
-out = open(filename, 'w')
+    try:
+        output_file = str(sys.argv[3])
+    except:
+        output_file = 'Player-Data/Input-P0-0'
+        os.makedirs(os.path.dirname(output_file), exist_ok = True)
 
-for line in open(sys.argv[1]):
-    line = (line.strip())
-    if line:
-        x = (line.split(' '))
-        out.write(' '.join(str(int(xx) / 2**f) for xx in x))
-    out.write('\n')
+    rep_to_float(input_file, k, output_file)
+
+
+if __name__ == "__main__":
+    main()

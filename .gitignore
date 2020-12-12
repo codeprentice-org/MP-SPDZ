@@ -113,10 +113,17 @@ ehthumbs.db
 Thumbs.db
 **/*.x.dSYM/**
 
-# Sphinx build
+# Sphinx build #
+################
 _build/
 
-# TF Inference 
+# Virtual python environment #
+##############################
+venv
+
+# Tensorflow Inference #
+########################
+TensorflowInf/ImageNetDownloads
 TensorflowInf/SqueezeNet/PreTrainedModel/sqz_full.mat
 TensorflowInf/SqueezeNet/SqNetImgNet_img_input.inp
 TensorflowInf/SqueezeNet/graphDef.bin
