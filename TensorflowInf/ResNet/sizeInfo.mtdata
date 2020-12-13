@@ -1,0 +1,440 @@
+input_x 1 224 224 3 
+resnet_model/Pad/paddings 4 2 
+resnet_model/Pad 1 230 230 3 
+resnet_model/conv2d/kernel 7 7 3 64 
+resnet_model/conv2d/Conv2D 1 112 112 64 
+resnet_model/max_pooling2d/MaxPool 1 56 56 64 
+resnet_model/batch_normalization/gamma 64 
+resnet_model/batch_normalization/beta 64 
+resnet_model/batch_normalization/moving_mean 64 
+resnet_model/batch_normalization/moving_variance 64 
+resnet_model/batch_normalization/FusedBatchNorm 1 56 56 64 
+resnet_model/Relu 1 56 56 64 
+resnet_model/conv2d_1/kernel 1 1 64 256 
+resnet_model/conv2d_1/Conv2D 1 56 56 256 
+resnet_model/conv2d_2/kernel 1 1 64 64 
+resnet_model/conv2d_2/Conv2D 1 56 56 64 
+resnet_model/batch_normalization_1/gamma 64 
+resnet_model/batch_normalization_1/beta 64 
+resnet_model/batch_normalization_1/moving_mean 64 
+resnet_model/batch_normalization_1/moving_variance 64 
+resnet_model/batch_normalization_1/FusedBatchNorm 1 56 56 64 
+resnet_model/Relu_1 1 56 56 64 
+resnet_model/conv2d_3/kernel 3 3 64 64 
+resnet_model/conv2d_3/Conv2D 1 56 56 64 
+resnet_model/batch_normalization_2/gamma 64 
+resnet_model/batch_normalization_2/beta 64 
+resnet_model/batch_normalization_2/moving_mean 64 
+resnet_model/batch_normalization_2/moving_variance 64 
+resnet_model/batch_normalization_2/FusedBatchNorm 1 56 56 64 
+resnet_model/Relu_2 1 56 56 64 
+resnet_model/conv2d_4/kernel 1 1 64 256 
+resnet_model/conv2d_4/Conv2D 1 56 56 256 
+resnet_model/add 1 56 56 256 
+resnet_model/batch_normalization_3/gamma 256 
+resnet_model/batch_normalization_3/beta 256 
+resnet_model/batch_normalization_3/moving_mean 256 
+resnet_model/batch_normalization_3/moving_variance 256 
+resnet_model/batch_normalization_3/FusedBatchNorm 1 56 56 256 
+resnet_model/Relu_3 1 56 56 256 
+resnet_model/conv2d_5/kernel 1 1 256 64 
+resnet_model/conv2d_5/Conv2D 1 56 56 64 
+resnet_model/batch_normalization_4/gamma 64 
+resnet_model/batch_normalization_4/beta 64 
+resnet_model/batch_normalization_4/moving_mean 64 
+resnet_model/batch_normalization_4/moving_variance 64 
+resnet_model/batch_normalization_4/FusedBatchNorm 1 56 56 64 
+resnet_model/Relu_4 1 56 56 64 
+resnet_model/conv2d_6/kernel 3 3 64 64 
+resnet_model/conv2d_6/Conv2D 1 56 56 64 
+resnet_model/batch_normalization_5/gamma 64 
+resnet_model/batch_normalization_5/beta 64 
+resnet_model/batch_normalization_5/moving_mean 64 
+resnet_model/batch_normalization_5/moving_variance 64 
+resnet_model/batch_normalization_5/FusedBatchNorm 1 56 56 64 
+resnet_model/Relu_5 1 56 56 64 
+resnet_model/conv2d_7/kernel 1 1 64 256 
+resnet_model/conv2d_7/Conv2D 1 56 56 256 
+resnet_model/add_1 1 56 56 256 
+resnet_model/batch_normalization_6/gamma 256 
+resnet_model/batch_normalization_6/beta 256 
+resnet_model/batch_normalization_6/moving_mean 256 
+resnet_model/batch_normalization_6/moving_variance 256 
+resnet_model/batch_normalization_6/FusedBatchNorm 1 56 56 256 
+resnet_model/Relu_6 1 56 56 256 
+resnet_model/conv2d_8/kernel 1 1 256 64 
+resnet_model/conv2d_8/Conv2D 1 56 56 64 
+resnet_model/batch_normalization_7/gamma 64 
+resnet_model/batch_normalization_7/beta 64 
+resnet_model/batch_normalization_7/moving_mean 64 
+resnet_model/batch_normalization_7/moving_variance 64 
+resnet_model/batch_normalization_7/FusedBatchNorm 1 56 56 64 
+resnet_model/Relu_7 1 56 56 64 
+resnet_model/conv2d_9/kernel 3 3 64 64 
+resnet_model/conv2d_9/Conv2D 1 56 56 64 
+resnet_model/batch_normalization_8/gamma 64 
+resnet_model/batch_normalization_8/beta 64 
+resnet_model/batch_normalization_8/moving_mean 64 
+resnet_model/batch_normalization_8/moving_variance 64 
+resnet_model/batch_normalization_8/FusedBatchNorm 1 56 56 64 
+resnet_model/Relu_8 1 56 56 64 
+resnet_model/conv2d_10/kernel 1 1 64 256 
+resnet_model/conv2d_10/Conv2D 1 56 56 256 
+resnet_model/add_2 1 56 56 256 
+resnet_model/batch_normalization_9/gamma 256 
+resnet_model/batch_normalization_9/beta 256 
+resnet_model/batch_normalization_9/moving_mean 256 
+resnet_model/batch_normalization_9/moving_variance 256 
+resnet_model/batch_normalization_9/FusedBatchNorm 1 56 56 256 
+resnet_model/Relu_9 1 56 56 256 
+resnet_model/Pad_1/paddings 4 2 
+resnet_model/Pad_1 1 56 56 256 
+resnet_model/conv2d_11/kernel 1 1 256 512 
+resnet_model/conv2d_11/Conv2D 1 28 28 512 
+resnet_model/conv2d_12/kernel 1 1 256 128 
+resnet_model/conv2d_12/Conv2D 1 56 56 128 
+resnet_model/batch_normalization_10/gamma 128 
+resnet_model/batch_normalization_10/beta 128 
+resnet_model/batch_normalization_10/moving_mean 128 
+resnet_model/batch_normalization_10/moving_variance 128 
+resnet_model/batch_normalization_10/FusedBatchNorm 1 56 56 128 
+resnet_model/Relu_10 1 56 56 128 
+resnet_model/Pad_2/paddings 4 2 
+resnet_model/Pad_2 1 58 58 128 
+resnet_model/conv2d_13/kernel 3 3 128 128 
+resnet_model/conv2d_13/Conv2D 1 28 28 128 
+resnet_model/batch_normalization_11/gamma 128 
+resnet_model/batch_normalization_11/beta 128 
+resnet_model/batch_normalization_11/moving_mean 128 
+resnet_model/batch_normalization_11/moving_variance 128 
+resnet_model/batch_normalization_11/FusedBatchNorm 1 28 28 128 
+resnet_model/Relu_11 1 28 28 128 
+resnet_model/conv2d_14/kernel 1 1 128 512 
+resnet_model/conv2d_14/Conv2D 1 28 28 512 
+resnet_model/add_3 1 28 28 512 
+resnet_model/batch_normalization_12/gamma 512 
+resnet_model/batch_normalization_12/beta 512 
+resnet_model/batch_normalization_12/moving_mean 512 
+resnet_model/batch_normalization_12/moving_variance 512 
+resnet_model/batch_normalization_12/FusedBatchNorm 1 28 28 512 
+resnet_model/Relu_12 1 28 28 512 
+resnet_model/conv2d_15/kernel 1 1 512 128 
+resnet_model/conv2d_15/Conv2D 1 28 28 128 
+resnet_model/batch_normalization_13/gamma 128 
+resnet_model/batch_normalization_13/beta 128 
+resnet_model/batch_normalization_13/moving_mean 128 
+resnet_model/batch_normalization_13/moving_variance 128 
+resnet_model/batch_normalization_13/FusedBatchNorm 1 28 28 128 
+resnet_model/Relu_13 1 28 28 128 
+resnet_model/conv2d_16/kernel 3 3 128 128 
+resnet_model/conv2d_16/Conv2D 1 28 28 128 
+resnet_model/batch_normalization_14/gamma 128 
+resnet_model/batch_normalization_14/beta 128 
+resnet_model/batch_normalization_14/moving_mean 128 
+resnet_model/batch_normalization_14/moving_variance 128 
+resnet_model/batch_normalization_14/FusedBatchNorm 1 28 28 128 
+resnet_model/Relu_14 1 28 28 128 
+resnet_model/conv2d_17/kernel 1 1 128 512 
+resnet_model/conv2d_17/Conv2D 1 28 28 512 
+resnet_model/add_4 1 28 28 512 
+resnet_model/batch_normalization_15/gamma 512 
+resnet_model/batch_normalization_15/beta 512 
+resnet_model/batch_normalization_15/moving_mean 512 
+resnet_model/batch_normalization_15/moving_variance 512 
+resnet_model/batch_normalization_15/FusedBatchNorm 1 28 28 512 
+resnet_model/Relu_15 1 28 28 512 
+resnet_model/conv2d_18/kernel 1 1 512 128 
+resnet_model/conv2d_18/Conv2D 1 28 28 128 
+resnet_model/batch_normalization_16/gamma 128 
+resnet_model/batch_normalization_16/beta 128 
+resnet_model/batch_normalization_16/moving_mean 128 
+resnet_model/batch_normalization_16/moving_variance 128 
+resnet_model/batch_normalization_16/FusedBatchNorm 1 28 28 128 
+resnet_model/Relu_16 1 28 28 128 
+resnet_model/conv2d_19/kernel 3 3 128 128 
+resnet_model/conv2d_19/Conv2D 1 28 28 128 
+resnet_model/batch_normalization_17/gamma 128 
+resnet_model/batch_normalization_17/beta 128 
+resnet_model/batch_normalization_17/moving_mean 128 
+resnet_model/batch_normalization_17/moving_variance 128 
+resnet_model/batch_normalization_17/FusedBatchNorm 1 28 28 128 
+resnet_model/Relu_17 1 28 28 128 
+resnet_model/conv2d_20/kernel 1 1 128 512 
+resnet_model/conv2d_20/Conv2D 1 28 28 512 
+resnet_model/add_5 1 28 28 512 
+resnet_model/batch_normalization_18/gamma 512 
+resnet_model/batch_normalization_18/beta 512 
+resnet_model/batch_normalization_18/moving_mean 512 
+resnet_model/batch_normalization_18/moving_variance 512 
+resnet_model/batch_normalization_18/FusedBatchNorm 1 28 28 512 
+resnet_model/Relu_18 1 28 28 512 
+resnet_model/conv2d_21/kernel 1 1 512 128 
+resnet_model/conv2d_21/Conv2D 1 28 28 128 
+resnet_model/batch_normalization_19/gamma 128 
+resnet_model/batch_normalization_19/beta 128 
+resnet_model/batch_normalization_19/moving_mean 128 
+resnet_model/batch_normalization_19/moving_variance 128 
+resnet_model/batch_normalization_19/FusedBatchNorm 1 28 28 128 
+resnet_model/Relu_19 1 28 28 128 
+resnet_model/conv2d_22/kernel 3 3 128 128 
+resnet_model/conv2d_22/Conv2D 1 28 28 128 
+resnet_model/batch_normalization_20/gamma 128 
+resnet_model/batch_normalization_20/beta 128 
+resnet_model/batch_normalization_20/moving_mean 128 
+resnet_model/batch_normalization_20/moving_variance 128 
+resnet_model/batch_normalization_20/FusedBatchNorm 1 28 28 128 
+resnet_model/Relu_20 1 28 28 128 
+resnet_model/conv2d_23/kernel 1 1 128 512 
+resnet_model/conv2d_23/Conv2D 1 28 28 512 
+resnet_model/add_6 1 28 28 512 
+resnet_model/batch_normalization_21/gamma 512 
+resnet_model/batch_normalization_21/beta 512 
+resnet_model/batch_normalization_21/moving_mean 512 
+resnet_model/batch_normalization_21/moving_variance 512 
+resnet_model/batch_normalization_21/FusedBatchNorm 1 28 28 512 
+resnet_model/Relu_21 1 28 28 512 
+resnet_model/Pad_3/paddings 4 2 
+resnet_model/Pad_3 1 28 28 512 
+resnet_model/conv2d_24/kernel 1 1 512 1024 
+resnet_model/conv2d_24/Conv2D 1 14 14 1024 
+resnet_model/conv2d_25/kernel 1 1 512 256 
+resnet_model/conv2d_25/Conv2D 1 28 28 256 
+resnet_model/batch_normalization_22/gamma 256 
+resnet_model/batch_normalization_22/beta 256 
+resnet_model/batch_normalization_22/moving_mean 256 
+resnet_model/batch_normalization_22/moving_variance 256 
+resnet_model/batch_normalization_22/FusedBatchNorm 1 28 28 256 
+resnet_model/Relu_22 1 28 28 256 
+resnet_model/Pad_4/paddings 4 2 
+resnet_model/Pad_4 1 30 30 256 
+resnet_model/conv2d_26/kernel 3 3 256 256 
+resnet_model/conv2d_26/Conv2D 1 14 14 256 
+resnet_model/batch_normalization_23/gamma 256 
+resnet_model/batch_normalization_23/beta 256 
+resnet_model/batch_normalization_23/moving_mean 256 
+resnet_model/batch_normalization_23/moving_variance 256 
+resnet_model/batch_normalization_23/FusedBatchNorm 1 14 14 256 
+resnet_model/Relu_23 1 14 14 256 
+resnet_model/conv2d_27/kernel 1 1 256 1024 
+resnet_model/conv2d_27/Conv2D 1 14 14 1024 
+resnet_model/add_7 1 14 14 1024 
+resnet_model/batch_normalization_24/gamma 1024 
+resnet_model/batch_normalization_24/beta 1024 
+resnet_model/batch_normalization_24/moving_mean 1024 
+resnet_model/batch_normalization_24/moving_variance 1024 
+resnet_model/batch_normalization_24/FusedBatchNorm 1 14 14 1024 
+resnet_model/Relu_24 1 14 14 1024 
+resnet_model/conv2d_28/kernel 1 1 1024 256 
+resnet_model/conv2d_28/Conv2D 1 14 14 256 
+resnet_model/batch_normalization_25/gamma 256 
+resnet_model/batch_normalization_25/beta 256 
+resnet_model/batch_normalization_25/moving_mean 256 
+resnet_model/batch_normalization_25/moving_variance 256 
+resnet_model/batch_normalization_25/FusedBatchNorm 1 14 14 256 
+resnet_model/Relu_25 1 14 14 256 
+resnet_model/conv2d_29/kernel 3 3 256 256 
+resnet_model/conv2d_29/Conv2D 1 14 14 256 
+resnet_model/batch_normalization_26/gamma 256 
+resnet_model/batch_normalization_26/beta 256 
+resnet_model/batch_normalization_26/moving_mean 256 
+resnet_model/batch_normalization_26/moving_variance 256 
+resnet_model/batch_normalization_26/FusedBatchNorm 1 14 14 256 
+resnet_model/Relu_26 1 14 14 256 
+resnet_model/conv2d_30/kernel 1 1 256 1024 
+resnet_model/conv2d_30/Conv2D 1 14 14 1024 
+resnet_model/add_8 1 14 14 1024 
+resnet_model/batch_normalization_27/gamma 1024 
+resnet_model/batch_normalization_27/beta 1024 
+resnet_model/batch_normalization_27/moving_mean 1024 
+resnet_model/batch_normalization_27/moving_variance 1024 
+resnet_model/batch_normalization_27/FusedBatchNorm 1 14 14 1024 
+resnet_model/Relu_27 1 14 14 1024 
+resnet_model/conv2d_31/kernel 1 1 1024 256 
+resnet_model/conv2d_31/Conv2D 1 14 14 256 
+resnet_model/batch_normalization_28/gamma 256 
+resnet_model/batch_normalization_28/beta 256 
+resnet_model/batch_normalization_28/moving_mean 256 
+resnet_model/batch_normalization_28/moving_variance 256 
+resnet_model/batch_normalization_28/FusedBatchNorm 1 14 14 256 
+resnet_model/Relu_28 1 14 14 256 
+resnet_model/conv2d_32/kernel 3 3 256 256 
+resnet_model/conv2d_32/Conv2D 1 14 14 256 
+resnet_model/batch_normalization_29/gamma 256 
+resnet_model/batch_normalization_29/beta 256 
+resnet_model/batch_normalization_29/moving_mean 256 
+resnet_model/batch_normalization_29/moving_variance 256 
+resnet_model/batch_normalization_29/FusedBatchNorm 1 14 14 256 
+resnet_model/Relu_29 1 14 14 256 
+resnet_model/conv2d_33/kernel 1 1 256 1024 
+resnet_model/conv2d_33/Conv2D 1 14 14 1024 
+resnet_model/add_9 1 14 14 1024 
+resnet_model/batch_normalization_30/gamma 1024 
+resnet_model/batch_normalization_30/beta 1024 
+resnet_model/batch_normalization_30/moving_mean 1024 
+resnet_model/batch_normalization_30/moving_variance 1024 
+resnet_model/batch_normalization_30/FusedBatchNorm 1 14 14 1024 
+resnet_model/Relu_30 1 14 14 1024 
+resnet_model/conv2d_34/kernel 1 1 1024 256 
+resnet_model/conv2d_34/Conv2D 1 14 14 256 
+resnet_model/batch_normalization_31/gamma 256 
+resnet_model/batch_normalization_31/beta 256 
+resnet_model/batch_normalization_31/moving_mean 256 
+resnet_model/batch_normalization_31/moving_variance 256 
+resnet_model/batch_normalization_31/FusedBatchNorm 1 14 14 256 
+resnet_model/Relu_31 1 14 14 256 
+resnet_model/conv2d_35/kernel 3 3 256 256 
+resnet_model/conv2d_35/Conv2D 1 14 14 256 
+resnet_model/batch_normalization_32/gamma 256 
+resnet_model/batch_normalization_32/beta 256 
+resnet_model/batch_normalization_32/moving_mean 256 
+resnet_model/batch_normalization_32/moving_variance 256 
+resnet_model/batch_normalization_32/FusedBatchNorm 1 14 14 256 
+resnet_model/Relu_32 1 14 14 256 
+resnet_model/conv2d_36/kernel 1 1 256 1024 
+resnet_model/conv2d_36/Conv2D 1 14 14 1024 
+resnet_model/add_10 1 14 14 1024 
+resnet_model/batch_normalization_33/gamma 1024 
+resnet_model/batch_normalization_33/beta 1024 
+resnet_model/batch_normalization_33/moving_mean 1024 
+resnet_model/batch_normalization_33/moving_variance 1024 
+resnet_model/batch_normalization_33/FusedBatchNorm 1 14 14 1024 
+resnet_model/Relu_33 1 14 14 1024 
+resnet_model/conv2d_37/kernel 1 1 1024 256 
+resnet_model/conv2d_37/Conv2D 1 14 14 256 
+resnet_model/batch_normalization_34/gamma 256 
+resnet_model/batch_normalization_34/beta 256 
+resnet_model/batch_normalization_34/moving_mean 256 
+resnet_model/batch_normalization_34/moving_variance 256 
+resnet_model/batch_normalization_34/FusedBatchNorm 1 14 14 256 
+resnet_model/Relu_34 1 14 14 256 
+resnet_model/conv2d_38/kernel 3 3 256 256 
+resnet_model/conv2d_38/Conv2D 1 14 14 256 
+resnet_model/batch_normalization_35/gamma 256 
+resnet_model/batch_normalization_35/beta 256 
+resnet_model/batch_normalization_35/moving_mean 256 
+resnet_model/batch_normalization_35/moving_variance 256 
+resnet_model/batch_normalization_35/FusedBatchNorm 1 14 14 256 
+resnet_model/Relu_35 1 14 14 256 
+resnet_model/conv2d_39/kernel 1 1 256 1024 
+resnet_model/conv2d_39/Conv2D 1 14 14 1024 
+resnet_model/add_11 1 14 14 1024 
+resnet_model/batch_normalization_36/gamma 1024 
+resnet_model/batch_normalization_36/beta 1024 
+resnet_model/batch_normalization_36/moving_mean 1024 
+resnet_model/batch_normalization_36/moving_variance 1024 
+resnet_model/batch_normalization_36/FusedBatchNorm 1 14 14 1024 
+resnet_model/Relu_36 1 14 14 1024 
+resnet_model/conv2d_40/kernel 1 1 1024 256 
+resnet_model/conv2d_40/Conv2D 1 14 14 256 
+resnet_model/batch_normalization_37/gamma 256 
+resnet_model/batch_normalization_37/beta 256 
+resnet_model/batch_normalization_37/moving_mean 256 
+resnet_model/batch_normalization_37/moving_variance 256 
+resnet_model/batch_normalization_37/FusedBatchNorm 1 14 14 256 
+resnet_model/Relu_37 1 14 14 256 
+resnet_model/conv2d_41/kernel 3 3 256 256 
+resnet_model/conv2d_41/Conv2D 1 14 14 256 
+resnet_model/batch_normalization_38/gamma 256 
+resnet_model/batch_normalization_38/beta 256 
+resnet_model/batch_normalization_38/moving_mean 256 
+resnet_model/batch_normalization_38/moving_variance 256 
+resnet_model/batch_normalization_38/FusedBatchNorm 1 14 14 256 
+resnet_model/Relu_38 1 14 14 256 
+resnet_model/conv2d_42/kernel 1 1 256 1024 
+resnet_model/conv2d_42/Conv2D 1 14 14 1024 
+resnet_model/add_12 1 14 14 1024 
+resnet_model/batch_normalization_39/gamma 1024 
+resnet_model/batch_normalization_39/beta 1024 
+resnet_model/batch_normalization_39/moving_mean 1024 
+resnet_model/batch_normalization_39/moving_variance 1024 
+resnet_model/batch_normalization_39/FusedBatchNorm 1 14 14 1024 
+resnet_model/Relu_39 1 14 14 1024 
+resnet_model/Pad_5/paddings 4 2 
+resnet_model/Pad_5 1 14 14 1024 
+resnet_model/conv2d_43/kernel 1 1 1024 2048 
+resnet_model/conv2d_43/Conv2D 1 7 7 2048 
+resnet_model/conv2d_44/kernel 1 1 1024 512 
+resnet_model/conv2d_44/Conv2D 1 14 14 512 
+resnet_model/batch_normalization_40/gamma 512 
+resnet_model/batch_normalization_40/beta 512 
+resnet_model/batch_normalization_40/moving_mean 512 
+resnet_model/batch_normalization_40/moving_variance 512 
+resnet_model/batch_normalization_40/FusedBatchNorm 1 14 14 512 
+resnet_model/Relu_40 1 14 14 512 
+resnet_model/Pad_6/paddings 4 2 
+resnet_model/Pad_6 1 16 16 512 
+resnet_model/conv2d_45/kernel 3 3 512 512 
+resnet_model/conv2d_45/Conv2D 1 7 7 512 
+resnet_model/batch_normalization_41/gamma 512 
+resnet_model/batch_normalization_41/beta 512 
+resnet_model/batch_normalization_41/moving_mean 512 
+resnet_model/batch_normalization_41/moving_variance 512 
+resnet_model/batch_normalization_41/FusedBatchNorm 1 7 7 512 
+resnet_model/Relu_41 1 7 7 512 
+resnet_model/conv2d_46/kernel 1 1 512 2048 
+resnet_model/conv2d_46/Conv2D 1 7 7 2048 
+resnet_model/add_13 1 7 7 2048 
+resnet_model/batch_normalization_42/gamma 2048 
+resnet_model/batch_normalization_42/beta 2048 
+resnet_model/batch_normalization_42/moving_mean 2048 
+resnet_model/batch_normalization_42/moving_variance 2048 
+resnet_model/batch_normalization_42/FusedBatchNorm 1 7 7 2048 
+resnet_model/Relu_42 1 7 7 2048 
+resnet_model/conv2d_47/kernel 1 1 2048 512 
+resnet_model/conv2d_47/Conv2D 1 7 7 512 
+resnet_model/batch_normalization_43/gamma 512 
+resnet_model/batch_normalization_43/beta 512 
+resnet_model/batch_normalization_43/moving_mean 512 
+resnet_model/batch_normalization_43/moving_variance 512 
+resnet_model/batch_normalization_43/FusedBatchNorm 1 7 7 512 
+resnet_model/Relu_43 1 7 7 512 
+resnet_model/conv2d_48/kernel 3 3 512 512 
+resnet_model/conv2d_48/Conv2D 1 7 7 512 
+resnet_model/batch_normalization_44/gamma 512 
+resnet_model/batch_normalization_44/beta 512 
+resnet_model/batch_normalization_44/moving_mean 512 
+resnet_model/batch_normalization_44/moving_variance 512 
+resnet_model/batch_normalization_44/FusedBatchNorm 1 7 7 512 
+resnet_model/Relu_44 1 7 7 512 
+resnet_model/conv2d_49/kernel 1 1 512 2048 
+resnet_model/conv2d_49/Conv2D 1 7 7 2048 
+resnet_model/add_14 1 7 7 2048 
+resnet_model/batch_normalization_45/gamma 2048 
+resnet_model/batch_normalization_45/beta 2048 
+resnet_model/batch_normalization_45/moving_mean 2048 
+resnet_model/batch_normalization_45/moving_variance 2048 
+resnet_model/batch_normalization_45/FusedBatchNorm 1 7 7 2048 
+resnet_model/Relu_45 1 7 7 2048 
+resnet_model/conv2d_50/kernel 1 1 2048 512 
+resnet_model/conv2d_50/Conv2D 1 7 7 512 
+resnet_model/batch_normalization_46/gamma 512 
+resnet_model/batch_normalization_46/beta 512 
+resnet_model/batch_normalization_46/moving_mean 512 
+resnet_model/batch_normalization_46/moving_variance 512 
+resnet_model/batch_normalization_46/FusedBatchNorm 1 7 7 512 
+resnet_model/Relu_46 1 7 7 512 
+resnet_model/conv2d_51/kernel 3 3 512 512 
+resnet_model/conv2d_51/Conv2D 1 7 7 512 
+resnet_model/batch_normalization_47/gamma 512 
+resnet_model/batch_normalization_47/beta 512 
+resnet_model/batch_normalization_47/moving_mean 512 
+resnet_model/batch_normalization_47/moving_variance 512 
+resnet_model/batch_normalization_47/FusedBatchNorm 1 7 7 512 
+resnet_model/Relu_47 1 7 7 512 
+resnet_model/conv2d_52/kernel 1 1 512 2048 
+resnet_model/conv2d_52/Conv2D 1 7 7 2048 
+resnet_model/add_15 1 7 7 2048 
+resnet_model/batch_normalization_48/gamma 2048 
+resnet_model/batch_normalization_48/beta 2048 
+resnet_model/batch_normalization_48/moving_mean 2048 
+resnet_model/batch_normalization_48/moving_variance 2048 
+resnet_model/batch_normalization_48/FusedBatchNorm 1 7 7 2048 
+resnet_model/Relu_48 1 7 7 2048 
+resnet_model/AvgPool 1 1 1 2048 
+resnet_model/Squeeze 1 2048 
+resnet_model/dense/kernel 2048 1001 
+resnet_model/dense/bias 1001 
+resnet_model/dense/MatMul 1 1001 
+resnet_model/dense/BiasAdd 1 1001 
+ArgMax/dimension 
+ArgMax 1 

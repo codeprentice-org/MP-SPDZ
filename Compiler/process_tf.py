@@ -64,7 +64,7 @@ def get_layers_and_named_data(filename):
             source(op, named)
         elif t == 'MatMul':
             assert reduce(operator.mul, shape) == op.inputs[1].shape[0]
-            output(layers, named, op, ml.Dense(1, op.inputs[1].shape[0], op.inputs[1].shape[1]))
+            output(layers, named, op, ml.Dense(1, int(op.inputs[1].shape[0]), int(op.inputs[1].shape[1])))
             shape = [1, int(op.inputs[1].shape[1])]
         elif t == 'Conv2D':
             strides = op.get_attr('strides')
