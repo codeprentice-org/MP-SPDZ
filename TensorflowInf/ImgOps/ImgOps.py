@@ -2,14 +2,26 @@ import numpy as np
 from PIL import Image
 
 def getImg(imgfile):
-    img = np.asarray(Image.open(imgfile))
-    return img
+    imgOut = Image.open(imgfile).convert("RGB")
+    imgOut = np.asarray(imgOut)
+    return imgOut
 
 def imgResize(img, width, height):
-    return np.asarray(Image.fromarray(img).resize((width, height)))
+    imgOut = Image.fromarray(img)
+    imgOut = imgOut.resize((width, height), Image.BILINEAR)
+    imgOut = np.asarray(imgOut)
+    if len(imgOut.shape) == 2:
+        imgOut = np.dstack((imgOut, imgOut, imgOut))
+    return imgOut
+
+def imgSave(img, dest):
+    imgSave = np.clip(img, 0, 255).astype(np.uint8)
+    imgSave = Image.fromarray(imgSave)
+    imgSave.save(path, quality = 95)
 
 def reverseColor(img):
-    return img[:,:,::-1]
+    imgOut = img[:,:,::-1]
+    return imgOut
 
 def squareCrop(img):
     imgWidth = img.shape[0]
@@ -19,7 +31,13 @@ def squareCrop(img):
                 int((imgHeight / 2) - (cropLength / 2)),
                 int((imgWidth / 2) + (cropLength / 2)),
                 int((imgHeight / 2) + (cropLength / 2)))
-    return img[cropCoor[0]:cropCoor[2], cropCoor[1]:cropCoor[3],:]
+    imgOut = img[cropCoor[0]:cropCoor[2], cropCoor[1]:cropCoor[3],:]
+    return imgOut
 
-def offsetPixels(img, offset):
-    return img - offset
+def meanOffset(img):
+    imgOut = img - np.array([104.006, 116.669, 122.679], dtype = np.float32)
+    return imgOut
+
+def meanUnoffset(img):
+    imgOut = img + np.array([104.006, 116.669, 122.679], dtype = np.float32)
+    return imgOut

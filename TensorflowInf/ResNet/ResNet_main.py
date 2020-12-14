@@ -35,7 +35,7 @@ import Resnet_Model
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "TFCompiler"))
 import DumpTFMtData
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "ImgOps"))
-from ImgOps import getImg, squareCrop, imgResize, reverseColor, offsetPixels
+from ImgOps import getImg, squareCrop, imgResize, reverseColor, meanOffset
 
 NUM_CLASSES = 1001
 
@@ -139,8 +139,7 @@ def infer(imgfile, savePreTrainedWeightsInt, savePreTrainedWeightsFloat, scaling
         img = squareCrop(img)
         img = imgResize(img, 224, 224)
         img = reverseColor(img)
-        mean_pixel = np.array([104.006, 116.669, 122.679], dtype = np.float32)
-        img = offsetPixels(img, mean_pixel)
+        img = meanOffset(img)
         images = [img]
 
         numImages = len(images)

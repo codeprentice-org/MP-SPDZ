@@ -3,34 +3,16 @@
 import os, sys
 import time
 import scipy.io
-import scipy.misc
 import numpy as np
 import tensorflow as tf
 from PIL import Image
 from argparse import ArgumentParser
 from tensorflow.tools.graph_transforms import TransformGraph
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'TFCompiler'))
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "TFCompiler"))
 import DumpTFMtData
-
-def imread_resize(path):
-    img_orig = Image.open(path).convert("RGB")
-    img_orig = np.asarray(img_orig)
-
-    # NOTE: scipy.misc.imresize is deprecated in > v1.1.0.
-    #   But i cannot find a suitable replacement for this which returns
-    #   exactly the same float value after resizing as scipy.misc.resize.
-    #   So, as an alternative, try reinstalling scipy v1.1.0 and then run this code.
-    #   Install Scipy v1.1 as : pip3 install scipy==1.1.0
-    img = scipy.misc.imresize(img_orig, (227, 227)).astype(np.float)
-    if len(img.shape) == 2:
-        # grayscale
-        img = np.dstack((img,img,img))
-    return img, img_orig.shape
-
-def imsave(path, img):
-    img = np.clip(img, 0, 255).astype(np.uint8)
-    Image.fromarray(img).save(path, quality=95)
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "ImgOps"))
+from ImgOps import getImg, imgResize, reverseColor, meanOffset
 
 def get_dtype_np():
     return np.float32
@@ -62,22 +44,7 @@ def load_net(data_path):
             weights[name].append( bias.astype(get_dtype_np()) )
     print("Converted network data(%s): %fs" % (get_dtype_np(), time.time() - conv_time))
 
-    mean_pixel = np.array([104.006, 116.669, 122.679], dtype=get_dtype_np())
-    return weights, mean_pixel
-
-def preprocess(image, mean_pixel):
-    swap_img = np.array(image)
-    img_out = np.array(swap_img)
-    img_out[:, :, 0] = swap_img[:, :, 2]
-    img_out[:, :, 2] = swap_img[:, :, 0]
-    return img_out - mean_pixel
-
-def unprocess(image, mean_pixel):
-    swap_img = np.array(image + mean_pixel)
-    img_out = np.array(swap_img)
-    img_out[:, :, 0] = swap_img[:, :, 2]
-    img_out[:, :, 2] = swap_img[:, :, 0]
-    return img_out
+    return weights
 
 def get_weights_biases(preloaded, layer_name):
     weights, biases = preloaded[layer_name]
@@ -208,7 +175,7 @@ def main():
     options = parser.parse_args()
 
     # Loading image
-    img_content, orig_shape = imread_resize(options.input)
+    img_content = imgResize(getImg(options.input), 227, 227)
     img_content_shape = (1,) + img_content.shape
 
     # Loading ImageNet classes info
@@ -217,7 +184,7 @@ def main():
         classes = classes_file.read().splitlines()
 
     # Loading network
-    data, sqz_mean = load_net('./PreTrainedModel/sqz_full.mat')
+    data = load_net('./PreTrainedModel/sqz_full.mat')
 
     config = tf.ConfigProto(log_device_placement = False)
     config.gpu_options.allow_growth = True
@@ -235,7 +202,7 @@ def main():
         final_class = tf.argmax(sqznet['classifier_pool'],3)
 
         sess.run(tf.global_variables_initializer())
-        imageData = [preprocess(img_content, sqz_mean)]
+        imageData = [meanOffset(reverseColor(img_content))]
 
         feed_dict = {image: imageData}
 
