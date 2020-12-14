@@ -15,10 +15,10 @@ print_usage() {
 # Parse options
 while getopts 'n:F:' flag; do
     case "${flag}" in
-	n) NUM_THREADS=${OPTARG};;
+        n) NUM_THREADS=${OPTARG};;
         F) IMG_FILE=${OPTARG};;
-	*) print_usage
-	exit 1 ;;
+        *) print_usage
+        exit 1 ;;
     esac
 done
 
@@ -29,7 +29,7 @@ if [ -z "$PYTHON_CMD" ]; then
     echo Error: Python3 is not installed
     echo Please install Python 3.5-3.7 first
     echo Quitting...
-    exit 1
+    exit 2
 else
     echo Python3 is installed
 fi
@@ -42,7 +42,7 @@ if [[ "`$PYTHON_CMD --version`" =~ ^Python[[:space:]]*(3\.[5-7].*)$ ]]; then
 else
     echo Error: Python installation must be version 3.5-3.7
     echo Quitting...
-    exit 2
+    exit 3
 fi
 
 # Navigate to script directory
