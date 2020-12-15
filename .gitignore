@@ -125,14 +125,14 @@ venv
 ########################
 TensorflowInf/ImageNetDownloads/*/*
 
-#TensorflowInf/SqueezeNet/__pycache__/
-#TensorflowInf/SqueezeNet/PreTrainedModel/
-#TensorflowInf/SqueezeNet/*.inp
-#TensorflowInf/SqueezeNet/*.bin
-#TensorflowInf/SqueezeNet/*.mtdata
+TensorflowInf/SqueezeNet/__pycache__/
+TensorflowInf/SqueezeNet/PreTrainedModel/
+TensorflowInf/SqueezeNet/*.inp
+TensorflowInf/SqueezeNet/*.bin
+TensorflowInf/SqueezeNet/*.mtdata
 
-#TensorflowInf/ResNet/__pycache__/
-#TensorflowInf/ResNet/PreTrainedModel/
-#TensorflowInf/ResNet/ResNet_img_input.inp
-#TensorflowInf/ResNet/*.bin
-#TensorflowInf/ResNet/*.mtdata
+TensorflowInf/ResNet/__pycache__/
+TensorflowInf/ResNet/PreTrainedModel/
+TensorflowInf/ResNet/ResNet_img_input.inp
+TensorflowInf/ResNet/*.bin
+TensorflowInf/ResNet/*.mtdata
