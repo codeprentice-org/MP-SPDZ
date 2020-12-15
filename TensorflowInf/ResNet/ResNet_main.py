@@ -30,7 +30,7 @@ import time
 import numpy as np
 import argparse
 import tensorflow as tf
-import Resnet_Model
+import ResNet_Model
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "TFCompiler"))
 import DumpTFMtData
@@ -76,15 +76,15 @@ def _get_block_sizes(resnet_size):
                 resnet_size, choices.keys()))
         raise ValueError(err)
 
-class ImagenetModel(Resnet_Model.Model):
+class ImagenetModel(ResNet_Model.Model):
     """Model class with appropriate defaults for Imagenet data."""
 
     def __init__(self,
         resnet_size,
         data_format = None,
         num_classes = NUM_CLASSES,
-        resnet_version = Resnet_Model.DEFAULT_VERSION,
-        dtype=Resnet_Model.DEFAULT_DTYPE):
+        resnet_version = ResNet_Model.DEFAULT_VERSION,
+        dtype=ResNet_Model.DEFAULT_DTYPE):
 
         """These are the parameters that work for Imagenet data.
         Args:
@@ -176,7 +176,7 @@ def infer(imgfile, savePreTrainedWeightsInt, savePreTrainedWeightsFloat, scaling
 def parseArgs():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--img", type=str, default="SampleImages/n02109961_36.JPEG", help="img")
+    parser.add_argument("--in", type=str, default="SampleImages/n02109961_36.JPEG", help="in")
     parser.add_argument("--savePreTrainedWeightsInt", type=bool, default=False, help="savePreTrainedWeightsInt")
     parser.add_argument("--savePreTrainedWeightsFloat", type=bool, default=False, help="savePreTrainedWeightsFloat")
     parser.add_argument("--scalingFac", type=int, default=15, help="scalingFac")
@@ -187,7 +187,7 @@ def parseArgs():
 
 def main():
     args = parseArgs()
-    infer(args.img,
+    infer(args.in,
         args.savePreTrainedWeightsInt,
         args.savePreTrainedWeightsFloat,
         args.scalingFac,
