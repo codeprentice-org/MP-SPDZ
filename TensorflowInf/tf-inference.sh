@@ -20,14 +20,19 @@ done
 
 ./requirements.sh || exit 1
 
-MODEL_NETWORK_NO_CAPS="${MODEL_NETWORK,,}"
-case "$MODEL_NETWORK_NO_CAPS" in
-    squeezenet) PRE_TRAINED_MODEL_LINK="https://github.com/avoroshilov/tf-squeezenet/raw/master/sqz_full.mat"
+if [ ${IMG_FILE:0:1} == "/" ]; then
+    IMG_FILE_ABS_PATH="$IMG_FILE"
+else
+    IMG_FILE_ABS_PATH="${PWD}/${IMG_FILE}"
+fi
+
+case "$MODEL_NETWORK" in
+    SqueezeNet) PRE_TRAINED_MODEL_LINK="https://github.com/avoroshilov/tf-squeezenet/raw/master/sqz_full.mat"
                 PRE_TRAINED_MODEL_FILE="sqz_full.mat"
                 SCRIPT="squeezenet_main.py"
                 EXTRACT=0;;
 
-    resnet)     PRE_TRAINED_MODEL_LINK="http://download.tensorflow.org/models/official/20181001_resnet/savedmodels/resnet_v2_fp32_savedmodel_NHWC.tar.gz"
+    ResNet)     PRE_TRAINED_MODEL_LINK="http://download.tensorflow.org/models/official/20181001_resnet/savedmodels/resnet_v2_fp32_savedmodel_NHWC.tar.gz"
                 PRE_TRAINED_MODEL_FILE="resnet_v2_fp32_savedmodel_NHWC.tar.gz"
                 SCRIPT="ResNet_main.py"
                 EXTRACT=1;;
@@ -46,18 +51,17 @@ if [[ ! -f "PreTrainedModel/$PRE_TRAINED_MODEL_FILE" ]]; then
     axel -a -n 5 -c --output ./PreTrainedModel $PRE_TRAINED_MODEL_LINK
 fi
 
-if [ EXTRACT -eq 1 ] then;
+if [ $EXTRACT -eq 1 ]; then
     cd PreTrainedModel
     tar -xvzf $PRE_TRAINED_MODEL_FILE
     cd ..
 fi
 
-# python3 $SCRIPT .....
-# make both resnet not need scalingfac and saveimgandwtdata
-# handle issue with relative image path
-# cd ../..
-# Scripts/fixed-rep-to-float.py TensorflowInf/$MODEL_NETWORK/inp_thing
-# python3 compile.py .....
-# Scripts/ring.sh tf-......
+python3 $SCRIPT --img $IMG_FILE_ABS_PATH
+
+cd ../..
+Scripts/fixed-rep-to-float.py TensorflowInf/${MODEL_NETWORK}/${MODEL_NETWORK}_img_input.inp
+python3 compile.py -R 64 tf TensorflowInf/${MODEL_NETWORK}/graphDef.bin ${NUM_THREADS} trunc_pr split 
+Scripts/ring.sh tf-TensorflowInf_${MODEL_NETWORK}_graphDef.bin-${NUM_THREADS}-trunc_pr-split
 
 set +e

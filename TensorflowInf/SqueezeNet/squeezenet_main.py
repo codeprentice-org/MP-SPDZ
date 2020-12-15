@@ -168,7 +168,7 @@ def _pool_layer(net, name, input, pooling, size=(2, 2), stride=(3, 3), padding='
 
 def build_parser():
     ps = ArgumentParser()
-    ps.add_argument('--in', dest='input', help='input file', metavar='INPUT', required=True)
+    ps.add_argument('--img', dest='input', help='input file', metavar='INPUT', required=True)
     return ps
 
 def main():
@@ -215,7 +215,7 @@ def main():
 
         SCALING_FAC = 12
         DumpTFMtData.save_graph_metadata(output_tensor, sess, feed_dict)
-        DumpTFMtData.dumpImgAndWeightsData(sess, imageData, all_weights, 'SqNetImgNet_img_input.inp', SCALING_FAC, alreadyEvaluated=True)
+        DumpTFMtData.dumpImgAndWeightsData(sess, imageData, all_weights, 'SqueezeNet_img_input.inp', SCALING_FAC, alreadyEvaluated=True)
 
 if __name__ == '__main__':
     parser = build_parser()

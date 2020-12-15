@@ -22,7 +22,7 @@ while getopts 'n:F:' flag; do
     esac
 done
 
-../.requirements.sh || exit 1
+.././requirements.sh || exit 1
 
 # Navigate to script directory
 SCRIPT_DIR=`dirname ${BASH_SOURCE[0]}`
@@ -36,11 +36,11 @@ if [[ ! -f "PreTrainedModel/sqz_full.mat" ]]; then
 fi
 
 # Run SqueezeNet script
-python3 squeezenet_main.py --in $IMG_FILE
+python3 squeezenet_main.py --img $IMG_FILE
 
 # Run MP-SPDZ compilation
 cd ../../
-Scripts/fixed-rep-to-float.py TensorflowInf/SqueezeNet/SqNetImgNet_img_input.inp
+Scripts/fixed-rep-to-float.py TensorflowInf/SqueezeNet/SqueezeNet_img_input.inp
 
 # TODO: abstract script so that the protocol being used can be changed at runtime
 # See https://github.com/data61/MP-SPDZ#tensorflow-inference for details

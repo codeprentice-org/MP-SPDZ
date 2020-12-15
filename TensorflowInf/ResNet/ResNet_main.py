@@ -122,7 +122,7 @@ class ImagenetModel(ResNet_Model.Model):
 
 ##############################################
 
-def infer(imgfile, savePreTrainedWeightsInt, savePreTrainedWeightsFloat, scalingFac, saveImgAndWtData):
+def infer(imgfile, scalingFac):
     x = tf.placeholder(tf.float32, shape=(None, 224, 224, 3), name='input_x')
     # y = tf.placeholder(tf.int64, shape=(None), name='input_y')
 
@@ -153,45 +153,27 @@ def infer(imgfile, savePreTrainedWeightsInt, savePreTrainedWeightsFloat, scaling
                 output_tensor = gg.get_operation_by_name(node.name).outputs[0]
 
         optimized_graph_def = DumpTFMtData.save_graph_metadata(output_tensor, sess, feed_dict)
-
-        if savePreTrainedWeightsInt or savePreTrainedWeightsFloat or saveImgAndWtData:
-            modelPath = './PreTrainedModel/resnet_v2_fp32_savedmodel_NHWC/1538687283/variables/variables'
-            saver = tf.train.Saver()
-            saver.restore(sess, modelPath)
-            if savePreTrainedWeightsInt or savePreTrainedWeightsFloat or saveImgAndWtData:
-                DumpTFMtData.updateWeightsForBN(optimized_graph_def, sess, feed_dict)
+        modelPath = './PreTrainedModel/resnet_v2_fp32_savedmodel_NHWC/1538687283/variables/variables'
+        saver = tf.train.Saver()
+        saver.restore(sess, modelPath)
+        DumpTFMtData.updateWeightsForBN(optimized_graph_def, sess, feed_dict)
 
         trainVarsName = []
         for node in optimized_graph_def.node:
             if node.op=="VariableV2":
                 trainVarsName.append(node.name)
         trainVars = list(map(lambda x : tf.get_default_graph().get_operation_by_name(x).outputs[0] , trainVarsName))
-        if savePreTrainedWeightsInt:
-            DumpTFMtData.dumpTrainedWeights(sess, trainVars, 'ResNet_img_input_weights_int.inp', scalingFac, 'w')
-        if saveImgAndWtData:
-            DumpTFMtData.dumpImgAndWeightsData(sess, images[0], trainVars, 'ResNet_img_input.inp', scalingFac)
-        if savePreTrainedWeightsFloat:
-            DumpTFMtData.dumpTrainedWeightsFloat(sess, trainVars, 'ResNet_img_input_weights_float.inp', 'w')
+        DumpTFMtData.dumpImgAndWeightsData(sess, images[0], trainVars, 'ResNet_img_input.inp', scalingFac)
 
 def parseArgs():
     parser = argparse.ArgumentParser()
-
-    parser.add_argument("--in", type=str, default="SampleImages/n02109961_36.JPEG", help="in")
-    parser.add_argument("--savePreTrainedWeightsInt", type=bool, default=False, help="savePreTrainedWeightsInt")
-    parser.add_argument("--savePreTrainedWeightsFloat", type=bool, default=False, help="savePreTrainedWeightsFloat")
-    parser.add_argument("--scalingFac", type=int, default=15, help="scalingFac")
-    parser.add_argument("--saveImgAndWtData", type=bool, default=False, help="saveImgAndWtData")
-
+    parser.add_argument("--img", type=str, default="SampleImages/n02109961_36.JPEG", help="input file")
     args = parser.parse_args()
     return args
 
 def main():
     args = parseArgs()
-    infer(args.in,
-        args.savePreTrainedWeightsInt,
-        args.savePreTrainedWeightsFloat,
-        args.scalingFac,
-        args.saveImgAndWtData)
+    infer(args.img, 12)
 
 if __name__=='__main__':
     main()
