@@ -1,7 +1,7 @@
 SCRIPT_DIR=`dirname ${BASH_SOURCE[0]}`
 cd $SCRIPT_DIR
 IMG_CODE="n02109961"
-IMG_DOWNLOADS_DIR="ImageNetDownloads/"
+IMG_DOWNLOADS_DIR="./"
 IMG_NET_URL="http://59.36.11.51/dataset/workspace/mindspore_dataset/imagenet/imagenet_original/train/"
 SYNSET_FILE="synset_words.txt"
 

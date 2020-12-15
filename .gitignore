@@ -123,7 +123,7 @@ venv
 
 # Tensorflow Inference #
 ########################
-TensorflowInf/ImageNetDownloads
+TensorflowInf/ImageNetDownloads/*/*
 TensorflowInf/SqueezeNet/PreTrainedModel/sqz_full.mat
 TensorflowInf/SqueezeNet/SqNetImgNet_img_input.inp
 TensorflowInf/SqueezeNet/graphDef.bin
