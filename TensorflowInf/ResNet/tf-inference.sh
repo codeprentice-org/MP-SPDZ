@@ -40,7 +40,7 @@ tar -xvzf resnet_v2_fp32_savedmodel_NHWC.tar.gz
 
 # Run ResNet script
 cd ..
-python3 ResNet_main.py --img $IMG_FILE
+python3 ResNet.py --img $IMG_FILE
 
 # Run Mp-SPDZ compilation
 cd ../..
