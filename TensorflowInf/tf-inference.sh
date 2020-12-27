@@ -74,7 +74,6 @@ function pip_check_library_version() {
     fi
 
     echo -e "Checking for $name library version $version_required..."
-
     version=`${PYTHON_CMD} -c "import ${name}; print(${name}.__version__)"`
     if [[ $version == $version_required ]]; then
         echo -e "$name version $version\n"
