@@ -2,31 +2,22 @@ set -e
 
 # Check for Python 3 version
 function python_check() {
-    echo -e "Checking for Python3..."
-
+    # get rid of this?
+    echo -e "Checking for Python version"
     PYTHON_CMD=${PYTHON_CMD:-`which python3`}
     if [ -z "$PYTHON_CMD" ]; then
-        echo -e "Error: Python 3 is not installed"
-        echo -e "Please install Python 3 first"
-        echo -e "Quitting...\n"
+        echo -e "Error: Python 3 is not installed. Please install Python 3.$1 - 3.$2."
         exit 1
-    else
-        echo -e "Python 3 is installed\n"
     fi
 
-    echo "Checking for Python version 3.$1 - 3.$2..."
-
-    if [[ "`$PYTHON_CMD --version`" =~ ^Python[[:space:]]*(3\.[$1-$2].*)$ ]]; then
-        PYTHON_VERSION=${BASH_REMATCH[1]}
-        echo -e "Python version=$PYTHON_VERSION\n"
-    else
+    if ! [[ "`$PYTHON_CMD --version`" =~ ^Python[[:space:]]*(3\.[$1-$2].*)$ ]]; then
         echo -e "Error: Python installation must be version 3.$1-3.$2"
-        echo -e "Quitting...\n"
-        exit 2
+        exit 1
     fi
 }
 
 # Check for pip3
+# TODO: if they don't have pip3 but they have all of the requirements already then it shouldn't fail
 function pip_check() {
     echo -e "Checking for pip3..."
 
@@ -39,12 +30,8 @@ function pip_check() {
             sudo apt-get install -y python3-pip
         else
             echo -e "Error: pip3 is not installed"
-            echo -e "Quitting...\n"
             exit 1
         fi
-    else
-        PIP_VERSION=`$PIP_CMD --version`
-        echo -e "pip3 version=$PIP_VERSION\n"
     fi
 }
 
@@ -97,6 +84,7 @@ function pip_check_library_version() {
         echo -e "Would you like to uninstall the current version and install $name version $version_required? [y/n]"
         read input
         if [[ ${input,,} == "y" ]]; then
+	    # use pip upgrade? what if it's downgrading a version?
             $PIP_CMD uninstall -y $install_name
             $PIP_CMD install $install_name==$version_required
         else
@@ -111,12 +99,13 @@ function pip_check_library_version() {
             $PIP_CMD install $install_name==$version_required
         else
             echo -e "Quitting...\n"
-            exit 2
+            exit 1
         fi
     fi
 }
 
 # Print usage
+# TODO: Also show valid options
 print_usage() {
     echo -e "\nUsage:\n\t$0 [-m <MODEL_NETWORK>] [-i <INPUT_IMAGE_FILE>] [-n <NUMBER_OF_THREADS>]\n"
 }
@@ -136,16 +125,12 @@ while getopts "m:n:i:h" flag; do
 done
 
 # Check for Python version 3.5 - 3.7
+# I think that they should all use the version one. 
 python_check 5 7
-# Check for pip3
 pip_check
-# Check for SciPy
 pip_check_library scipy
-# Check for Pillow
-pip_check_library PIL pillow
-# Check for Tensorflow 1.14.0
+pip_check_library PIL pillow # do they need separate names?
 pip_check_library_version tensorflow 1.14.0
-# Check for numpy 1.16.4
 pip_check_library_version numpy 1.16.4
 
 # Categorize selected model network
@@ -162,14 +147,14 @@ case "$MODEL_NETWORK" in
                 PRE_TRAINED_MODEL_FILE="resnet_v2_fp32_savedmodel_NHWC.tar.gz"
                 EXTRACT=1;;
 
-    *)          echo -e Error: Please select a valid model network\n
-                exit 2;;
+    *)          echo -e "Error: Please select a model network from the following list: squeezenet, resnet\n"
+                exit 1;;
 esac
 
 # Check for empty image file path
 if [ -z "$IMG_FILE" ]; then
     echo -e "Error: Please select an input image\n"
-    exit 3
+    exit 1
 fi
 
 # Get absolute path to image file
@@ -187,8 +172,7 @@ cd $SCRIPT_DIR
 cd $MODEL_NETWORK
 if [[ ! -f "PreTrainedModel/$PRE_TRAINED_MODEL_FILE" ]]; then
     echo -e "Downloading pretrained $MODEL_NETWORK model from $PRE_TRAINED_MODEL_LINK"
-    mkdir -p PreTrainedModel
-    cd PreTrainedModel
+    mkdir -p PreTrainedModel && cd PreTrainedModel
     curl -L -o $PRE_TRAINED_MODEL_FILE $PRE_TRAINED_MODEL_LINK
     cd ..
 fi
