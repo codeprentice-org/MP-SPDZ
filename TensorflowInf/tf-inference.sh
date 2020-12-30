@@ -6,7 +6,7 @@ function python_check() {
     echo -e "Checking for Python version"
     PYTHON_CMD=${PYTHON_CMD:-`which python3`}
     if [ -z "$PYTHON_CMD" ]; then
-        echo -e "Error: Python 3 is not installed. Please install Python 3.$1 - 3.$2."
+        echo -e "Error: Python3 is not installed. Please install Python 3.$1 - 3.$2."
         exit 1
     fi
 
@@ -56,8 +56,7 @@ function pip_check_library() {
         if [[ ${input,,} == "y" ]]; then
             $PIP_CMD install $install_name
         else
-            echo -e "Error: $name is not installed"
-            echo -e "Quitting...\n"
+            echo -e "Error: $name is not installed, cannot run tensorflow inference."
             exit 1
         fi
     fi
@@ -78,16 +77,16 @@ function pip_check_library_version() {
     if [[ $version == $version_required ]]; then
         echo -e "$name version $version\n"
     elif [ ! -z $version ]; then
-        echo -e "$name version $version"
-        echo -e "require version $version_required"
-        echo -e "Would you like to uninstall the current version and install $name version $version_required? [y/n]"
+        echo "Found $name version $version"
+        echo "Version $version_required is required to run tensorflow inference."
+        echo "Would you like to uninstall the current version and install $name version $version_required? [y/n]"
         read input
         if [[ ${input,,} == "y" ]]; then
 	    # use pip upgrade? what if it's downgrading a version?
             $PIP_CMD uninstall -y $install_name
             $PIP_CMD install $install_name==$version_required
         else
-            echo -e "Quitting...\n"
+            echo -e "Cannot run tensorflow inference."
             exit 1
         fi
     else
@@ -97,7 +96,7 @@ function pip_check_library_version() {
         if [[ ${input,,} == "y" ]]; then
             $PIP_CMD install $install_name==$version_required
         else
-            echo -e "Quitting...\n"
+            echo -e "Cannot run tensorflow inference."
             exit 1
         fi
     fi
@@ -123,8 +122,8 @@ while getopts "m:n:i:h" flag; do
     esac
 done
 
-# Check for Python version 3.5 - 3.7
 # I think that they should all use the version one. 
+echo "Checking requirements..."
 python_check 5 7
 pip_check
 pip_check_library scipy
