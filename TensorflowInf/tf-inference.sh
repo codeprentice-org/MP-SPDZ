@@ -35,72 +35,74 @@ function pip_check() {
     fi
 }
 
-# Check for Python library
-function pip_check_library() {
-    name=$1
-    if [ ! -z $2 ]; then
-        install_name=$2
-    else
-        install_name=$name
-    fi
-
-    echo -e "Checking for $name library..."
-
-    version=`${PYTHON_CMD} -c "import ${name}; print(${name}.__version__)"`
-    if [ ! -z $version ]; then
-        echo -e "$name version $version\n"
-    else
-        echo -e "$name is not installed"
-        echo -e "Would you like to install $name? [y/n]"
-        read input
-        if [[ ${input,,} == "y" ]]; then
-            $PIP_CMD install $install_name
-        else
-            echo -e "Error: $name is not installed, cannot run tensorflow inference."
-            exit 1
-        fi
-    fi
-}
-
-# Check for Python library version
-function pip_check_library_version() {
-    name=$1
-    version_required=$2
-    if [ ! -z $3 ]; then
-        install_name=$3
-    else
-        install_name=$name
-    fi
-
-    echo -e "Checking for $name library version $version_required..."
-    version=`${PYTHON_CMD} -c "import ${name}; print(${name}.__version__)"`
-    if [[ $version == $version_required ]]; then
-        echo -e "$name version $version\n"
-    elif [ ! -z $version ]; then
-        echo "Found $name version $version"
-        echo "Version $version_required is required to run tensorflow inference."
-        echo "Would you like to uninstall the current version and install $name version $version_required? [y/n]"
-        read input
-        if [[ ${input,,} == "y" ]]; then
-	    # use pip upgrade? what if it's downgrading a version?
-            $PIP_CMD uninstall -y $install_name
-            $PIP_CMD install $install_name==$version_required
-        else
-            echo -e "Cannot run tensorflow inference."
-            exit 1
-        fi
-    else
-        echo -e "$name is not installed"
-        echo -e "Would you like to install $name? [y/n]"
-        read input
-        if [[ ${input,,} == "y" ]]; then
-            $PIP_CMD install $install_name==$version_required
-        else
-            echo -e "Cannot run tensorflow inference."
-            exit 1
-        fi
-    fi
-}
+# this can be replaced by using pip3 install -r requirements.txt
+# as long as the requirements.txt file specifies the correct versions
+# # Check for Python library
+# function pip_check_library() {
+#     name=$1
+#     if [ ! -z $2 ]; then
+#         install_name=$2
+#     else
+#         install_name=$name
+#     fi
+# 
+#     echo -e "Checking for $name library..."
+# 
+#     version=`${PYTHON_CMD} -c "import ${name}; print(${name}.__version__)"`
+#     if [ ! -z $version ]; then
+#         echo -e "$name version $version\n"
+#     else
+#         echo -e "$name is not installed"
+#         echo -e "Would you like to install $name? [y/n]"
+#         read input
+#         if [[ ${input,,} == "y" ]]; then
+#             $PIP_CMD install $install_name
+#         else
+#             echo -e "Error: $name is not installed, cannot run tensorflow inference."
+#             exit 1
+#         fi
+#     fi
+# }
+# 
+# # Check for Python library version
+# function pip_check_library_version() {
+#     name=$1
+#     version_required=$2
+#     if [ ! -z $3 ]; then
+#         install_name=$3
+#     else
+#         install_name=$name
+#     fi
+# 
+#     echo -e "Checking for $name library version $version_required..."
+#     version=`${PYTHON_CMD} -c "import ${name}; print(${name}.__version__)"`
+#     if [[ $version == $version_required ]]; then
+#         echo -e "$name version $version\n"
+#     elif [ ! -z $version ]; then
+#         echo "Found $name version $version"
+#         echo "Version $version_required is required to run tensorflow inference."
+#         echo "Would you like to uninstall the current version and install $name version $version_required? [y/n]"
+#         read input
+#         if [[ ${input,,} == "y" ]]; then
+# 	    # use pip upgrade? what if it's downgrading a version?
+#             $PIP_CMD uninstall -y $install_name
+#             $PIP_CMD install $install_name==$version_required
+#         else
+#             echo -e "Cannot run tensorflow inference."
+#             exit 1
+#         fi
+#     else
+#         echo -e "$name is not installed"
+#         echo -e "Would you like to install $name? [y/n]"
+#         read input
+#         if [[ ${input,,} == "y" ]]; then
+#             $PIP_CMD install $install_name==$version_required
+#         else
+#             echo -e "Cannot run tensorflow inference."
+#             exit 1
+#         fi
+#     fi
+# }
 
 # Print usage
 # TODO: Also show valid options
@@ -126,10 +128,14 @@ done
 echo "Checking requirements..."
 python_check 5 7
 pip_check
-pip_check_library scipy
-pip_check_library PIL pillow # do they need separate names?
-pip_check_library_version tensorflow 1.14.0
-pip_check_library_version numpy 1.16.4
+# venv? I think that the requirements stuff should be separate from the script
+# pip3 install -r requirements.txt
+# if this gets run within tf-inference.sh, the script should not proceed if it ran into any errors
+# do we need to check for correct versions within the script? the script will just fail if something isn't right, and if we assume the user ran pip install -r requirements.txt then we should be good to go
+# pip_check_library scipy
+# pip_check_library PIL pillow # do they need separate names?
+# pip_check_library_version tensorflow 1.14.0
+# pip_check_library_version numpy 1.16.4
 
 # Categorize selected model network
 MODEL_NETWORK=$(echo $MODEL_NETWORK | sed 's:/*$::')
