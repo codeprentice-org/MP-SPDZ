@@ -141,6 +141,15 @@ def get_layers_and_named_data(filename):
             paddings[op.name] = numpy.fromstring(op.inputs[1].op.get_attr('value').
                                                 tensor_content, 'int32').tolist()
             link(op, op.inputs[0].op, named)
+        elif t == 'FusedBatchNormV3':
+            # This treats the input the same as FusedBatchNorm (might be erroneous)
+            # print("Inputs: ", named[op.inputs[0].op.name])
+            # print("Shape: ", get_shape(op.inputs[0].shape))
+            # _layer =  ml.FusedBatchNorm(
+            #             get_shape(op.inputs[0].shape), 
+            #             inputs=[named[op.inputs[0].op.name]])
+            # output(layers, named, op, _layer)
+            raise Exception('unknown type: %s' % t)
         else:
             raise Exception('unknown type: %s' % t)
 
