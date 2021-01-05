@@ -123,9 +123,16 @@ venv
 
 # Tensorflow Inference #
 ########################
-TensorflowInf/ImageNetDownloads
-TensorflowInf/SqueezeNet/PreTrainedModel/sqz_full.mat
-TensorflowInf/SqueezeNet/SqNetImgNet_img_input.inp
-TensorflowInf/SqueezeNet/graphDef.bin
-TensorflowInf/SqueezeNet/graphDef.mtdata
-TensorflowInf/SqueezeNet/sizeInfo.mtdata
+TensorflowInf/ImageNetDownloads/*/*
+
+TensorflowInf/SqueezeNet/__pycache__/
+TensorflowInf/SqueezeNet/PreTrainedModel/
+TensorflowInf/SqueezeNet/*.inp
+TensorflowInf/SqueezeNet/*.bin
+TensorflowInf/SqueezeNet/*.mtdata
+
+TensorflowInf/ResNet/__pycache__/
+TensorflowInf/ResNet/PreTrainedModel/
+TensorflowInf/ResNet/ResNet_img_input.inp
+TensorflowInf/ResNet/*.bin
+TensorflowInf/ResNet/*.mtdata
