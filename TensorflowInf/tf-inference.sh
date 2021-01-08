@@ -70,11 +70,11 @@ if [ $EXTRACT -eq 1 ]; then
     cd ..
 fi
 
-$PYTHON_CMD $MODEL_NETWORK.py --img $IMG_FILE_ABS_PATH
+python3 $MODEL_NETWORK.py --img $IMG_FILE_ABS_PATH
 
 cd ../..
 Scripts/fixed-rep-to-float.py TensorflowInf/${MODEL_NETWORK}/${MODEL_NETWORK}_img_input.inp
-$PYTHON_CMD compile.py -R 64 tf TensorflowInf/${MODEL_NETWORK}/graphDef.bin ${NUM_THREADS} trunc_pr split 
+python3 compile.py -R 64 tf TensorflowInf/${MODEL_NETWORK}/graphDef.bin ${NUM_THREADS} trunc_pr split
 Scripts/ring.sh tf-TensorflowInf_${MODEL_NETWORK}_graphDef.bin-${NUM_THREADS}-trunc_pr-split
 
 set +e
