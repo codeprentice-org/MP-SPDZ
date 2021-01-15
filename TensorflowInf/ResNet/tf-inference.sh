@@ -1,51 +1,65 @@
-# Set script to exit on error
+# ----------------------------------------------------------------------
+# Configurations
+
+NUM_THREADS=1
+IMG_FILE="SampleImages/sample_image_3.JPEG"
+PRE_TRAINED_MODEL_LINK="http://download.tensorflow.org/models/official/20181001_resnet/savedmodels/resnet_v2_fp32_savedmodel_NHWC.tar.gz"
+EXTRACT=1
+MODEL_NETWORK="ResNet"
+
+# ----------------------------------------------------------------------
+
 set -e
 
-# Set default number of threads to use
-NUM_THREADS=1
-# Set default image file
-IMG_FILE="SampleImages/n02109961_36.JPEG"
-
-# Print script usage
+# Print usage
 print_usage() {
-    echo "Usage: ./tf-inference.sh <Image File> [options]"
-    echo " -n	    Number of threads to use. Value defaults to 1"
+    echo -e "\nUsage:\n\t$0 [-i <INPUT_IMAGE_FILE>] [-n <NUMBER_OF_THREADS>]\n"
 }
 
-# Parse options
-while getopts 'n:F:' flag; do
-    case "${flag}" in
-        n) NUM_THREADS=${OPTARG};;
-        F) IMG_FILE=${OPTARG};;
-        *) print_usage
-        exit 1 ;;
+# Parse options and arguments
+while getopts "n:i:h" flag; do
+    case "$flag" in
+        i)  IMG_FILE=$OPTARG;;
+        n)  NUM_THREADS=$OPTARG;;
+        h)  print_usage
+            exit 0;;
+        *)  print_usage
+            exit 1;;
     esac
 done
 
-.././requirements.sh || exit 1
+# Get absolute path to image file
+if [ ${IMG_FILE:0:1} == "/" ]; then
+    IMG_FILE_ABS_PATH="$IMG_FILE"
+else
+    IMG_FILE_ABS_PATH="${PWD}/${IMG_FILE}"
+fi
 
 # Navigate to script directory
 SCRIPT_DIR=`dirname ${BASH_SOURCE[0]}`
-cd ${SCRIPT_DIR}
+cd $SCRIPT_DIR
 
-if [[ ! -f "PreTrainedModel/resnet_v2_fp32_savedmodel_NHWC.tar.gz" ]]; then
-    echo "Downloading pretrained ResNet model from http://download.tensorflow.org"
-    mkdir -p PreTrainedModel
-    axel -a -n 5 -c --output ./PreTrainedModel http://download.tensorflow.org/models/official/20181001_resnet/savedmodels/resnet_v2_fp32_savedmodel_NHWC.tar.gz
+# Get Pre-Trained Model Filename
+PRE_TRAINED_MODEL_LINK=${PRE_TRAINED_MODEL_LINK%/}
+PRE_TRAINED_MODEL_FILE=`echo $PRE_TRAINED_MODEL_LINK | grep -oP "([^/]+$)"`
+
+# Download Pre-Trained Model
+if [[ ! -f "PreTrainedModel/$PRE_TRAINED_MODEL_FILE" ]]; then
+    echo -e "Downloading pretrained $MODEL_NETWORK model from $PRE_TRAINED_MODEL_LINK"
+    mkdir -p PreTrainedModel && cd PreTrainedModel
+    curl -L -o $PRE_TRAINED_MODEL_FILE $PRE_TRAINED_MODEL_LINK
+    cd ..
 fi
 
-# Extract pretrained model
-cd PreTrainedModel
-tar -xvzf resnet_v2_fp32_savedmodel_NHWC.tar.gz
+if [ $EXTRACT -eq 1 ]; then
+    cd PreTrainedModel
+    tar -xvzf $PRE_TRAINED_MODEL_FILE
+    cd ..
+fi
 
-# Run ResNet script
-cd ..
-python3 ResNet.py --img $IMG_FILE
+python3 $MODEL_NETWORK.py --img $IMG_FILE_ABS_PATH
 
-# Run Mp-SPDZ compilation
 cd ../..
-./Scripts/fixed-rep-to-float.py TensorflowInf/ResNet/ResNet_img_input.inp
-python3 compile.py -R 64 tf TensorflowInf/ResNet/graphDef.bin ${NUM_THREADS} trunc_pr split
-./Scripts/ring.sh tf-TensorflowInf_ResNet_graphDef.bin-${NUM_THREADS}-trunc_pr-split
-
-set +e
+Scripts/fixed-rep-to-float.py TensorflowInf/${MODEL_NETWORK}/${MODEL_NETWORK}_img_input.inp
+python3 compile.py -R 64 tf TensorflowInf/${MODEL_NETWORK}/graphDef.bin ${NUM_THREADS} trunc_pr split
+Scripts/ring.sh tf-TensorflowInf_${MODEL_NETWORK}_graphDef.bin-${NUM_THREADS}-trunc_pr-split

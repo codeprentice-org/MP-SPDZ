@@ -324,14 +324,13 @@ particular DenseNet, ResNet, and SqueezeNet as used in
 run SqueezeNet inference for ImageNet as follows:
 
 ```
-python3 -m venv venv
-source venv/bin/activate
-pip install -r TensorflowInf/requirements.txt
-./new-tf-inference.sh
+cd TensorflowInf/SqueezeNet
+./tf-inference.sh
 ```
 
-This requires TensorFlow and the axel command-line utility to be
-installed. It runs inference with
+See [Tensorflow inference](TensorflowInf/README.md) for further information.
+
+This has specific Python dependencies It runs inference with
 three-party semi-honest computation, similar to CrypTFlow's
 Porthos. Replace 1 by the desired number of thread in the last two
 lines. If you run with any other protocol, you will need to remove
