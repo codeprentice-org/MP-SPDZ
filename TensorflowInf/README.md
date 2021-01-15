@@ -38,6 +38,7 @@ cd TensorflowInf/SqueezeNet
 ### Options
 **-i** *<INPUT_IMAGE_FILE>*
     Path to image file to run computation on. This may be relative or absolute path.
+  
 **-n** *<NUMBER_OF_THREADS>*
     Number of threads for compilation
 
@@ -52,5 +53,6 @@ cd TensorflowInf/ResNet
 ### Options
 **-i** *<INPUT_IMAGE_FILE>*
     Path to image file to run computation on. This may be relative or absolute path.
+  
 **-n** *<NUMBER_OF_THREADS>*
     Number of threads for compilation
