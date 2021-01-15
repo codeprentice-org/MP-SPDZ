@@ -10,7 +10,7 @@ For all supported models, computation are preformed in four parts:
 
 Supported models:
 - [SqueezeNet](#squeezenet)
-- [ResNet](#squeezenet)
+- [ResNet](#resnet)
 
 ## Requirements
 Before running Tensorflow inference, be sure to run the compilation instructions once:
