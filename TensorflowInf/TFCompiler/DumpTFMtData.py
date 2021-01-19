@@ -88,8 +88,8 @@ def updateWeightsForBN(optimized_graph_def, sess, feed_dict):
   graphDef = optimized_graph_def
 
   for node in graphDef.node:
-      if (node.op == 'FusedBatchNorm'):
-        print("node.name = {0}".format(node.name))
+      if (node.op == 'FusedBatchNorm' or node.op == 'FusedBatchNormV3'):
+        print("Updating BN weight, node.name = {0}".format(node.name))
         gamma = graph.get_operation_by_name(node.input[1]).outputs[0]
         beta = graph.get_operation_by_name(node.input[2]).outputs[0]
         mu = graph.get_operation_by_name(node.input[3]).outputs[0]

@@ -5,14 +5,14 @@ densenet121/BatchNorm/gamma 64
 densenet121/BatchNorm/beta 64 
 densenet121/BatchNorm/moving_mean 64 
 densenet121/BatchNorm/moving_variance 64 
-densenet121/BatchNorm/FusedBatchNormV3 1 112 112 64 
+densenet121/BatchNorm/FusedBatchNorm 1 112 112 64 
 densenet121/Relu 1 112 112 64 
 densenet121/MaxPool2D/MaxPool 1 56 56 64 
 densenet121/dense_block1/conv_block1/x1/BatchNorm/gamma 64 
 densenet121/dense_block1/conv_block1/x1/BatchNorm/beta 64 
 densenet121/dense_block1/conv_block1/x1/BatchNorm/moving_mean 64 
 densenet121/dense_block1/conv_block1/x1/BatchNorm/moving_variance 64 
-densenet121/dense_block1/conv_block1/x1/BatchNorm/FusedBatchNormV3 1 56 56 64 
+densenet121/dense_block1/conv_block1/x1/BatchNorm/FusedBatchNorm 1 56 56 64 
 densenet121/dense_block1/conv_block1/x1/Relu 1 56 56 64 
 densenet121/dense_block1/conv_block1/x1/Conv/weights 1 1 64 128 
 densenet121/dense_block1/conv_block1/x1/Conv/Conv2D 1 56 56 128 
@@ -20,7 +20,7 @@ densenet121/dense_block1/conv_block1/x2/BatchNorm/gamma 128
 densenet121/dense_block1/conv_block1/x2/BatchNorm/beta 128 
 densenet121/dense_block1/conv_block1/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block1/conv_block1/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block1/conv_block1/x2/BatchNorm/FusedBatchNormV3 1 56 56 128 
+densenet121/dense_block1/conv_block1/x2/BatchNorm/FusedBatchNorm 1 56 56 128 
 densenet121/dense_block1/conv_block1/x2/Relu 1 56 56 128 
 densenet121/dense_block1/conv_block1/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block1/conv_block1/x2/Conv/Conv2D 1 56 56 32 
@@ -30,7 +30,7 @@ densenet121/dense_block1/conv_block2/x1/BatchNorm/gamma 96
 densenet121/dense_block1/conv_block2/x1/BatchNorm/beta 96 
 densenet121/dense_block1/conv_block2/x1/BatchNorm/moving_mean 96 
 densenet121/dense_block1/conv_block2/x1/BatchNorm/moving_variance 96 
-densenet121/dense_block1/conv_block2/x1/BatchNorm/FusedBatchNormV3 1 56 56 96 
+densenet121/dense_block1/conv_block2/x1/BatchNorm/FusedBatchNorm 1 56 56 96 
 densenet121/dense_block1/conv_block2/x1/Relu 1 56 56 96 
 densenet121/dense_block1/conv_block2/x1/Conv/weights 1 1 96 128 
 densenet121/dense_block1/conv_block2/x1/Conv/Conv2D 1 56 56 128 
@@ -38,7 +38,7 @@ densenet121/dense_block1/conv_block2/x2/BatchNorm/gamma 128
 densenet121/dense_block1/conv_block2/x2/BatchNorm/beta 128 
 densenet121/dense_block1/conv_block2/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block1/conv_block2/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block1/conv_block2/x2/BatchNorm/FusedBatchNormV3 1 56 56 128 
+densenet121/dense_block1/conv_block2/x2/BatchNorm/FusedBatchNorm 1 56 56 128 
 densenet121/dense_block1/conv_block2/x2/Relu 1 56 56 128 
 densenet121/dense_block1/conv_block2/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block1/conv_block2/x2/Conv/Conv2D 1 56 56 32 
@@ -48,7 +48,7 @@ densenet121/dense_block1/conv_block3/x1/BatchNorm/gamma 128
 densenet121/dense_block1/conv_block3/x1/BatchNorm/beta 128 
 densenet121/dense_block1/conv_block3/x1/BatchNorm/moving_mean 128 
 densenet121/dense_block1/conv_block3/x1/BatchNorm/moving_variance 128 
-densenet121/dense_block1/conv_block3/x1/BatchNorm/FusedBatchNormV3 1 56 56 128 
+densenet121/dense_block1/conv_block3/x1/BatchNorm/FusedBatchNorm 1 56 56 128 
 densenet121/dense_block1/conv_block3/x1/Relu 1 56 56 128 
 densenet121/dense_block1/conv_block3/x1/Conv/weights 1 1 128 128 
 densenet121/dense_block1/conv_block3/x1/Conv/Conv2D 1 56 56 128 
@@ -56,7 +56,7 @@ densenet121/dense_block1/conv_block3/x2/BatchNorm/gamma 128
 densenet121/dense_block1/conv_block3/x2/BatchNorm/beta 128 
 densenet121/dense_block1/conv_block3/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block1/conv_block3/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block1/conv_block3/x2/BatchNorm/FusedBatchNormV3 1 56 56 128 
+densenet121/dense_block1/conv_block3/x2/BatchNorm/FusedBatchNorm 1 56 56 128 
 densenet121/dense_block1/conv_block3/x2/Relu 1 56 56 128 
 densenet121/dense_block1/conv_block3/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block1/conv_block3/x2/Conv/Conv2D 1 56 56 32 
@@ -66,7 +66,7 @@ densenet121/dense_block1/conv_block4/x1/BatchNorm/gamma 160
 densenet121/dense_block1/conv_block4/x1/BatchNorm/beta 160 
 densenet121/dense_block1/conv_block4/x1/BatchNorm/moving_mean 160 
 densenet121/dense_block1/conv_block4/x1/BatchNorm/moving_variance 160 
-densenet121/dense_block1/conv_block4/x1/BatchNorm/FusedBatchNormV3 1 56 56 160 
+densenet121/dense_block1/conv_block4/x1/BatchNorm/FusedBatchNorm 1 56 56 160 
 densenet121/dense_block1/conv_block4/x1/Relu 1 56 56 160 
 densenet121/dense_block1/conv_block4/x1/Conv/weights 1 1 160 128 
 densenet121/dense_block1/conv_block4/x1/Conv/Conv2D 1 56 56 128 
@@ -74,7 +74,7 @@ densenet121/dense_block1/conv_block4/x2/BatchNorm/gamma 128
 densenet121/dense_block1/conv_block4/x2/BatchNorm/beta 128 
 densenet121/dense_block1/conv_block4/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block1/conv_block4/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block1/conv_block4/x2/BatchNorm/FusedBatchNormV3 1 56 56 128 
+densenet121/dense_block1/conv_block4/x2/BatchNorm/FusedBatchNorm 1 56 56 128 
 densenet121/dense_block1/conv_block4/x2/Relu 1 56 56 128 
 densenet121/dense_block1/conv_block4/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block1/conv_block4/x2/Conv/Conv2D 1 56 56 32 
@@ -84,7 +84,7 @@ densenet121/dense_block1/conv_block5/x1/BatchNorm/gamma 192
 densenet121/dense_block1/conv_block5/x1/BatchNorm/beta 192 
 densenet121/dense_block1/conv_block5/x1/BatchNorm/moving_mean 192 
 densenet121/dense_block1/conv_block5/x1/BatchNorm/moving_variance 192 
-densenet121/dense_block1/conv_block5/x1/BatchNorm/FusedBatchNormV3 1 56 56 192 
+densenet121/dense_block1/conv_block5/x1/BatchNorm/FusedBatchNorm 1 56 56 192 
 densenet121/dense_block1/conv_block5/x1/Relu 1 56 56 192 
 densenet121/dense_block1/conv_block5/x1/Conv/weights 1 1 192 128 
 densenet121/dense_block1/conv_block5/x1/Conv/Conv2D 1 56 56 128 
@@ -92,7 +92,7 @@ densenet121/dense_block1/conv_block5/x2/BatchNorm/gamma 128
 densenet121/dense_block1/conv_block5/x2/BatchNorm/beta 128 
 densenet121/dense_block1/conv_block5/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block1/conv_block5/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block1/conv_block5/x2/BatchNorm/FusedBatchNormV3 1 56 56 128 
+densenet121/dense_block1/conv_block5/x2/BatchNorm/FusedBatchNorm 1 56 56 128 
 densenet121/dense_block1/conv_block5/x2/Relu 1 56 56 128 
 densenet121/dense_block1/conv_block5/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block1/conv_block5/x2/Conv/Conv2D 1 56 56 32 
@@ -102,7 +102,7 @@ densenet121/dense_block1/conv_block6/x1/BatchNorm/gamma 224
 densenet121/dense_block1/conv_block6/x1/BatchNorm/beta 224 
 densenet121/dense_block1/conv_block6/x1/BatchNorm/moving_mean 224 
 densenet121/dense_block1/conv_block6/x1/BatchNorm/moving_variance 224 
-densenet121/dense_block1/conv_block6/x1/BatchNorm/FusedBatchNormV3 1 56 56 224 
+densenet121/dense_block1/conv_block6/x1/BatchNorm/FusedBatchNorm 1 56 56 224 
 densenet121/dense_block1/conv_block6/x1/Relu 1 56 56 224 
 densenet121/dense_block1/conv_block6/x1/Conv/weights 1 1 224 128 
 densenet121/dense_block1/conv_block6/x1/Conv/Conv2D 1 56 56 128 
@@ -110,7 +110,7 @@ densenet121/dense_block1/conv_block6/x2/BatchNorm/gamma 128
 densenet121/dense_block1/conv_block6/x2/BatchNorm/beta 128 
 densenet121/dense_block1/conv_block6/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block1/conv_block6/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block1/conv_block6/x2/BatchNorm/FusedBatchNormV3 1 56 56 128 
+densenet121/dense_block1/conv_block6/x2/BatchNorm/FusedBatchNorm 1 56 56 128 
 densenet121/dense_block1/conv_block6/x2/Relu 1 56 56 128 
 densenet121/dense_block1/conv_block6/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block1/conv_block6/x2/Conv/Conv2D 1 56 56 32 
@@ -120,7 +120,7 @@ densenet121/transition_block1/blk/BatchNorm/gamma 256
 densenet121/transition_block1/blk/BatchNorm/beta 256 
 densenet121/transition_block1/blk/BatchNorm/moving_mean 256 
 densenet121/transition_block1/blk/BatchNorm/moving_variance 256 
-densenet121/transition_block1/blk/BatchNorm/FusedBatchNormV3 1 56 56 256 
+densenet121/transition_block1/blk/BatchNorm/FusedBatchNorm 1 56 56 256 
 densenet121/transition_block1/blk/Relu 1 56 56 256 
 densenet121/transition_block1/blk/Conv/weights 1 1 256 128 
 densenet121/transition_block1/blk/Conv/Conv2D 1 56 56 128 
@@ -129,7 +129,7 @@ densenet121/dense_block2/conv_block1/x1/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block1/x1/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block1/x1/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block1/x1/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block1/x1/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block1/x1/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block1/x1/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block1/x1/Conv/weights 1 1 128 128 
 densenet121/dense_block2/conv_block1/x1/Conv/Conv2D 1 28 28 128 
@@ -137,7 +137,7 @@ densenet121/dense_block2/conv_block1/x2/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block1/x2/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block1/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block1/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block1/x2/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block1/x2/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block1/x2/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block1/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block2/conv_block1/x2/Conv/Conv2D 1 28 28 32 
@@ -147,7 +147,7 @@ densenet121/dense_block2/conv_block2/x1/BatchNorm/gamma 160
 densenet121/dense_block2/conv_block2/x1/BatchNorm/beta 160 
 densenet121/dense_block2/conv_block2/x1/BatchNorm/moving_mean 160 
 densenet121/dense_block2/conv_block2/x1/BatchNorm/moving_variance 160 
-densenet121/dense_block2/conv_block2/x1/BatchNorm/FusedBatchNormV3 1 28 28 160 
+densenet121/dense_block2/conv_block2/x1/BatchNorm/FusedBatchNorm 1 28 28 160 
 densenet121/dense_block2/conv_block2/x1/Relu 1 28 28 160 
 densenet121/dense_block2/conv_block2/x1/Conv/weights 1 1 160 128 
 densenet121/dense_block2/conv_block2/x1/Conv/Conv2D 1 28 28 128 
@@ -155,7 +155,7 @@ densenet121/dense_block2/conv_block2/x2/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block2/x2/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block2/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block2/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block2/x2/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block2/x2/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block2/x2/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block2/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block2/conv_block2/x2/Conv/Conv2D 1 28 28 32 
@@ -165,7 +165,7 @@ densenet121/dense_block2/conv_block3/x1/BatchNorm/gamma 192
 densenet121/dense_block2/conv_block3/x1/BatchNorm/beta 192 
 densenet121/dense_block2/conv_block3/x1/BatchNorm/moving_mean 192 
 densenet121/dense_block2/conv_block3/x1/BatchNorm/moving_variance 192 
-densenet121/dense_block2/conv_block3/x1/BatchNorm/FusedBatchNormV3 1 28 28 192 
+densenet121/dense_block2/conv_block3/x1/BatchNorm/FusedBatchNorm 1 28 28 192 
 densenet121/dense_block2/conv_block3/x1/Relu 1 28 28 192 
 densenet121/dense_block2/conv_block3/x1/Conv/weights 1 1 192 128 
 densenet121/dense_block2/conv_block3/x1/Conv/Conv2D 1 28 28 128 
@@ -173,7 +173,7 @@ densenet121/dense_block2/conv_block3/x2/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block3/x2/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block3/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block3/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block3/x2/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block3/x2/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block3/x2/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block3/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block2/conv_block3/x2/Conv/Conv2D 1 28 28 32 
@@ -183,7 +183,7 @@ densenet121/dense_block2/conv_block4/x1/BatchNorm/gamma 224
 densenet121/dense_block2/conv_block4/x1/BatchNorm/beta 224 
 densenet121/dense_block2/conv_block4/x1/BatchNorm/moving_mean 224 
 densenet121/dense_block2/conv_block4/x1/BatchNorm/moving_variance 224 
-densenet121/dense_block2/conv_block4/x1/BatchNorm/FusedBatchNormV3 1 28 28 224 
+densenet121/dense_block2/conv_block4/x1/BatchNorm/FusedBatchNorm 1 28 28 224 
 densenet121/dense_block2/conv_block4/x1/Relu 1 28 28 224 
 densenet121/dense_block2/conv_block4/x1/Conv/weights 1 1 224 128 
 densenet121/dense_block2/conv_block4/x1/Conv/Conv2D 1 28 28 128 
@@ -191,7 +191,7 @@ densenet121/dense_block2/conv_block4/x2/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block4/x2/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block4/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block4/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block4/x2/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block4/x2/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block4/x2/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block4/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block2/conv_block4/x2/Conv/Conv2D 1 28 28 32 
@@ -201,7 +201,7 @@ densenet121/dense_block2/conv_block5/x1/BatchNorm/gamma 256
 densenet121/dense_block2/conv_block5/x1/BatchNorm/beta 256 
 densenet121/dense_block2/conv_block5/x1/BatchNorm/moving_mean 256 
 densenet121/dense_block2/conv_block5/x1/BatchNorm/moving_variance 256 
-densenet121/dense_block2/conv_block5/x1/BatchNorm/FusedBatchNormV3 1 28 28 256 
+densenet121/dense_block2/conv_block5/x1/BatchNorm/FusedBatchNorm 1 28 28 256 
 densenet121/dense_block2/conv_block5/x1/Relu 1 28 28 256 
 densenet121/dense_block2/conv_block5/x1/Conv/weights 1 1 256 128 
 densenet121/dense_block2/conv_block5/x1/Conv/Conv2D 1 28 28 128 
@@ -209,7 +209,7 @@ densenet121/dense_block2/conv_block5/x2/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block5/x2/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block5/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block5/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block5/x2/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block5/x2/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block5/x2/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block5/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block2/conv_block5/x2/Conv/Conv2D 1 28 28 32 
@@ -219,7 +219,7 @@ densenet121/dense_block2/conv_block6/x1/BatchNorm/gamma 288
 densenet121/dense_block2/conv_block6/x1/BatchNorm/beta 288 
 densenet121/dense_block2/conv_block6/x1/BatchNorm/moving_mean 288 
 densenet121/dense_block2/conv_block6/x1/BatchNorm/moving_variance 288 
-densenet121/dense_block2/conv_block6/x1/BatchNorm/FusedBatchNormV3 1 28 28 288 
+densenet121/dense_block2/conv_block6/x1/BatchNorm/FusedBatchNorm 1 28 28 288 
 densenet121/dense_block2/conv_block6/x1/Relu 1 28 28 288 
 densenet121/dense_block2/conv_block6/x1/Conv/weights 1 1 288 128 
 densenet121/dense_block2/conv_block6/x1/Conv/Conv2D 1 28 28 128 
@@ -227,7 +227,7 @@ densenet121/dense_block2/conv_block6/x2/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block6/x2/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block6/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block6/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block6/x2/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block6/x2/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block6/x2/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block6/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block2/conv_block6/x2/Conv/Conv2D 1 28 28 32 
@@ -237,7 +237,7 @@ densenet121/dense_block2/conv_block7/x1/BatchNorm/gamma 320
 densenet121/dense_block2/conv_block7/x1/BatchNorm/beta 320 
 densenet121/dense_block2/conv_block7/x1/BatchNorm/moving_mean 320 
 densenet121/dense_block2/conv_block7/x1/BatchNorm/moving_variance 320 
-densenet121/dense_block2/conv_block7/x1/BatchNorm/FusedBatchNormV3 1 28 28 320 
+densenet121/dense_block2/conv_block7/x1/BatchNorm/FusedBatchNorm 1 28 28 320 
 densenet121/dense_block2/conv_block7/x1/Relu 1 28 28 320 
 densenet121/dense_block2/conv_block7/x1/Conv/weights 1 1 320 128 
 densenet121/dense_block2/conv_block7/x1/Conv/Conv2D 1 28 28 128 
@@ -245,7 +245,7 @@ densenet121/dense_block2/conv_block7/x2/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block7/x2/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block7/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block7/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block7/x2/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block7/x2/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block7/x2/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block7/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block2/conv_block7/x2/Conv/Conv2D 1 28 28 32 
@@ -255,7 +255,7 @@ densenet121/dense_block2/conv_block8/x1/BatchNorm/gamma 352
 densenet121/dense_block2/conv_block8/x1/BatchNorm/beta 352 
 densenet121/dense_block2/conv_block8/x1/BatchNorm/moving_mean 352 
 densenet121/dense_block2/conv_block8/x1/BatchNorm/moving_variance 352 
-densenet121/dense_block2/conv_block8/x1/BatchNorm/FusedBatchNormV3 1 28 28 352 
+densenet121/dense_block2/conv_block8/x1/BatchNorm/FusedBatchNorm 1 28 28 352 
 densenet121/dense_block2/conv_block8/x1/Relu 1 28 28 352 
 densenet121/dense_block2/conv_block8/x1/Conv/weights 1 1 352 128 
 densenet121/dense_block2/conv_block8/x1/Conv/Conv2D 1 28 28 128 
@@ -263,7 +263,7 @@ densenet121/dense_block2/conv_block8/x2/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block8/x2/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block8/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block8/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block8/x2/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block8/x2/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block8/x2/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block8/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block2/conv_block8/x2/Conv/Conv2D 1 28 28 32 
@@ -273,7 +273,7 @@ densenet121/dense_block2/conv_block9/x1/BatchNorm/gamma 384
 densenet121/dense_block2/conv_block9/x1/BatchNorm/beta 384 
 densenet121/dense_block2/conv_block9/x1/BatchNorm/moving_mean 384 
 densenet121/dense_block2/conv_block9/x1/BatchNorm/moving_variance 384 
-densenet121/dense_block2/conv_block9/x1/BatchNorm/FusedBatchNormV3 1 28 28 384 
+densenet121/dense_block2/conv_block9/x1/BatchNorm/FusedBatchNorm 1 28 28 384 
 densenet121/dense_block2/conv_block9/x1/Relu 1 28 28 384 
 densenet121/dense_block2/conv_block9/x1/Conv/weights 1 1 384 128 
 densenet121/dense_block2/conv_block9/x1/Conv/Conv2D 1 28 28 128 
@@ -281,7 +281,7 @@ densenet121/dense_block2/conv_block9/x2/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block9/x2/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block9/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block9/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block9/x2/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block9/x2/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block9/x2/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block9/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block2/conv_block9/x2/Conv/Conv2D 1 28 28 32 
@@ -291,7 +291,7 @@ densenet121/dense_block2/conv_block10/x1/BatchNorm/gamma 416
 densenet121/dense_block2/conv_block10/x1/BatchNorm/beta 416 
 densenet121/dense_block2/conv_block10/x1/BatchNorm/moving_mean 416 
 densenet121/dense_block2/conv_block10/x1/BatchNorm/moving_variance 416 
-densenet121/dense_block2/conv_block10/x1/BatchNorm/FusedBatchNormV3 1 28 28 416 
+densenet121/dense_block2/conv_block10/x1/BatchNorm/FusedBatchNorm 1 28 28 416 
 densenet121/dense_block2/conv_block10/x1/Relu 1 28 28 416 
 densenet121/dense_block2/conv_block10/x1/Conv/weights 1 1 416 128 
 densenet121/dense_block2/conv_block10/x1/Conv/Conv2D 1 28 28 128 
@@ -299,7 +299,7 @@ densenet121/dense_block2/conv_block10/x2/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block10/x2/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block10/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block10/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block10/x2/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block10/x2/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block10/x2/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block10/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block2/conv_block10/x2/Conv/Conv2D 1 28 28 32 
@@ -309,7 +309,7 @@ densenet121/dense_block2/conv_block11/x1/BatchNorm/gamma 448
 densenet121/dense_block2/conv_block11/x1/BatchNorm/beta 448 
 densenet121/dense_block2/conv_block11/x1/BatchNorm/moving_mean 448 
 densenet121/dense_block2/conv_block11/x1/BatchNorm/moving_variance 448 
-densenet121/dense_block2/conv_block11/x1/BatchNorm/FusedBatchNormV3 1 28 28 448 
+densenet121/dense_block2/conv_block11/x1/BatchNorm/FusedBatchNorm 1 28 28 448 
 densenet121/dense_block2/conv_block11/x1/Relu 1 28 28 448 
 densenet121/dense_block2/conv_block11/x1/Conv/weights 1 1 448 128 
 densenet121/dense_block2/conv_block11/x1/Conv/Conv2D 1 28 28 128 
@@ -317,7 +317,7 @@ densenet121/dense_block2/conv_block11/x2/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block11/x2/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block11/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block11/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block11/x2/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block11/x2/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block11/x2/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block11/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block2/conv_block11/x2/Conv/Conv2D 1 28 28 32 
@@ -327,7 +327,7 @@ densenet121/dense_block2/conv_block12/x1/BatchNorm/gamma 480
 densenet121/dense_block2/conv_block12/x1/BatchNorm/beta 480 
 densenet121/dense_block2/conv_block12/x1/BatchNorm/moving_mean 480 
 densenet121/dense_block2/conv_block12/x1/BatchNorm/moving_variance 480 
-densenet121/dense_block2/conv_block12/x1/BatchNorm/FusedBatchNormV3 1 28 28 480 
+densenet121/dense_block2/conv_block12/x1/BatchNorm/FusedBatchNorm 1 28 28 480 
 densenet121/dense_block2/conv_block12/x1/Relu 1 28 28 480 
 densenet121/dense_block2/conv_block12/x1/Conv/weights 1 1 480 128 
 densenet121/dense_block2/conv_block12/x1/Conv/Conv2D 1 28 28 128 
@@ -335,7 +335,7 @@ densenet121/dense_block2/conv_block12/x2/BatchNorm/gamma 128
 densenet121/dense_block2/conv_block12/x2/BatchNorm/beta 128 
 densenet121/dense_block2/conv_block12/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block2/conv_block12/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block2/conv_block12/x2/BatchNorm/FusedBatchNormV3 1 28 28 128 
+densenet121/dense_block2/conv_block12/x2/BatchNorm/FusedBatchNorm 1 28 28 128 
 densenet121/dense_block2/conv_block12/x2/Relu 1 28 28 128 
 densenet121/dense_block2/conv_block12/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block2/conv_block12/x2/Conv/Conv2D 1 28 28 32 
@@ -345,7 +345,7 @@ densenet121/transition_block2/blk/BatchNorm/gamma 512
 densenet121/transition_block2/blk/BatchNorm/beta 512 
 densenet121/transition_block2/blk/BatchNorm/moving_mean 512 
 densenet121/transition_block2/blk/BatchNorm/moving_variance 512 
-densenet121/transition_block2/blk/BatchNorm/FusedBatchNormV3 1 28 28 512 
+densenet121/transition_block2/blk/BatchNorm/FusedBatchNorm 1 28 28 512 
 densenet121/transition_block2/blk/Relu 1 28 28 512 
 densenet121/transition_block2/blk/Conv/weights 1 1 512 256 
 densenet121/transition_block2/blk/Conv/Conv2D 1 28 28 256 
@@ -354,7 +354,7 @@ densenet121/dense_block3/conv_block1/x1/BatchNorm/gamma 256
 densenet121/dense_block3/conv_block1/x1/BatchNorm/beta 256 
 densenet121/dense_block3/conv_block1/x1/BatchNorm/moving_mean 256 
 densenet121/dense_block3/conv_block1/x1/BatchNorm/moving_variance 256 
-densenet121/dense_block3/conv_block1/x1/BatchNorm/FusedBatchNormV3 1 14 14 256 
+densenet121/dense_block3/conv_block1/x1/BatchNorm/FusedBatchNorm 1 14 14 256 
 densenet121/dense_block3/conv_block1/x1/Relu 1 14 14 256 
 densenet121/dense_block3/conv_block1/x1/Conv/weights 1 1 256 128 
 densenet121/dense_block3/conv_block1/x1/Conv/Conv2D 1 14 14 128 
@@ -362,7 +362,7 @@ densenet121/dense_block3/conv_block1/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block1/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block1/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block1/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block1/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block1/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block1/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block1/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block1/x2/Conv/Conv2D 1 14 14 32 
@@ -372,7 +372,7 @@ densenet121/dense_block3/conv_block2/x1/BatchNorm/gamma 288
 densenet121/dense_block3/conv_block2/x1/BatchNorm/beta 288 
 densenet121/dense_block3/conv_block2/x1/BatchNorm/moving_mean 288 
 densenet121/dense_block3/conv_block2/x1/BatchNorm/moving_variance 288 
-densenet121/dense_block3/conv_block2/x1/BatchNorm/FusedBatchNormV3 1 14 14 288 
+densenet121/dense_block3/conv_block2/x1/BatchNorm/FusedBatchNorm 1 14 14 288 
 densenet121/dense_block3/conv_block2/x1/Relu 1 14 14 288 
 densenet121/dense_block3/conv_block2/x1/Conv/weights 1 1 288 128 
 densenet121/dense_block3/conv_block2/x1/Conv/Conv2D 1 14 14 128 
@@ -380,7 +380,7 @@ densenet121/dense_block3/conv_block2/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block2/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block2/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block2/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block2/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block2/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block2/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block2/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block2/x2/Conv/Conv2D 1 14 14 32 
@@ -390,7 +390,7 @@ densenet121/dense_block3/conv_block3/x1/BatchNorm/gamma 320
 densenet121/dense_block3/conv_block3/x1/BatchNorm/beta 320 
 densenet121/dense_block3/conv_block3/x1/BatchNorm/moving_mean 320 
 densenet121/dense_block3/conv_block3/x1/BatchNorm/moving_variance 320 
-densenet121/dense_block3/conv_block3/x1/BatchNorm/FusedBatchNormV3 1 14 14 320 
+densenet121/dense_block3/conv_block3/x1/BatchNorm/FusedBatchNorm 1 14 14 320 
 densenet121/dense_block3/conv_block3/x1/Relu 1 14 14 320 
 densenet121/dense_block3/conv_block3/x1/Conv/weights 1 1 320 128 
 densenet121/dense_block3/conv_block3/x1/Conv/Conv2D 1 14 14 128 
@@ -398,7 +398,7 @@ densenet121/dense_block3/conv_block3/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block3/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block3/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block3/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block3/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block3/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block3/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block3/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block3/x2/Conv/Conv2D 1 14 14 32 
@@ -408,7 +408,7 @@ densenet121/dense_block3/conv_block4/x1/BatchNorm/gamma 352
 densenet121/dense_block3/conv_block4/x1/BatchNorm/beta 352 
 densenet121/dense_block3/conv_block4/x1/BatchNorm/moving_mean 352 
 densenet121/dense_block3/conv_block4/x1/BatchNorm/moving_variance 352 
-densenet121/dense_block3/conv_block4/x1/BatchNorm/FusedBatchNormV3 1 14 14 352 
+densenet121/dense_block3/conv_block4/x1/BatchNorm/FusedBatchNorm 1 14 14 352 
 densenet121/dense_block3/conv_block4/x1/Relu 1 14 14 352 
 densenet121/dense_block3/conv_block4/x1/Conv/weights 1 1 352 128 
 densenet121/dense_block3/conv_block4/x1/Conv/Conv2D 1 14 14 128 
@@ -416,7 +416,7 @@ densenet121/dense_block3/conv_block4/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block4/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block4/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block4/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block4/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block4/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block4/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block4/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block4/x2/Conv/Conv2D 1 14 14 32 
@@ -426,7 +426,7 @@ densenet121/dense_block3/conv_block5/x1/BatchNorm/gamma 384
 densenet121/dense_block3/conv_block5/x1/BatchNorm/beta 384 
 densenet121/dense_block3/conv_block5/x1/BatchNorm/moving_mean 384 
 densenet121/dense_block3/conv_block5/x1/BatchNorm/moving_variance 384 
-densenet121/dense_block3/conv_block5/x1/BatchNorm/FusedBatchNormV3 1 14 14 384 
+densenet121/dense_block3/conv_block5/x1/BatchNorm/FusedBatchNorm 1 14 14 384 
 densenet121/dense_block3/conv_block5/x1/Relu 1 14 14 384 
 densenet121/dense_block3/conv_block5/x1/Conv/weights 1 1 384 128 
 densenet121/dense_block3/conv_block5/x1/Conv/Conv2D 1 14 14 128 
@@ -434,7 +434,7 @@ densenet121/dense_block3/conv_block5/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block5/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block5/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block5/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block5/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block5/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block5/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block5/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block5/x2/Conv/Conv2D 1 14 14 32 
@@ -444,7 +444,7 @@ densenet121/dense_block3/conv_block6/x1/BatchNorm/gamma 416
 densenet121/dense_block3/conv_block6/x1/BatchNorm/beta 416 
 densenet121/dense_block3/conv_block6/x1/BatchNorm/moving_mean 416 
 densenet121/dense_block3/conv_block6/x1/BatchNorm/moving_variance 416 
-densenet121/dense_block3/conv_block6/x1/BatchNorm/FusedBatchNormV3 1 14 14 416 
+densenet121/dense_block3/conv_block6/x1/BatchNorm/FusedBatchNorm 1 14 14 416 
 densenet121/dense_block3/conv_block6/x1/Relu 1 14 14 416 
 densenet121/dense_block3/conv_block6/x1/Conv/weights 1 1 416 128 
 densenet121/dense_block3/conv_block6/x1/Conv/Conv2D 1 14 14 128 
@@ -452,7 +452,7 @@ densenet121/dense_block3/conv_block6/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block6/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block6/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block6/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block6/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block6/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block6/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block6/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block6/x2/Conv/Conv2D 1 14 14 32 
@@ -462,7 +462,7 @@ densenet121/dense_block3/conv_block7/x1/BatchNorm/gamma 448
 densenet121/dense_block3/conv_block7/x1/BatchNorm/beta 448 
 densenet121/dense_block3/conv_block7/x1/BatchNorm/moving_mean 448 
 densenet121/dense_block3/conv_block7/x1/BatchNorm/moving_variance 448 
-densenet121/dense_block3/conv_block7/x1/BatchNorm/FusedBatchNormV3 1 14 14 448 
+densenet121/dense_block3/conv_block7/x1/BatchNorm/FusedBatchNorm 1 14 14 448 
 densenet121/dense_block3/conv_block7/x1/Relu 1 14 14 448 
 densenet121/dense_block3/conv_block7/x1/Conv/weights 1 1 448 128 
 densenet121/dense_block3/conv_block7/x1/Conv/Conv2D 1 14 14 128 
@@ -470,7 +470,7 @@ densenet121/dense_block3/conv_block7/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block7/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block7/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block7/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block7/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block7/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block7/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block7/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block7/x2/Conv/Conv2D 1 14 14 32 
@@ -480,7 +480,7 @@ densenet121/dense_block3/conv_block8/x1/BatchNorm/gamma 480
 densenet121/dense_block3/conv_block8/x1/BatchNorm/beta 480 
 densenet121/dense_block3/conv_block8/x1/BatchNorm/moving_mean 480 
 densenet121/dense_block3/conv_block8/x1/BatchNorm/moving_variance 480 
-densenet121/dense_block3/conv_block8/x1/BatchNorm/FusedBatchNormV3 1 14 14 480 
+densenet121/dense_block3/conv_block8/x1/BatchNorm/FusedBatchNorm 1 14 14 480 
 densenet121/dense_block3/conv_block8/x1/Relu 1 14 14 480 
 densenet121/dense_block3/conv_block8/x1/Conv/weights 1 1 480 128 
 densenet121/dense_block3/conv_block8/x1/Conv/Conv2D 1 14 14 128 
@@ -488,7 +488,7 @@ densenet121/dense_block3/conv_block8/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block8/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block8/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block8/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block8/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block8/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block8/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block8/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block8/x2/Conv/Conv2D 1 14 14 32 
@@ -498,7 +498,7 @@ densenet121/dense_block3/conv_block9/x1/BatchNorm/gamma 512
 densenet121/dense_block3/conv_block9/x1/BatchNorm/beta 512 
 densenet121/dense_block3/conv_block9/x1/BatchNorm/moving_mean 512 
 densenet121/dense_block3/conv_block9/x1/BatchNorm/moving_variance 512 
-densenet121/dense_block3/conv_block9/x1/BatchNorm/FusedBatchNormV3 1 14 14 512 
+densenet121/dense_block3/conv_block9/x1/BatchNorm/FusedBatchNorm 1 14 14 512 
 densenet121/dense_block3/conv_block9/x1/Relu 1 14 14 512 
 densenet121/dense_block3/conv_block9/x1/Conv/weights 1 1 512 128 
 densenet121/dense_block3/conv_block9/x1/Conv/Conv2D 1 14 14 128 
@@ -506,7 +506,7 @@ densenet121/dense_block3/conv_block9/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block9/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block9/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block9/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block9/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block9/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block9/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block9/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block9/x2/Conv/Conv2D 1 14 14 32 
@@ -516,7 +516,7 @@ densenet121/dense_block3/conv_block10/x1/BatchNorm/gamma 544
 densenet121/dense_block3/conv_block10/x1/BatchNorm/beta 544 
 densenet121/dense_block3/conv_block10/x1/BatchNorm/moving_mean 544 
 densenet121/dense_block3/conv_block10/x1/BatchNorm/moving_variance 544 
-densenet121/dense_block3/conv_block10/x1/BatchNorm/FusedBatchNormV3 1 14 14 544 
+densenet121/dense_block3/conv_block10/x1/BatchNorm/FusedBatchNorm 1 14 14 544 
 densenet121/dense_block3/conv_block10/x1/Relu 1 14 14 544 
 densenet121/dense_block3/conv_block10/x1/Conv/weights 1 1 544 128 
 densenet121/dense_block3/conv_block10/x1/Conv/Conv2D 1 14 14 128 
@@ -524,7 +524,7 @@ densenet121/dense_block3/conv_block10/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block10/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block10/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block10/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block10/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block10/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block10/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block10/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block10/x2/Conv/Conv2D 1 14 14 32 
@@ -534,7 +534,7 @@ densenet121/dense_block3/conv_block11/x1/BatchNorm/gamma 576
 densenet121/dense_block3/conv_block11/x1/BatchNorm/beta 576 
 densenet121/dense_block3/conv_block11/x1/BatchNorm/moving_mean 576 
 densenet121/dense_block3/conv_block11/x1/BatchNorm/moving_variance 576 
-densenet121/dense_block3/conv_block11/x1/BatchNorm/FusedBatchNormV3 1 14 14 576 
+densenet121/dense_block3/conv_block11/x1/BatchNorm/FusedBatchNorm 1 14 14 576 
 densenet121/dense_block3/conv_block11/x1/Relu 1 14 14 576 
 densenet121/dense_block3/conv_block11/x1/Conv/weights 1 1 576 128 
 densenet121/dense_block3/conv_block11/x1/Conv/Conv2D 1 14 14 128 
@@ -542,7 +542,7 @@ densenet121/dense_block3/conv_block11/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block11/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block11/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block11/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block11/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block11/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block11/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block11/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block11/x2/Conv/Conv2D 1 14 14 32 
@@ -552,7 +552,7 @@ densenet121/dense_block3/conv_block12/x1/BatchNorm/gamma 608
 densenet121/dense_block3/conv_block12/x1/BatchNorm/beta 608 
 densenet121/dense_block3/conv_block12/x1/BatchNorm/moving_mean 608 
 densenet121/dense_block3/conv_block12/x1/BatchNorm/moving_variance 608 
-densenet121/dense_block3/conv_block12/x1/BatchNorm/FusedBatchNormV3 1 14 14 608 
+densenet121/dense_block3/conv_block12/x1/BatchNorm/FusedBatchNorm 1 14 14 608 
 densenet121/dense_block3/conv_block12/x1/Relu 1 14 14 608 
 densenet121/dense_block3/conv_block12/x1/Conv/weights 1 1 608 128 
 densenet121/dense_block3/conv_block12/x1/Conv/Conv2D 1 14 14 128 
@@ -560,7 +560,7 @@ densenet121/dense_block3/conv_block12/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block12/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block12/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block12/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block12/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block12/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block12/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block12/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block12/x2/Conv/Conv2D 1 14 14 32 
@@ -570,7 +570,7 @@ densenet121/dense_block3/conv_block13/x1/BatchNorm/gamma 640
 densenet121/dense_block3/conv_block13/x1/BatchNorm/beta 640 
 densenet121/dense_block3/conv_block13/x1/BatchNorm/moving_mean 640 
 densenet121/dense_block3/conv_block13/x1/BatchNorm/moving_variance 640 
-densenet121/dense_block3/conv_block13/x1/BatchNorm/FusedBatchNormV3 1 14 14 640 
+densenet121/dense_block3/conv_block13/x1/BatchNorm/FusedBatchNorm 1 14 14 640 
 densenet121/dense_block3/conv_block13/x1/Relu 1 14 14 640 
 densenet121/dense_block3/conv_block13/x1/Conv/weights 1 1 640 128 
 densenet121/dense_block3/conv_block13/x1/Conv/Conv2D 1 14 14 128 
@@ -578,7 +578,7 @@ densenet121/dense_block3/conv_block13/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block13/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block13/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block13/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block13/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block13/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block13/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block13/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block13/x2/Conv/Conv2D 1 14 14 32 
@@ -588,7 +588,7 @@ densenet121/dense_block3/conv_block14/x1/BatchNorm/gamma 672
 densenet121/dense_block3/conv_block14/x1/BatchNorm/beta 672 
 densenet121/dense_block3/conv_block14/x1/BatchNorm/moving_mean 672 
 densenet121/dense_block3/conv_block14/x1/BatchNorm/moving_variance 672 
-densenet121/dense_block3/conv_block14/x1/BatchNorm/FusedBatchNormV3 1 14 14 672 
+densenet121/dense_block3/conv_block14/x1/BatchNorm/FusedBatchNorm 1 14 14 672 
 densenet121/dense_block3/conv_block14/x1/Relu 1 14 14 672 
 densenet121/dense_block3/conv_block14/x1/Conv/weights 1 1 672 128 
 densenet121/dense_block3/conv_block14/x1/Conv/Conv2D 1 14 14 128 
@@ -596,7 +596,7 @@ densenet121/dense_block3/conv_block14/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block14/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block14/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block14/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block14/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block14/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block14/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block14/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block14/x2/Conv/Conv2D 1 14 14 32 
@@ -606,7 +606,7 @@ densenet121/dense_block3/conv_block15/x1/BatchNorm/gamma 704
 densenet121/dense_block3/conv_block15/x1/BatchNorm/beta 704 
 densenet121/dense_block3/conv_block15/x1/BatchNorm/moving_mean 704 
 densenet121/dense_block3/conv_block15/x1/BatchNorm/moving_variance 704 
-densenet121/dense_block3/conv_block15/x1/BatchNorm/FusedBatchNormV3 1 14 14 704 
+densenet121/dense_block3/conv_block15/x1/BatchNorm/FusedBatchNorm 1 14 14 704 
 densenet121/dense_block3/conv_block15/x1/Relu 1 14 14 704 
 densenet121/dense_block3/conv_block15/x1/Conv/weights 1 1 704 128 
 densenet121/dense_block3/conv_block15/x1/Conv/Conv2D 1 14 14 128 
@@ -614,7 +614,7 @@ densenet121/dense_block3/conv_block15/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block15/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block15/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block15/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block15/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block15/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block15/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block15/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block15/x2/Conv/Conv2D 1 14 14 32 
@@ -624,7 +624,7 @@ densenet121/dense_block3/conv_block16/x1/BatchNorm/gamma 736
 densenet121/dense_block3/conv_block16/x1/BatchNorm/beta 736 
 densenet121/dense_block3/conv_block16/x1/BatchNorm/moving_mean 736 
 densenet121/dense_block3/conv_block16/x1/BatchNorm/moving_variance 736 
-densenet121/dense_block3/conv_block16/x1/BatchNorm/FusedBatchNormV3 1 14 14 736 
+densenet121/dense_block3/conv_block16/x1/BatchNorm/FusedBatchNorm 1 14 14 736 
 densenet121/dense_block3/conv_block16/x1/Relu 1 14 14 736 
 densenet121/dense_block3/conv_block16/x1/Conv/weights 1 1 736 128 
 densenet121/dense_block3/conv_block16/x1/Conv/Conv2D 1 14 14 128 
@@ -632,7 +632,7 @@ densenet121/dense_block3/conv_block16/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block16/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block16/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block16/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block16/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block16/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block16/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block16/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block16/x2/Conv/Conv2D 1 14 14 32 
@@ -642,7 +642,7 @@ densenet121/dense_block3/conv_block17/x1/BatchNorm/gamma 768
 densenet121/dense_block3/conv_block17/x1/BatchNorm/beta 768 
 densenet121/dense_block3/conv_block17/x1/BatchNorm/moving_mean 768 
 densenet121/dense_block3/conv_block17/x1/BatchNorm/moving_variance 768 
-densenet121/dense_block3/conv_block17/x1/BatchNorm/FusedBatchNormV3 1 14 14 768 
+densenet121/dense_block3/conv_block17/x1/BatchNorm/FusedBatchNorm 1 14 14 768 
 densenet121/dense_block3/conv_block17/x1/Relu 1 14 14 768 
 densenet121/dense_block3/conv_block17/x1/Conv/weights 1 1 768 128 
 densenet121/dense_block3/conv_block17/x1/Conv/Conv2D 1 14 14 128 
@@ -650,7 +650,7 @@ densenet121/dense_block3/conv_block17/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block17/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block17/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block17/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block17/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block17/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block17/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block17/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block17/x2/Conv/Conv2D 1 14 14 32 
@@ -660,7 +660,7 @@ densenet121/dense_block3/conv_block18/x1/BatchNorm/gamma 800
 densenet121/dense_block3/conv_block18/x1/BatchNorm/beta 800 
 densenet121/dense_block3/conv_block18/x1/BatchNorm/moving_mean 800 
 densenet121/dense_block3/conv_block18/x1/BatchNorm/moving_variance 800 
-densenet121/dense_block3/conv_block18/x1/BatchNorm/FusedBatchNormV3 1 14 14 800 
+densenet121/dense_block3/conv_block18/x1/BatchNorm/FusedBatchNorm 1 14 14 800 
 densenet121/dense_block3/conv_block18/x1/Relu 1 14 14 800 
 densenet121/dense_block3/conv_block18/x1/Conv/weights 1 1 800 128 
 densenet121/dense_block3/conv_block18/x1/Conv/Conv2D 1 14 14 128 
@@ -668,7 +668,7 @@ densenet121/dense_block3/conv_block18/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block18/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block18/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block18/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block18/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block18/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block18/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block18/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block18/x2/Conv/Conv2D 1 14 14 32 
@@ -678,7 +678,7 @@ densenet121/dense_block3/conv_block19/x1/BatchNorm/gamma 832
 densenet121/dense_block3/conv_block19/x1/BatchNorm/beta 832 
 densenet121/dense_block3/conv_block19/x1/BatchNorm/moving_mean 832 
 densenet121/dense_block3/conv_block19/x1/BatchNorm/moving_variance 832 
-densenet121/dense_block3/conv_block19/x1/BatchNorm/FusedBatchNormV3 1 14 14 832 
+densenet121/dense_block3/conv_block19/x1/BatchNorm/FusedBatchNorm 1 14 14 832 
 densenet121/dense_block3/conv_block19/x1/Relu 1 14 14 832 
 densenet121/dense_block3/conv_block19/x1/Conv/weights 1 1 832 128 
 densenet121/dense_block3/conv_block19/x1/Conv/Conv2D 1 14 14 128 
@@ -686,7 +686,7 @@ densenet121/dense_block3/conv_block19/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block19/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block19/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block19/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block19/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block19/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block19/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block19/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block19/x2/Conv/Conv2D 1 14 14 32 
@@ -696,7 +696,7 @@ densenet121/dense_block3/conv_block20/x1/BatchNorm/gamma 864
 densenet121/dense_block3/conv_block20/x1/BatchNorm/beta 864 
 densenet121/dense_block3/conv_block20/x1/BatchNorm/moving_mean 864 
 densenet121/dense_block3/conv_block20/x1/BatchNorm/moving_variance 864 
-densenet121/dense_block3/conv_block20/x1/BatchNorm/FusedBatchNormV3 1 14 14 864 
+densenet121/dense_block3/conv_block20/x1/BatchNorm/FusedBatchNorm 1 14 14 864 
 densenet121/dense_block3/conv_block20/x1/Relu 1 14 14 864 
 densenet121/dense_block3/conv_block20/x1/Conv/weights 1 1 864 128 
 densenet121/dense_block3/conv_block20/x1/Conv/Conv2D 1 14 14 128 
@@ -704,7 +704,7 @@ densenet121/dense_block3/conv_block20/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block20/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block20/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block20/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block20/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block20/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block20/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block20/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block20/x2/Conv/Conv2D 1 14 14 32 
@@ -714,7 +714,7 @@ densenet121/dense_block3/conv_block21/x1/BatchNorm/gamma 896
 densenet121/dense_block3/conv_block21/x1/BatchNorm/beta 896 
 densenet121/dense_block3/conv_block21/x1/BatchNorm/moving_mean 896 
 densenet121/dense_block3/conv_block21/x1/BatchNorm/moving_variance 896 
-densenet121/dense_block3/conv_block21/x1/BatchNorm/FusedBatchNormV3 1 14 14 896 
+densenet121/dense_block3/conv_block21/x1/BatchNorm/FusedBatchNorm 1 14 14 896 
 densenet121/dense_block3/conv_block21/x1/Relu 1 14 14 896 
 densenet121/dense_block3/conv_block21/x1/Conv/weights 1 1 896 128 
 densenet121/dense_block3/conv_block21/x1/Conv/Conv2D 1 14 14 128 
@@ -722,7 +722,7 @@ densenet121/dense_block3/conv_block21/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block21/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block21/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block21/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block21/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block21/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block21/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block21/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block21/x2/Conv/Conv2D 1 14 14 32 
@@ -732,7 +732,7 @@ densenet121/dense_block3/conv_block22/x1/BatchNorm/gamma 928
 densenet121/dense_block3/conv_block22/x1/BatchNorm/beta 928 
 densenet121/dense_block3/conv_block22/x1/BatchNorm/moving_mean 928 
 densenet121/dense_block3/conv_block22/x1/BatchNorm/moving_variance 928 
-densenet121/dense_block3/conv_block22/x1/BatchNorm/FusedBatchNormV3 1 14 14 928 
+densenet121/dense_block3/conv_block22/x1/BatchNorm/FusedBatchNorm 1 14 14 928 
 densenet121/dense_block3/conv_block22/x1/Relu 1 14 14 928 
 densenet121/dense_block3/conv_block22/x1/Conv/weights 1 1 928 128 
 densenet121/dense_block3/conv_block22/x1/Conv/Conv2D 1 14 14 128 
@@ -740,7 +740,7 @@ densenet121/dense_block3/conv_block22/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block22/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block22/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block22/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block22/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block22/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block22/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block22/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block22/x2/Conv/Conv2D 1 14 14 32 
@@ -750,7 +750,7 @@ densenet121/dense_block3/conv_block23/x1/BatchNorm/gamma 960
 densenet121/dense_block3/conv_block23/x1/BatchNorm/beta 960 
 densenet121/dense_block3/conv_block23/x1/BatchNorm/moving_mean 960 
 densenet121/dense_block3/conv_block23/x1/BatchNorm/moving_variance 960 
-densenet121/dense_block3/conv_block23/x1/BatchNorm/FusedBatchNormV3 1 14 14 960 
+densenet121/dense_block3/conv_block23/x1/BatchNorm/FusedBatchNorm 1 14 14 960 
 densenet121/dense_block3/conv_block23/x1/Relu 1 14 14 960 
 densenet121/dense_block3/conv_block23/x1/Conv/weights 1 1 960 128 
 densenet121/dense_block3/conv_block23/x1/Conv/Conv2D 1 14 14 128 
@@ -758,7 +758,7 @@ densenet121/dense_block3/conv_block23/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block23/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block23/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block23/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block23/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block23/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block23/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block23/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block23/x2/Conv/Conv2D 1 14 14 32 
@@ -768,7 +768,7 @@ densenet121/dense_block3/conv_block24/x1/BatchNorm/gamma 992
 densenet121/dense_block3/conv_block24/x1/BatchNorm/beta 992 
 densenet121/dense_block3/conv_block24/x1/BatchNorm/moving_mean 992 
 densenet121/dense_block3/conv_block24/x1/BatchNorm/moving_variance 992 
-densenet121/dense_block3/conv_block24/x1/BatchNorm/FusedBatchNormV3 1 14 14 992 
+densenet121/dense_block3/conv_block24/x1/BatchNorm/FusedBatchNorm 1 14 14 992 
 densenet121/dense_block3/conv_block24/x1/Relu 1 14 14 992 
 densenet121/dense_block3/conv_block24/x1/Conv/weights 1 1 992 128 
 densenet121/dense_block3/conv_block24/x1/Conv/Conv2D 1 14 14 128 
@@ -776,7 +776,7 @@ densenet121/dense_block3/conv_block24/x2/BatchNorm/gamma 128
 densenet121/dense_block3/conv_block24/x2/BatchNorm/beta 128 
 densenet121/dense_block3/conv_block24/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block3/conv_block24/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block3/conv_block24/x2/BatchNorm/FusedBatchNormV3 1 14 14 128 
+densenet121/dense_block3/conv_block24/x2/BatchNorm/FusedBatchNorm 1 14 14 128 
 densenet121/dense_block3/conv_block24/x2/Relu 1 14 14 128 
 densenet121/dense_block3/conv_block24/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block3/conv_block24/x2/Conv/Conv2D 1 14 14 32 
@@ -786,7 +786,7 @@ densenet121/transition_block3/blk/BatchNorm/gamma 1024
 densenet121/transition_block3/blk/BatchNorm/beta 1024 
 densenet121/transition_block3/blk/BatchNorm/moving_mean 1024 
 densenet121/transition_block3/blk/BatchNorm/moving_variance 1024 
-densenet121/transition_block3/blk/BatchNorm/FusedBatchNormV3 1 14 14 1024 
+densenet121/transition_block3/blk/BatchNorm/FusedBatchNorm 1 14 14 1024 
 densenet121/transition_block3/blk/Relu 1 14 14 1024 
 densenet121/transition_block3/blk/Conv/weights 1 1 1024 512 
 densenet121/transition_block3/blk/Conv/Conv2D 1 14 14 512 
@@ -795,7 +795,7 @@ densenet121/dense_block4/conv_block1/x1/BatchNorm/gamma 512
 densenet121/dense_block4/conv_block1/x1/BatchNorm/beta 512 
 densenet121/dense_block4/conv_block1/x1/BatchNorm/moving_mean 512 
 densenet121/dense_block4/conv_block1/x1/BatchNorm/moving_variance 512 
-densenet121/dense_block4/conv_block1/x1/BatchNorm/FusedBatchNormV3 1 7 7 512 
+densenet121/dense_block4/conv_block1/x1/BatchNorm/FusedBatchNorm 1 7 7 512 
 densenet121/dense_block4/conv_block1/x1/Relu 1 7 7 512 
 densenet121/dense_block4/conv_block1/x1/Conv/weights 1 1 512 128 
 densenet121/dense_block4/conv_block1/x1/Conv/Conv2D 1 7 7 128 
@@ -803,7 +803,7 @@ densenet121/dense_block4/conv_block1/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block1/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block1/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block1/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block1/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block1/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block1/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block1/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block1/x2/Conv/Conv2D 1 7 7 32 
@@ -813,7 +813,7 @@ densenet121/dense_block4/conv_block2/x1/BatchNorm/gamma 544
 densenet121/dense_block4/conv_block2/x1/BatchNorm/beta 544 
 densenet121/dense_block4/conv_block2/x1/BatchNorm/moving_mean 544 
 densenet121/dense_block4/conv_block2/x1/BatchNorm/moving_variance 544 
-densenet121/dense_block4/conv_block2/x1/BatchNorm/FusedBatchNormV3 1 7 7 544 
+densenet121/dense_block4/conv_block2/x1/BatchNorm/FusedBatchNorm 1 7 7 544 
 densenet121/dense_block4/conv_block2/x1/Relu 1 7 7 544 
 densenet121/dense_block4/conv_block2/x1/Conv/weights 1 1 544 128 
 densenet121/dense_block4/conv_block2/x1/Conv/Conv2D 1 7 7 128 
@@ -821,7 +821,7 @@ densenet121/dense_block4/conv_block2/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block2/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block2/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block2/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block2/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block2/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block2/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block2/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block2/x2/Conv/Conv2D 1 7 7 32 
@@ -831,7 +831,7 @@ densenet121/dense_block4/conv_block3/x1/BatchNorm/gamma 576
 densenet121/dense_block4/conv_block3/x1/BatchNorm/beta 576 
 densenet121/dense_block4/conv_block3/x1/BatchNorm/moving_mean 576 
 densenet121/dense_block4/conv_block3/x1/BatchNorm/moving_variance 576 
-densenet121/dense_block4/conv_block3/x1/BatchNorm/FusedBatchNormV3 1 7 7 576 
+densenet121/dense_block4/conv_block3/x1/BatchNorm/FusedBatchNorm 1 7 7 576 
 densenet121/dense_block4/conv_block3/x1/Relu 1 7 7 576 
 densenet121/dense_block4/conv_block3/x1/Conv/weights 1 1 576 128 
 densenet121/dense_block4/conv_block3/x1/Conv/Conv2D 1 7 7 128 
@@ -839,7 +839,7 @@ densenet121/dense_block4/conv_block3/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block3/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block3/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block3/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block3/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block3/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block3/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block3/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block3/x2/Conv/Conv2D 1 7 7 32 
@@ -849,7 +849,7 @@ densenet121/dense_block4/conv_block4/x1/BatchNorm/gamma 608
 densenet121/dense_block4/conv_block4/x1/BatchNorm/beta 608 
 densenet121/dense_block4/conv_block4/x1/BatchNorm/moving_mean 608 
 densenet121/dense_block4/conv_block4/x1/BatchNorm/moving_variance 608 
-densenet121/dense_block4/conv_block4/x1/BatchNorm/FusedBatchNormV3 1 7 7 608 
+densenet121/dense_block4/conv_block4/x1/BatchNorm/FusedBatchNorm 1 7 7 608 
 densenet121/dense_block4/conv_block4/x1/Relu 1 7 7 608 
 densenet121/dense_block4/conv_block4/x1/Conv/weights 1 1 608 128 
 densenet121/dense_block4/conv_block4/x1/Conv/Conv2D 1 7 7 128 
@@ -857,7 +857,7 @@ densenet121/dense_block4/conv_block4/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block4/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block4/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block4/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block4/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block4/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block4/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block4/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block4/x2/Conv/Conv2D 1 7 7 32 
@@ -867,7 +867,7 @@ densenet121/dense_block4/conv_block5/x1/BatchNorm/gamma 640
 densenet121/dense_block4/conv_block5/x1/BatchNorm/beta 640 
 densenet121/dense_block4/conv_block5/x1/BatchNorm/moving_mean 640 
 densenet121/dense_block4/conv_block5/x1/BatchNorm/moving_variance 640 
-densenet121/dense_block4/conv_block5/x1/BatchNorm/FusedBatchNormV3 1 7 7 640 
+densenet121/dense_block4/conv_block5/x1/BatchNorm/FusedBatchNorm 1 7 7 640 
 densenet121/dense_block4/conv_block5/x1/Relu 1 7 7 640 
 densenet121/dense_block4/conv_block5/x1/Conv/weights 1 1 640 128 
 densenet121/dense_block4/conv_block5/x1/Conv/Conv2D 1 7 7 128 
@@ -875,7 +875,7 @@ densenet121/dense_block4/conv_block5/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block5/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block5/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block5/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block5/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block5/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block5/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block5/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block5/x2/Conv/Conv2D 1 7 7 32 
@@ -885,7 +885,7 @@ densenet121/dense_block4/conv_block6/x1/BatchNorm/gamma 672
 densenet121/dense_block4/conv_block6/x1/BatchNorm/beta 672 
 densenet121/dense_block4/conv_block6/x1/BatchNorm/moving_mean 672 
 densenet121/dense_block4/conv_block6/x1/BatchNorm/moving_variance 672 
-densenet121/dense_block4/conv_block6/x1/BatchNorm/FusedBatchNormV3 1 7 7 672 
+densenet121/dense_block4/conv_block6/x1/BatchNorm/FusedBatchNorm 1 7 7 672 
 densenet121/dense_block4/conv_block6/x1/Relu 1 7 7 672 
 densenet121/dense_block4/conv_block6/x1/Conv/weights 1 1 672 128 
 densenet121/dense_block4/conv_block6/x1/Conv/Conv2D 1 7 7 128 
@@ -893,7 +893,7 @@ densenet121/dense_block4/conv_block6/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block6/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block6/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block6/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block6/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block6/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block6/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block6/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block6/x2/Conv/Conv2D 1 7 7 32 
@@ -903,7 +903,7 @@ densenet121/dense_block4/conv_block7/x1/BatchNorm/gamma 704
 densenet121/dense_block4/conv_block7/x1/BatchNorm/beta 704 
 densenet121/dense_block4/conv_block7/x1/BatchNorm/moving_mean 704 
 densenet121/dense_block4/conv_block7/x1/BatchNorm/moving_variance 704 
-densenet121/dense_block4/conv_block7/x1/BatchNorm/FusedBatchNormV3 1 7 7 704 
+densenet121/dense_block4/conv_block7/x1/BatchNorm/FusedBatchNorm 1 7 7 704 
 densenet121/dense_block4/conv_block7/x1/Relu 1 7 7 704 
 densenet121/dense_block4/conv_block7/x1/Conv/weights 1 1 704 128 
 densenet121/dense_block4/conv_block7/x1/Conv/Conv2D 1 7 7 128 
@@ -911,7 +911,7 @@ densenet121/dense_block4/conv_block7/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block7/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block7/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block7/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block7/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block7/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block7/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block7/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block7/x2/Conv/Conv2D 1 7 7 32 
@@ -921,7 +921,7 @@ densenet121/dense_block4/conv_block8/x1/BatchNorm/gamma 736
 densenet121/dense_block4/conv_block8/x1/BatchNorm/beta 736 
 densenet121/dense_block4/conv_block8/x1/BatchNorm/moving_mean 736 
 densenet121/dense_block4/conv_block8/x1/BatchNorm/moving_variance 736 
-densenet121/dense_block4/conv_block8/x1/BatchNorm/FusedBatchNormV3 1 7 7 736 
+densenet121/dense_block4/conv_block8/x1/BatchNorm/FusedBatchNorm 1 7 7 736 
 densenet121/dense_block4/conv_block8/x1/Relu 1 7 7 736 
 densenet121/dense_block4/conv_block8/x1/Conv/weights 1 1 736 128 
 densenet121/dense_block4/conv_block8/x1/Conv/Conv2D 1 7 7 128 
@@ -929,7 +929,7 @@ densenet121/dense_block4/conv_block8/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block8/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block8/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block8/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block8/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block8/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block8/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block8/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block8/x2/Conv/Conv2D 1 7 7 32 
@@ -939,7 +939,7 @@ densenet121/dense_block4/conv_block9/x1/BatchNorm/gamma 768
 densenet121/dense_block4/conv_block9/x1/BatchNorm/beta 768 
 densenet121/dense_block4/conv_block9/x1/BatchNorm/moving_mean 768 
 densenet121/dense_block4/conv_block9/x1/BatchNorm/moving_variance 768 
-densenet121/dense_block4/conv_block9/x1/BatchNorm/FusedBatchNormV3 1 7 7 768 
+densenet121/dense_block4/conv_block9/x1/BatchNorm/FusedBatchNorm 1 7 7 768 
 densenet121/dense_block4/conv_block9/x1/Relu 1 7 7 768 
 densenet121/dense_block4/conv_block9/x1/Conv/weights 1 1 768 128 
 densenet121/dense_block4/conv_block9/x1/Conv/Conv2D 1 7 7 128 
@@ -947,7 +947,7 @@ densenet121/dense_block4/conv_block9/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block9/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block9/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block9/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block9/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block9/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block9/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block9/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block9/x2/Conv/Conv2D 1 7 7 32 
@@ -957,7 +957,7 @@ densenet121/dense_block4/conv_block10/x1/BatchNorm/gamma 800
 densenet121/dense_block4/conv_block10/x1/BatchNorm/beta 800 
 densenet121/dense_block4/conv_block10/x1/BatchNorm/moving_mean 800 
 densenet121/dense_block4/conv_block10/x1/BatchNorm/moving_variance 800 
-densenet121/dense_block4/conv_block10/x1/BatchNorm/FusedBatchNormV3 1 7 7 800 
+densenet121/dense_block4/conv_block10/x1/BatchNorm/FusedBatchNorm 1 7 7 800 
 densenet121/dense_block4/conv_block10/x1/Relu 1 7 7 800 
 densenet121/dense_block4/conv_block10/x1/Conv/weights 1 1 800 128 
 densenet121/dense_block4/conv_block10/x1/Conv/Conv2D 1 7 7 128 
@@ -965,7 +965,7 @@ densenet121/dense_block4/conv_block10/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block10/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block10/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block10/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block10/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block10/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block10/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block10/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block10/x2/Conv/Conv2D 1 7 7 32 
@@ -975,7 +975,7 @@ densenet121/dense_block4/conv_block11/x1/BatchNorm/gamma 832
 densenet121/dense_block4/conv_block11/x1/BatchNorm/beta 832 
 densenet121/dense_block4/conv_block11/x1/BatchNorm/moving_mean 832 
 densenet121/dense_block4/conv_block11/x1/BatchNorm/moving_variance 832 
-densenet121/dense_block4/conv_block11/x1/BatchNorm/FusedBatchNormV3 1 7 7 832 
+densenet121/dense_block4/conv_block11/x1/BatchNorm/FusedBatchNorm 1 7 7 832 
 densenet121/dense_block4/conv_block11/x1/Relu 1 7 7 832 
 densenet121/dense_block4/conv_block11/x1/Conv/weights 1 1 832 128 
 densenet121/dense_block4/conv_block11/x1/Conv/Conv2D 1 7 7 128 
@@ -983,7 +983,7 @@ densenet121/dense_block4/conv_block11/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block11/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block11/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block11/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block11/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block11/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block11/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block11/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block11/x2/Conv/Conv2D 1 7 7 32 
@@ -993,7 +993,7 @@ densenet121/dense_block4/conv_block12/x1/BatchNorm/gamma 864
 densenet121/dense_block4/conv_block12/x1/BatchNorm/beta 864 
 densenet121/dense_block4/conv_block12/x1/BatchNorm/moving_mean 864 
 densenet121/dense_block4/conv_block12/x1/BatchNorm/moving_variance 864 
-densenet121/dense_block4/conv_block12/x1/BatchNorm/FusedBatchNormV3 1 7 7 864 
+densenet121/dense_block4/conv_block12/x1/BatchNorm/FusedBatchNorm 1 7 7 864 
 densenet121/dense_block4/conv_block12/x1/Relu 1 7 7 864 
 densenet121/dense_block4/conv_block12/x1/Conv/weights 1 1 864 128 
 densenet121/dense_block4/conv_block12/x1/Conv/Conv2D 1 7 7 128 
@@ -1001,7 +1001,7 @@ densenet121/dense_block4/conv_block12/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block12/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block12/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block12/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block12/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block12/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block12/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block12/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block12/x2/Conv/Conv2D 1 7 7 32 
@@ -1011,7 +1011,7 @@ densenet121/dense_block4/conv_block13/x1/BatchNorm/gamma 896
 densenet121/dense_block4/conv_block13/x1/BatchNorm/beta 896 
 densenet121/dense_block4/conv_block13/x1/BatchNorm/moving_mean 896 
 densenet121/dense_block4/conv_block13/x1/BatchNorm/moving_variance 896 
-densenet121/dense_block4/conv_block13/x1/BatchNorm/FusedBatchNormV3 1 7 7 896 
+densenet121/dense_block4/conv_block13/x1/BatchNorm/FusedBatchNorm 1 7 7 896 
 densenet121/dense_block4/conv_block13/x1/Relu 1 7 7 896 
 densenet121/dense_block4/conv_block13/x1/Conv/weights 1 1 896 128 
 densenet121/dense_block4/conv_block13/x1/Conv/Conv2D 1 7 7 128 
@@ -1019,7 +1019,7 @@ densenet121/dense_block4/conv_block13/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block13/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block13/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block13/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block13/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block13/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block13/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block13/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block13/x2/Conv/Conv2D 1 7 7 32 
@@ -1029,7 +1029,7 @@ densenet121/dense_block4/conv_block14/x1/BatchNorm/gamma 928
 densenet121/dense_block4/conv_block14/x1/BatchNorm/beta 928 
 densenet121/dense_block4/conv_block14/x1/BatchNorm/moving_mean 928 
 densenet121/dense_block4/conv_block14/x1/BatchNorm/moving_variance 928 
-densenet121/dense_block4/conv_block14/x1/BatchNorm/FusedBatchNormV3 1 7 7 928 
+densenet121/dense_block4/conv_block14/x1/BatchNorm/FusedBatchNorm 1 7 7 928 
 densenet121/dense_block4/conv_block14/x1/Relu 1 7 7 928 
 densenet121/dense_block4/conv_block14/x1/Conv/weights 1 1 928 128 
 densenet121/dense_block4/conv_block14/x1/Conv/Conv2D 1 7 7 128 
@@ -1037,7 +1037,7 @@ densenet121/dense_block4/conv_block14/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block14/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block14/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block14/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block14/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block14/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block14/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block14/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block14/x2/Conv/Conv2D 1 7 7 32 
@@ -1047,7 +1047,7 @@ densenet121/dense_block4/conv_block15/x1/BatchNorm/gamma 960
 densenet121/dense_block4/conv_block15/x1/BatchNorm/beta 960 
 densenet121/dense_block4/conv_block15/x1/BatchNorm/moving_mean 960 
 densenet121/dense_block4/conv_block15/x1/BatchNorm/moving_variance 960 
-densenet121/dense_block4/conv_block15/x1/BatchNorm/FusedBatchNormV3 1 7 7 960 
+densenet121/dense_block4/conv_block15/x1/BatchNorm/FusedBatchNorm 1 7 7 960 
 densenet121/dense_block4/conv_block15/x1/Relu 1 7 7 960 
 densenet121/dense_block4/conv_block15/x1/Conv/weights 1 1 960 128 
 densenet121/dense_block4/conv_block15/x1/Conv/Conv2D 1 7 7 128 
@@ -1055,7 +1055,7 @@ densenet121/dense_block4/conv_block15/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block15/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block15/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block15/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block15/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block15/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block15/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block15/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block15/x2/Conv/Conv2D 1 7 7 32 
@@ -1065,7 +1065,7 @@ densenet121/dense_block4/conv_block16/x1/BatchNorm/gamma 992
 densenet121/dense_block4/conv_block16/x1/BatchNorm/beta 992 
 densenet121/dense_block4/conv_block16/x1/BatchNorm/moving_mean 992 
 densenet121/dense_block4/conv_block16/x1/BatchNorm/moving_variance 992 
-densenet121/dense_block4/conv_block16/x1/BatchNorm/FusedBatchNormV3 1 7 7 992 
+densenet121/dense_block4/conv_block16/x1/BatchNorm/FusedBatchNorm 1 7 7 992 
 densenet121/dense_block4/conv_block16/x1/Relu 1 7 7 992 
 densenet121/dense_block4/conv_block16/x1/Conv/weights 1 1 992 128 
 densenet121/dense_block4/conv_block16/x1/Conv/Conv2D 1 7 7 128 
@@ -1073,7 +1073,7 @@ densenet121/dense_block4/conv_block16/x2/BatchNorm/gamma 128
 densenet121/dense_block4/conv_block16/x2/BatchNorm/beta 128 
 densenet121/dense_block4/conv_block16/x2/BatchNorm/moving_mean 128 
 densenet121/dense_block4/conv_block16/x2/BatchNorm/moving_variance 128 
-densenet121/dense_block4/conv_block16/x2/BatchNorm/FusedBatchNormV3 1 7 7 128 
+densenet121/dense_block4/conv_block16/x2/BatchNorm/FusedBatchNorm 1 7 7 128 
 densenet121/dense_block4/conv_block16/x2/Relu 1 7 7 128 
 densenet121/dense_block4/conv_block16/x2/Conv/weights 3 3 128 32 
 densenet121/dense_block4/conv_block16/x2/Conv/Conv2D 1 7 7 32 
@@ -1083,7 +1083,7 @@ densenet121/final_block/BatchNorm/gamma 1024
 densenet121/final_block/BatchNorm/beta 1024 
 densenet121/final_block/BatchNorm/moving_mean 1024 
 densenet121/final_block/BatchNorm/moving_variance 1024 
-densenet121/final_block/BatchNorm/FusedBatchNormV3 1 7 7 1024 
+densenet121/final_block/BatchNorm/FusedBatchNorm 1 7 7 1024 
 densenet121/final_block/Relu 1 7 7 1024 
 densenet121/final_block/global_avg_pool/AvgPool 1 1 1 1024 
 densenet121/logits/weights 1 1 1024 1000 
