@@ -2,10 +2,11 @@
 # Configurations
 
 NUM_THREADS=1
-IMG_FILE="SampleImages/sample_image_3.JPEG"
+IMG_FILE="SampleImages/n02109961_36.JPEG"
 PRE_TRAINED_MODEL_LINK="http://download.tensorflow.org/models/official/20181001_resnet/savedmodels/resnet_v2_fp32_savedmodel_NHWC.tar.gz"
 EXTRACT=1
 MODEL_NETWORK="ResNet"
+COMPILE=1
 
 # ----------------------------------------------------------------------
 
@@ -13,14 +14,15 @@ set -e
 
 # Print usage
 print_usage() {
-    echo -e "\nUsage:\n\t$0 [-i <INPUT_IMAGE_FILE>] [-n <NUMBER_OF_THREADS>]\n"
+    echo -e "\nUsage:\n\t$0 [-i <INPUT_IMAGE_FILE>] [-n <NUMBER_OF_THREADS>] [-c]\n"
 }
 
 # Parse options and arguments
-while getopts "n:i:h" flag; do
+while getopts "n:i:ch" flag; do
     case "$flag" in
         i)  IMG_FILE=$OPTARG;;
         n)  NUM_THREADS=$OPTARG;;
+        c)  COMPILE=0;;
         h)  print_usage
             exit 0;;
         *)  print_usage
@@ -60,6 +62,9 @@ fi
 python3 $MODEL_NETWORK.py --img $IMG_FILE_ABS_PATH
 
 cd ../..
+if [ $COMPILE -eq 1 ]; then
+    python3 compile.py -C -R 64 tf TensorflowInf/${MODEL_NETWORK}/graphDef.bin ${NUM_THREADS} trunc_pr split
+fi
+
 Scripts/fixed-rep-to-float.py TensorflowInf/${MODEL_NETWORK}/${MODEL_NETWORK}_img_input.inp
-python3 compile.py -R 64 tf TensorflowInf/${MODEL_NETWORK}/graphDef.bin ${NUM_THREADS} trunc_pr split
-Scripts/ring.sh tf-TensorflowInf_${MODEL_NETWORK}_graphDef.bin-${NUM_THREADS}-trunc_pr-split
+Scripts/emulate.sh tf-TensorflowInf_${MODEL_NETWORK}_graphDef.bin-${NUM_THREADS}-trunc_pr-split

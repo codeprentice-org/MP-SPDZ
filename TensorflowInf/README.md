@@ -17,7 +17,7 @@ Before running Tensorflow inference, be sure to run the compilation instructions
 ```
 Scripts/setup-ssl.sh
 make -j 8 tldr
-make replicated-ring-party.x
+make emulate.x
 ```
 Python version must be between 3.5 - 3.7.
 Additional dependencies may be installed through `requirements.txt`:

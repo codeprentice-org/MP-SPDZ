@@ -6,9 +6,10 @@ FAILURES=0
 TESTS=0
 
 # Run Tensorflow inference on image and compare output
-function test_tf_inference_file() {
+test_tf_inference_file() {
     TESTS=$((TESTS+1))
     filename=$1
+    compile=$2
     echo Testing MP-SPDZ Tensorflow Inference on $filename...
 
     # Get image reference code from filename
@@ -21,8 +22,12 @@ function test_tf_inference_file() {
         return
     fi
 
+    if [ ! -z "$compile" ]; then
+        no_compile_option="-c"
+    fi
+
     # Run Tensorflow inference and log output
-    ./tf-inference.sh -n 1 -i $filename &> test.log
+    ./tf-inference.sh -n 1 -i $filename $no_compile_option &> test.log
 
     # Get line number of image from log
     grep_output=`grep guess test.log`
@@ -62,8 +67,13 @@ function test_tf_inference_file() {
 # Navigate to script directory
 SCRIPT_DIR=`dirname ${BASH_SOURCE[0]}`
 cd $SCRIPT_DIR
+
 # Run test on every image in SampleImages
-for FILE in SampleImages/*; do test_tf_inference_file $FILE; echo ''; done
+for FILE in SampleImages/*
+    do test_tf_inference_file $FILE $no_compile
+    no_compile=1
+    echo ''
+done
 # Print test results
 echo $TESTS tests executed
 echo $PASSES tests PASSED
