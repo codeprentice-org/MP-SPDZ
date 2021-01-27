@@ -136,3 +136,6 @@ TensorflowInf/ResNet/PreTrainedModel/
 TensorflowInf/ResNet/ResNet_img_input.inp
 TensorflowInf/ResNet/*.bin
 TensorflowInf/ResNet/*.mtdata
+
+graphDef.bin
+*.inp
