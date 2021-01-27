@@ -56,9 +56,11 @@ def get_layers_and_named_data(filename):
         else:
             shape = None
         t = op.type
-        if t in ('VariableV2', 'Const'):
-            pass
-        elif t in ('Reshape', 'Squeeze'):
+        if t in ('VariableV2', 'Const', 'Assign', 'NoOp', 'Fill',
+                 'VarHandleOp'):
+            source(op, named)
+        elif t in ('Reshape', 'Squeeze', 'Identity', 'VarIsInitializedOp',
+                   'ReadVariableOp', 'AssignVariableOp'):
             link(op, op.inputs[0].op, named)
         elif t == 'Placeholder':
             source(op, named)
@@ -89,7 +91,7 @@ def get_layers_and_named_data(filename):
             assert len(output_shape) == 4
             output(layers, named, op, ml.FixConv2d(input_shape, tuple(window), (window[3],), output_shape, strides, padding, True,
                 inputs=[named[op.inputs[0].op.name]]))
-        elif t == 'Add' and op.inputs[1].op.type != 'VariableV2':
+        elif t in ('Add', 'AddV2') and op.inputs[1].op.type != 'VariableV2':
             output(layers, named, op, ml.Add([named[x.op.name] for x in op.inputs]), False)
         elif t in ('Add', 'BiasAdd'):
             assert op.inputs[0].op.type in ('MatMul', 'Conv2D')
@@ -135,7 +137,7 @@ def get_layers_and_named_data(filename):
             assert len(op.inputs) == 3
             dim = int(op.inputs[2].op.get_attr('value').int_val[0])
             output(layers, named, op, ml.Concat([named[x.name[:-2]] for x in op.inputs[:2]], dim), prev_input=False)
-        elif t == 'FusedBatchNorm':
+        elif t in ('FusedBatchNorm', 'FusedBatchNormV3'):
             output(layers, named, op, ml.FusedBatchNorm(get_shape(op.inputs[0].shape), inputs=[named[op.inputs[0].op.name]]))
         elif t == 'Pad':
             paddings[op.name] = numpy.fromstring(op.inputs[1].op.get_attr('value').

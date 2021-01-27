@@ -29,7 +29,7 @@ import os, sys
 import time
 import numpy as np
 import argparse
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import ResNet_Model
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "TFCompiler"))
@@ -156,14 +156,8 @@ def infer(imgfile, scalingFac):
         modelPath = './PreTrainedModel/resnet_v2_fp32_savedmodel_NHWC/1538687283/variables/variables'
         saver = tf.train.Saver()
         saver.restore(sess, modelPath)
-        DumpTFMtData.updateWeightsForBN(optimized_graph_def, sess, feed_dict)
 
-        trainVarsName = []
-        for node in optimized_graph_def.node:
-            if node.op=="VariableV2":
-                trainVarsName.append(node.name)
-        trainVars = list(map(lambda x : tf.get_default_graph().get_operation_by_name(x).outputs[0] , trainVarsName))
-        DumpTFMtData.dumpImgAndWeightsData(sess, images[0], trainVars, 'ResNet_img_input.inp', scalingFac)
+        DumpTFMtData.dumpImgAndWeightsData2(sess, images[0], 'ResNet_img_input.inp', scalingFac)
 
 def parseArgs():
     parser = argparse.ArgumentParser()
