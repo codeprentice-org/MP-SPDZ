@@ -1,7 +1,9 @@
 
 #include "FHE/Ring_Element.h"
-#include "Exceptions/Exceptions.h"
+#include "Tools/Exceptions.h"
 #include "FHE/FFT.h"
+
+#include "Math/modp.hpp"
 
 void reduce_step(vector<modp>& aa,int i,const FFT_Data& FFTD)
 { modp temp=aa[i];

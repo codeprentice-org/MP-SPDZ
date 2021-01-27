@@ -9,7 +9,7 @@
 #include "CcdShare.h"
 #include "Protocols/MaliciousShamirShare.h"
 
-template<class T> class MaliciousRepPrep;
+template<class T> class MaliciousBitOnlyRepPrep;
 
 namespace GC
 {
@@ -38,6 +38,11 @@ public:
     typedef NoShare bit_type;
 
     static const int default_length = 1;
+
+    static DataFieldType field_type()
+    {
+        return DATA_GF2;
+    }
 
     static string name()
     {

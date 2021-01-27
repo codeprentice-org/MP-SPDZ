@@ -3,8 +3,9 @@
 
 #include <string.h>
 
-#include "Exceptions/Exceptions.h"
+#include "Tools/Exceptions.h"
 #include "Tools/avx_memcpy.h"
+#include "Tools/int.h"
 
 #ifdef __APPLE__
 # include <libkern/OSByteOrder.h>
@@ -12,20 +13,9 @@
 #define le64toh(x) OSSwapLittleToHostInt64(x)
 #endif
 
-
-typedef unsigned char octet;
-
-// Assumes word is a 64 bit value
-#ifdef WIN32
-  typedef unsigned __int64 word;
-#else
-  typedef unsigned long word;
+#ifdef __linux__
+#include <endian.h>
 #endif
-
-#define BROADCAST 0
-#define ROUTE     1
-#define TERMINATE 2
-#define GO        3
 
 
 inline void encode_length(octet *buff, size_t len, size_t n_bytes)

@@ -29,6 +29,7 @@ SubProcessor<T>::SubProcessor(typename T::MAC_Check& MC,
 {
   DataF.set_proc(this);
   DataF.set_protocol(protocol);
+  protocol.init_mul(this);
   bit_usage.set_num_players(P.num_players());
   personal_bit_preps.resize(P.num_players());
   for (int i = 0; i < P.num_players(); i++)
@@ -76,7 +77,8 @@ Processor<sint, sgf2n>::Processor(int thread_num,Player& P,
 {
   reset(program,0);
 
-  public_input.open(get_filename("Programs/Public-Input/",false).c_str());
+  public_input_filename = get_filename("Programs/Public-Input/",false);
+  public_input.open(public_input_filename);
   private_input_filename = (get_filename(PREP_DIR "Private-Input-",true));
   private_input.open(private_input_filename.c_str());
   public_output.open(get_filename(PREP_DIR "Public-Output-",true).c_str(), ios_base::out);
@@ -133,12 +135,11 @@ string Processor<sint, sgf2n>::get_filename(const char* prefix, bool use_number)
 template<class sint, class sgf2n>
 void Processor<sint, sgf2n>::reset(const Program& program,int arg)
 {
-  reg_maxi = program.num_reg(INT);
   Proc2.get_S().resize(program.num_reg(SGF2N));
   Proc2.get_C().resize(program.num_reg(CGF2N));
   Procp.get_S().resize(program.num_reg(SINT));
   Procp.get_C().resize(program.num_reg(CINT));
-  Ci.resize(reg_maxi);
+  Ci.resize(program.num_reg(INT));
   this->arg = arg;
   Procb.reset(program);
 }
@@ -360,8 +361,11 @@ void Processor<sint, sgf2n>::read_shares_from_file(int start_file_posn, int end_
 // Append share data in data_registers to end of file. Expects Persistence directory to exist.
 template<class sint, class sgf2n>
 void Processor<sint, sgf2n>::write_shares_to_file(const vector<int>& data_registers) {
+  string dir = "Persistence";
+  mkdir_p(dir.c_str());
+
   string filename;
-  filename = "Persistence/Transactions-P" + to_string(P.my_num()) + ".data";
+  filename = dir + "/Transactions-P" + to_string(P.my_num()) + ".data";
 
   unsigned int size = data_registers.size();
 
@@ -594,6 +598,14 @@ void SubProcessor<T>::conv2ds(const Instruction& instruction)
             S[r0 + out_y * output_w + out_x] = protocol.finalize_dotprod(
                     lengths[out_y][out_x]);
         }
+}
+
+template<class sint, class sgf2n>
+typename sint::clear Processor<sint, sgf2n>::get_inverse2(unsigned m)
+{
+  for (unsigned i = inverses2m.size(); i <= m; i++)
+    inverses2m.push_back((cint(1) << i).invert());
+  return inverses2m[m];
 }
 
 template<class sint, class sgf2n>

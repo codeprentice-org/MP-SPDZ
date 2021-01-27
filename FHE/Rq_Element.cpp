@@ -1,6 +1,8 @@
 #include "Rq_Element.h"
 #include "FHE_Keys.h"
-#include "Exceptions/Exceptions.h"
+#include "Tools/Exceptions.h"
+
+#include "Math/modp.hpp"
 
 Rq_Element::Rq_Element(const FHE_PK& pk) :
         Rq_Element(pk.get_params().FFTD())

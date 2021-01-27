@@ -1,11 +1,12 @@
 
 #include "bigint.h"
 #include "gfp.h"
+#include "gfpvar.h"
 #include "Integer.h"
 #include "Z2k.h"
 #include "Z2k.hpp"
 #include "GC/Clear.h"
-#include "Exceptions/Exceptions.h"
+#include "Tools/Exceptions.h"
 
 #include "bigint.hpp"
 
@@ -144,6 +145,18 @@ bigint::bigint(const Integer& x) : bigint(SignedZ2<64>(x))
 
 bigint::bigint(const GC::Clear& x) : bigint(SignedZ2<64>(x))
 {
+}
+
+bigint::bigint(const gfpvar& other)
+{
+  to_bigint(*this, other.get(), other.get_ZpD());
+}
+
+string to_string(const bigint& x)
+{
+  stringstream ss;
+  ss << x;
+  return ss.str();
 }
 
 #ifdef REALLOC_POLICE

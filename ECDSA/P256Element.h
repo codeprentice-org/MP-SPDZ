@@ -27,6 +27,8 @@ public:
     typedef void next;
     typedef void Square;
 
+    static const true_type invertible;
+
     static int size() { return 0; }
     static string type_string() { return "P256"; }
 
@@ -55,15 +57,13 @@ public:
 
     void assign_zero() { *this = 0; }
     bool is_zero() { return *this == 0; }
-    void add(const P256Element& x, const P256Element& y) { *this = x + y; }
-    void sub(const P256Element& x, const P256Element& y) { *this = x - y; }
-    void mul(const P256Element& x, const Scalar& y) { *this = x * y; }
-    void mul(const Scalar& x, const P256Element& y) { *this = y * x; }
     void add(octetStream& os) { *this += os.get<P256Element>(); }
 
     void pack(octetStream& os) const;
     void unpack(octetStream& os);
 };
+
+P256Element operator*(const P256Element::Scalar& x, const P256Element& y);
 
 ostream& operator<<(ostream& s, const P256Element& x);
 

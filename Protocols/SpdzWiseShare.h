@@ -28,6 +28,7 @@ class SpdzWiseShare : public Share_<T, T>
     typedef Share_<T, T> super;
 
 public:
+    typedef T part_type;
     typedef T open_part_type;
     typedef typename T::clear clear;
     typedef typename T::open_type open_type;
@@ -70,5 +71,9 @@ public:
     {
     }
 };
+
+template<class T> class MaliciousRep3Share;
+template<class T>
+using SpdzWiseRepFieldShare = SpdzWiseShare<MaliciousRep3Share<T>>;
 
 #endif /* PROTOCOLS_SPDZWISESHARE_H_ */

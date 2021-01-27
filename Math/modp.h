@@ -27,6 +27,9 @@ class modp_
 
   public: 
 
+  static const int MAX_N_BITS = 64 * L;
+  static const int N_LIMBS = L;
+
   // NEXT FUNCTION IS FOR DEBUG PURPOSES ONLY
   mp_limb_t get_limb(int i) const { return x[i]; }
 
@@ -44,7 +47,7 @@ class modp_
 
   const mp_limb_t* get() const { return x; }
 
-  void assign(const char* buffer, int t) { memcpy(x, buffer, t * sizeof(mp_limb_t)); }
+  void assign(const void* buffer, int t) { memcpy(x, buffer, t * sizeof(mp_limb_t)); }
 
   void convert(const mp_limb_t* source, mp_size_t size, const Zp_Data& ZpD,
       bool negative = false);
@@ -81,7 +84,7 @@ class modp_
   void mul(const modp_& x, const modp_& y, const Zp_Data& ZpD);
 
   template<int M> friend void to_modp(modp_<M>& ans,int x,const Zp_Data& ZpD);
-  template<int M> friend void to_modp(modp_<M>& ans,const bigint& x,const Zp_Data& ZpD);
+  template<int M> friend void to_modp(modp_<M>& ans,const mpz_class& x,const Zp_Data& ZpD);
 
   friend void Add(modp_& ans,const modp_& x,const modp_& y,const Zp_Data& ZpD)
     { ZpD.Add(ans.x, x.x, y.x); }

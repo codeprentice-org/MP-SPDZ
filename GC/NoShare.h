@@ -9,6 +9,7 @@
 #include "Processor/DummyProtocol.h"
 #include "BMR/Register.h"
 #include "Tools/SwitchableOutput.h"
+#include "Protocols/ShareInterface.h"
 
 class InputArgs;
 class ArithmeticProcessor;
@@ -23,6 +24,7 @@ class NoValue : public ValueInterface
 {
 public:
     typedef NoValue Scalar;
+    typedef NoValue next;
 
     const static int n_bits = 0;
     const static int MAX_N_BITS = 0;
@@ -43,6 +45,11 @@ public:
     }
 
     static string type_string()
+    {
+        return "no";
+    }
+
+    static string type_short()
     {
         return "no";
     }
@@ -69,6 +76,11 @@ public:
     void randomize(PRNG&) { fail(); }
 
     void invert() { fail(); }
+
+    void mask(int) { fail(); }
+
+    void input(istream&, bool) { fail(); }
+    void output(ostream&, bool) { fail(); }
 };
 
 inline ostream& operator<<(ostream& o, NoValue)
@@ -76,7 +88,7 @@ inline ostream& operator<<(ostream& o, NoValue)
     return o;
 }
 
-class NoShare
+class NoShare : public ShareInterface
 {
 public:
     typedef DummyMC<NoShare> MC;
@@ -92,6 +104,8 @@ public:
     typedef NoShare bit_type;
     typedef NoShare part_type;
     typedef NoShare small_type;
+
+    typedef BlackHole out_type;
 
     static const int default_length = 1;
 
@@ -135,6 +149,7 @@ public:
     }
 
     static void inputb(Processor<NoShare>&, const ArithmeticProcessor&, const vector<int>&) { fail(); }
+    static void inputbvec(Processor<NoShare>&, const ArithmeticProcessor&, const vector<int>&) { fail(); }
     static void reveal_inst(Processor<NoShare>&, const vector<int>&) { fail(); }
     static void xors(Processor<NoShare>&, const vector<int>&) { fail(); }
     static void ands(Processor<NoShare>&, const vector<int>&) { fail(); }
@@ -142,10 +157,6 @@ public:
 
     static void input(Processor<NoShare>&, InputArgs&) { fail(); }
     static void trans(Processor<NoShare>&, Integer, const vector<int>&) { fail(); }
-
-    static void xors(Processor<NoShare>&, vector<int>) { fail(); }
-    static void ands(Processor<NoShare>&, vector<int>) { fail(); }
-    static void andrs(Processor<NoShare>&, vector<int>) { fail(); }
 
     static NoShare constant(const GC::Clear&, int, mac_key_type) { fail(); return {}; }
 
@@ -176,12 +187,17 @@ public:
     NoShare operator&(int) const { fail(); return {}; }
     NoShare operator>>(int) const { fail(); return {}; }
 
+    NoShare& operator+=(const NoShare&) { fail(); return *this; }
+
     NoShare lsb() const { fail(); return {}; }
     NoShare get_bit(int) const { fail(); return {}; }
 
     void invert(int, NoShare) { fail(); }
 
+    NoShare mask(int) const { fail(); return {}; }
+
     void input(istream&, bool) { fail(); }
+    void output(ostream&, bool) { fail(); }
 };
 
 } /* namespace GC */

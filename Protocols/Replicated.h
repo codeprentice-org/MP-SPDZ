@@ -44,7 +44,7 @@ public:
 template <class T>
 class ProtocolBase
 {
-    virtual void buffer_random() { not_implemented(); }
+    virtual void buffer_random() { throw not_implemented(); }
 
 protected:
     vector<T> random;
@@ -93,7 +93,7 @@ public:
 template <class T>
 class Replicated : public ReplicatedBase, public ProtocolBase<T>
 {
-    vector<octetStream> os;
+    array<octetStream, 2> os;
     PointerVector<typename T::clear> add_shares;
     typename T::clear dotprod_share;
 
@@ -130,7 +130,8 @@ public:
     void next_dotprod();
     T finalize_dotprod(int length);
 
-    void trunc_pr(const vector<int>& regs, int size, SubProcessor<T>& proc);
+    template<class U>
+    void trunc_pr(const vector<int>& regs, int size, U& proc);
 
     T get_random();
     void randoms(T& res, int n_bits);

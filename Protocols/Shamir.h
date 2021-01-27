@@ -23,14 +23,13 @@ class Shamir : public ProtocolBase<T>
 {
     typedef typename T::open_type::Scalar U;
 
-    vector<octetStream> os;
+    octetStreams os;
     vector<U> reconstruction;
     U rec_factor;
     ShamirInput<T>* resharing;
+    ShamirInput<T>* random_input;
 
     SeededPRNG secure_prng;
-
-    vector<T> random;
 
     vector<vector<typename T::clear>> hyper;
 
@@ -85,8 +84,6 @@ public:
     void prepare_dotprod(const T& x, const T& y);
     void next_dotprod();
     T finalize_dotprod(int length);
-
-    T get_random();
 };
 
 #endif /* PROTOCOLS_SHAMIR_H_ */

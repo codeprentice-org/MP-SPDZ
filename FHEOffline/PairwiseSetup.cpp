@@ -11,6 +11,10 @@
 #include "FHEOffline/PairwiseMachine.h"
 #include "Tools/Commit.h"
 #include "Tools/Bundle.h"
+#include "Processor/OnlineOptions.h"
+
+#include "Protocols/Share.hpp"
+#include "Protocols/mac_key.hpp"
 
 template <class FD>
 void PairwiseSetup<FD>::init(const Player& P, int sec, int plaintext_length,
@@ -20,7 +24,6 @@ void PairwiseSetup<FD>::init(const Player& P, int sec, int plaintext_length,
             << plaintext_length << endl;
     PRNG G;
     G.ReSeed();
-    dirname = PREP_DIR;
 
     octetStream o;
     if (P.my_num() == 0)
@@ -42,8 +45,8 @@ void PairwiseSetup<FD>::init(const Player& P, int sec, int plaintext_length,
     }
 
     alpha = FieldD;
-    alpha.randomize(G, Diagonal);
-    alphai = alpha.element(0);
+    alphai = read_or_generate_mac_key<Share<T>>(P);
+    alpha.assign_constant(alphai);
 }
 
 template <class FD>

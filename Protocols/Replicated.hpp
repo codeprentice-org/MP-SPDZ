@@ -127,7 +127,10 @@ template<class T>
 T ProtocolBase<T>::get_random()
 {
     if (random.empty())
+    {
         buffer_random();
+        assert(not random.empty());
+    }
 
     auto res = random.back();
     random.pop_back();
@@ -151,7 +154,6 @@ void Replicated<T>::init_mul(Preprocessing<T>& prep, typename T::MAC_Check& MC)
 template<class T>
 void Replicated<T>::init_mul()
 {
-    os.resize(2);
     for (auto& o : os)
         o.reset_write_head();
     add_shares.clear();
@@ -299,12 +301,12 @@ void trunc_pr(const vector<int>& regs, int size,
             }
         }
         for (int i = 0; i < 2; i++)
-            proc.P.send_to(i, os[i], true);
+            proc.P.send_to(i, os[i]);
     }
     else
     {
         octetStream os;
-        proc.P.receive_player(2, os, true);
+        proc.P.receive_player(2, os);
         OffsetPlayer player(proc.P, 1 - 2 * proc.P.my_num());
         typedef SemiShare<value_type> semi_type;
         vector<SemiShare<value_type>> to_open;
@@ -372,8 +374,9 @@ void trunc_pr(const vector<int>& regs, int size, SubProcessor<T>& proc)
 }
 
 template<class T>
+template<class U>
 void Replicated<T>::trunc_pr(const vector<int>& regs, int size,
-        SubProcessor<T>& proc)
+        U& proc)
 {
     ::trunc_pr(regs, size, proc);
 }

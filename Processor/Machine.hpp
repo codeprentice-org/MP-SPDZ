@@ -1,9 +1,12 @@
+#ifndef PROCESSOR_MACHINE_HPP_
+#define PROCESSOR_MACHINE_HPP_
+
 #include "Machine.h"
 
 #include "Memory.hpp"
 #include "Online-Thread.hpp"
 
-#include "Exceptions/Exceptions.h"
+#include "Tools/Exceptions.h"
 
 #include <sys/time.h>
 
@@ -20,7 +23,8 @@ using namespace std;
 
 template<class sint, class sgf2n>
 Machine<sint, sgf2n>::Machine(int my_number, Names& playerNames,
-    string progname_str, string memtype, int lg2, bool direct,
+    const string& progname_str, const string& memtype,
+    int lg2, bool direct,
     int opening_sum, bool receive_threads, int max_broadcast,
     bool use_encryption, bool live_prep, OnlineOptions opts)
   : my_number(my_number), N(playerNames),
@@ -128,14 +132,12 @@ Machine<sint, sgf2n>::Machine(int my_number, Names& playerNames,
 }
 
 template<class sint, class sgf2n>
-void Machine<sint, sgf2n>::load_program(string threadname, string filename)
+void Machine<sint, sgf2n>::load_program(const string& threadname,
+    const string& filename)
 {
-  ifstream pinp(filename);
-  if (pinp.fail()) { throw file_error(filename); }
   progs.push_back(N.num_players());
   int i = progs.size() - 1;
-  progs[i].parse(pinp);
-  pinp.close();
+  progs[i].parse(filename);
   M2.minimum_size(SGF2N, CGF2N, progs[i], threadname);
   Mp.minimum_size(SINT, CINT, progs[i], threadname);
   Mi.minimum_size(NONE, INT, progs[i], threadname);
@@ -223,9 +225,9 @@ DataPositions Machine<sint, sgf2n>::run_tape(int thread_number, int tape_number,
     int arg)
 {
   if (size_t(thread_number) >= tinfo.size())
-    throw Processor_Error("invalid thread number: " + to_string(thread_number) + "/" + to_string(tinfo.size()));
+    throw overflow("invalid thread number", thread_number, tinfo.size());
   if (size_t(tape_number) >= progs.size())
-    throw Processor_Error("invalid tape number: " + to_string(tape_number) + "/" + to_string(progs.size()));
+    throw overflow("invalid tape number", tape_number, progs.size());
 
   queues[thread_number]->schedule({tape_number, arg, pos});
   //printf("Send signal to run program %d in thread %d\n",tape_number,thread_number);
@@ -316,7 +318,7 @@ void Machine<sint, sgf2n>::run()
   print_timers();
   cerr << "Data sent = " << data_sent / 1e6 << " MB" << endl;
 
-  PlainPlayer P(N, 0xFFF0);
+  PlainPlayer P(N, 0xFF00);
   Bundle<octetStream> bundle(P);
   bundle.mine.store(data_sent.load());
   P.Broadcast_Receive_no_stats(bundle);
@@ -325,7 +327,7 @@ void Machine<sint, sgf2n>::run()
       global += os.get_int(8);
   cerr << "Global data sent = " << global / 1e6 << " MB" << endl;
 
-#ifdef VERBOSE
+#ifdef VERBOSE_OPTIONS
   if (opening_sum < N.num_players() && !direct)
     cerr << "Summed at most " << opening_sum << " shares at once with indirect communication" << endl;
   else
@@ -373,37 +375,13 @@ void Machine<sint, sgf2n>::run()
   pos.print_cost();
 #endif
 
+  if (pos.any_more(progs[0].get_offline_data_used())
+      and not progs[0].usage_unknown())
+    throw runtime_error("computation used more preprocessing than expected");
+
   if (not stats.empty())
     {
-      cerr << "Instruction statistics:" << endl;
-      set<pair<size_t, int>> sorted_stats;
-      for (auto& x : stats)
-        {
-          sorted_stats.insert({x.second, x.first});
-        }
-      for (auto& x : sorted_stats)
-        {
-          auto opcode = x.second;
-          auto calls = x.first;
-          cerr << "\t";
-          int n_fill = 15;
-          switch (opcode)
-          {
-#define X(NAME, PRE, CODE) case NAME: cerr << #NAME; n_fill -= strlen(#NAME); break;
-          ARITHMETIC_INSTRUCTIONS
-#undef X
-#define X(NAME, CODE) case NAME: cerr << #NAME; n_fill -= strlen(#NAME); break;
-          COMBI_INSTRUCTIONS
-#undef X
-          default:
-            cerr << hex << setw(5) << showbase << left << opcode;
-            n_fill -= 5;
-            cerr << setw(0);
-          }
-          for (int i = 0; i < n_fill; i++)
-            cerr << " ";
-          cerr << dec << calls << endl;
-        }
+      stats.print();
     }
 
 #ifndef INSECURE
@@ -441,3 +419,5 @@ void Machine<sint, sgf2n>::reqbl(int n)
 {
   sint::clear::reqbl(n);
 }
+
+#endif
