@@ -135,8 +135,7 @@ def runAndDump(ff, tensor, scalingFac, sess):
 
 def dump(ff, tensor, scalingFac):
   if scalingFac is None:
-    for xx in numpy.nditer(tensor, order='C'):
-      ff.write(str(xx) + ' ')
+    tensor.tofile(ff, ' ')
   else:
     for xx in numpy.nditer(tensor, order='C'):
       ff.write((str(int(xx * (1<<scalingFac)))) + ' ')
