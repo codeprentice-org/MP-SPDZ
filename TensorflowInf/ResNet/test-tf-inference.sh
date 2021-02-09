@@ -32,7 +32,7 @@ test_tf_inference_file() {
     # Get line number of image from log
     grep_output=`grep guess test.log`
     if [[ "$grep_output" =~ ^guess[[:space:]]+([[:digit:]]+)$ ]]; then
-        line_number=$(( ${BASH_REMATCH[1]} + 1 ))
+        line_number=$(( ${BASH_REMATCH[1]} ))
     else
         echo Error: Unable to find result from test.log
         echo Test FAILED for $filename
