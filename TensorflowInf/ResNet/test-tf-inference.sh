@@ -27,7 +27,7 @@ test_tf_inference_file() {
     fi
 
     # Run Tensorflow inference and log output
-    ./tf-inference.sh -n 1 -i $filename $no_compile_option &> test.log
+    ./tf-inference.sh -n ${NUM_THREADS:-1} -i $filename $no_compile_option &> test.log
 
     # Get line number of image from log
     grep_output=`grep guess test.log`
