@@ -102,9 +102,7 @@ def updateWeightsForBN(optimized_graph_def, sess, feed_dict):
 def dumpImageDataInt(imgData, filename, scalingFac, writeMode):
   print("Dumping image data...")
   with open(filename, writeMode) as ff:
-    for xx in numpy.nditer(imgData, order='C'):
-      ff.write(str(int(xx * (1<<scalingFac))) + ' ')
-    ff.write('\n\n')
+    dump(ff, imgData, scalingFac)
 
 def dumpTrainedWeightsInt(sess, evalTensors, filename, scalingFac, writeMode, alreadyEvaluated=False):
   print("Dumping trained weights...")
@@ -131,17 +129,24 @@ def dumpImgAndWeightsData(sess, imgData, evalTensors, filename, scalingFac, alre
   dumpImageDataInt(imgData, filename, scalingFac, 'w')
   dumpTrainedWeightsInt(sess, evalTensors, filename, scalingFac, 'a', alreadyEvaluated=alreadyEvaluated)
 
-def dumpInt(ff, tensor, scalingFac, sess, update=lambda x: x):
+def runAndDump(ff, tensor, scalingFac, sess):
   tensor = sess.run(tensor)
-  for xx in numpy.nditer(tensor, order='C'):
-    ff.write((str(int(update(xx) * (1<<scalingFac)))) + ' ')
+  dump(ff, tensor, scalingFac)
+
+def dump(ff, tensor, scalingFac):
+  if scalingFac is None:
+    for xx in numpy.nditer(tensor, order='C'):
+      ff.write(str(xx) + ' ')
+  else:
+    for xx in numpy.nditer(tensor, order='C'):
+      ff.write((str(int(xx * (1<<scalingFac)))) + ' ')
   ff.write('\n\n')
 
 def dumpWeightsInt(filename, scalingFac, writeMode, sess):
   with open(filename, writeMode) as ff:
     for op in tf.get_default_graph().get_operations():
       if op.type in ('Conv2D', 'BiasAdd', 'MatMul'):
-        dumpInt(ff, op.inputs[1], scalingFac, sess)
+        runAndDump(ff, op.inputs[1], scalingFac, sess)
       elif op.type in ('FusedBatchNorm', 'FusedBatchNormV3'):
         gamma, beta, mu, variance = op.inputs[1:]
 
@@ -149,10 +154,10 @@ def dumpWeightsInt(filename, scalingFac, writeMode, sess):
         rsigma = tf.rsqrt(variance + epsilon)
 
         gamma = gamma * rsigma
-        dumpInt(ff, gamma, scalingFac, sess)
-        dumpInt(ff, beta - gamma * mu, scalingFac, sess)
-        dumpInt(ff, tf.zeros(tf.shape(mu)), scalingFac, sess)
-        dumpInt(ff, tf.fill(tf.shape(variance), 1-epsilon), scalingFac, sess)
+        runAndDump(ff, gamma, scalingFac, sess)
+        runAndDump(ff, beta - gamma * mu, scalingFac, sess)
+        runAndDump(ff, tf.zeros(tf.shape(mu)), scalingFac, sess)
+        runAndDump(ff, tf.fill(tf.shape(variance), 1-epsilon), scalingFac, sess)
 
 def dumpImgAndWeightsData2(sess, imgData, filename, scalingFac):
   print("Starting to dump data...")

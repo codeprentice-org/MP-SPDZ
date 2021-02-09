@@ -66,5 +66,5 @@ if [ $COMPILE -eq 1 ]; then
     python3 compile.py -C -R 64 tf TensorflowInf/${MODEL_NETWORK}/graphDef.bin ${NUM_THREADS} trunc_pr split
 fi
 
-Scripts/fixed-rep-to-float.py TensorflowInf/${MODEL_NETWORK}/${MODEL_NETWORK}_img_input.inp
+cp TensorflowInf/${MODEL_NETWORK}/${MODEL_NETWORK}_img_input.inp Player-Data/Input-P0-0
 Scripts/emulate.sh tf-TensorflowInf_${MODEL_NETWORK}_graphDef.bin-${NUM_THREADS}-trunc_pr-split

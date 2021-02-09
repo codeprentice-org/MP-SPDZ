@@ -167,7 +167,7 @@ def parseArgs():
 
 def main():
     args = parseArgs()
-    infer(args.img, 12)
+    infer(args.img, None)
 
 if __name__=='__main__':
     main()
