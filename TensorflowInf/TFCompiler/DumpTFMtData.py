@@ -135,7 +135,7 @@ def runAndDump(ff, tensor, scalingFac, sess):
 
 def dump(ff, tensor, scalingFac):
   if scalingFac is None:
-    tensor.tofile(ff, ' ')
+    tensor.tofile(ff, ' ', '%.7g')
   else:
     for xx in numpy.nditer(tensor, order='C'):
       ff.write((str(int(xx * (1<<scalingFac)))) + ' ')
